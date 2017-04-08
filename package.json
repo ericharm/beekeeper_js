@@ -4,7 +4,7 @@
   "description": "a 2d beekeeping simulation built in javascript",
   "main": "server.js",
   "scripts": {
-    "test": "jasmine tests/",
+    "test": "jasmine",
     "start": "nodemon index.js",
     "open": "open http://localhost:8081/"
   },
