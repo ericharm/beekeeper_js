@@ -1,0 +1,27 @@
+{
+  "name": "beekeeper",
+  "version": "0.0.1",
+  "description": "a 2d beekeeping simulation built in javascript",
+  "main": "server.js",
+  "scripts": {
+    "test": "jasmine tests/",
+    "start": "nodemon index.js",
+    "open": "open http://localhost:8081/"
+  },
+  "keywords": [
+    "2d",
+    "game",
+    "bees"
+  ],
+  "author": "Eric Harm",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^2.5.3",
+    "jasmine-node": "^1.14.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "multer": "^1.3.0"
+  }
+}
