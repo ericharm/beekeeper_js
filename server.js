@@ -9,6 +9,7 @@ var app = express();
  */
 app.use('/js', express.static(__dirname + '/public/js'));
 app.use('/css', express.static(__dirname + '/public/css'));
+app.use('/images', express.static(__dirname + '/public/images'));
 
 /*
  *  Templates

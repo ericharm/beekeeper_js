@@ -2,15 +2,22 @@ module.exports = {
 
     new: function (context, player) {
 
+        // constructor
+        // declare private data
         var canvas = context.canvas;
+        
+        var texture = new Image();
+        texture.src = "images/alien.png";
+        var sprite = texture;
 
+        // private methods
         function update(deltaTime) {
             var movement = {
                 x: 0.0,
                 y: 0.0
             };
             if (player.movingUp)
-                movement.y -= 1.0 * (deltaTime);
+                movement.y -= 1.0 * deltaTime;
             if (player.movingDown)
                 movement.y += 1.0 * deltaTime;
             if (player.movingLeft)
@@ -22,23 +29,23 @@ module.exports = {
 
         function render() {
             // clear window
-            canvas.fillStyle = "#ffffff";
+            canvas.fillStyle = "#00aa00";
             canvas.fillRect(0, 0, 800, 600);
             canvas.fillStyle = "#aaaaaa";
             canvas.strokeRect(0, 0, 800, 600);
             // draw player
-            canvas.fillStyle = "#ff00ff";
-            canvas.fillRect(
+            // canvas.fillStyle = "#ff00ff";
+            canvas.drawImage(
+                sprite,
                 player.position.x,
-                player.position.y,
-                player.size,
-                player.size
+                player.position.y
             );
         }
 
+        // public interface
         var self = {
             tick: function (deltaTime) {
-                update(deltaTime); // pass delta time
+                update(deltaTime);
                 render();
             },
             processEvent: function (event, isKeyPressed) {
