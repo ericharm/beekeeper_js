@@ -1,14 +1,25 @@
 module.exports = {
 
+
+
     new: function (context, player) {
 
         // constructor
-        // declare private data
+        // private data
+        var Sprite = {
+            create: function (texture) {
+                var image = new Image();
+                image.src = texture;
+                return image;
+            }
+        };
+
+        var Textures = {
+            Player: "images/alien.png"
+        };
+
         var canvas = context.canvas;
-        
-        var texture = new Image();
-        texture.src = "images/alien.png";
-        var sprite = texture;
+        var sprite = Sprite.create(Textures.Player);
 
         // private methods
         function update(deltaTime) {
@@ -35,6 +46,7 @@ module.exports = {
             canvas.strokeRect(0, 0, 800, 600);
             // draw player
             // canvas.fillStyle = "#ff00ff";
+
             canvas.drawImage(
                 sprite,
                 player.position.x,

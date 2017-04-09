@@ -11,6 +11,19 @@ $(document).ready(function () {
         }, false);
     }
 
+    function execFixedTimestep() {
+        var ctx = canvas.getContext("2d");
+        context.canvas = ctx;
+        game = Game.new(context, player);
+        addListeners(game);
+        setInterval(function () {
+            var now = window.performance.now();
+            var delta = now - previous;
+            game.tick(delta / fps); // seconds
+            previous = window.performance.now();
+        }, 1000 / fps);
+    }
+
     var context = {
         canvas: undefined
     };
@@ -35,16 +48,7 @@ $(document).ready(function () {
     var fps = 30.0;
 
     if (canvasElement.getContext) {
-        var ctx = canvas.getContext("2d");
-        context.canvas = ctx;
-        game = Game.new(context, player);
-        addListeners(game);
-        setInterval(function () {
-            var now = window.performance.now();
-            var delta = now - previous;
-            game.tick(delta / fps); // seconds
-            previous = window.performance.now();
-        }, 1000 / fps);
+        execFixedTimestep();
     }
     else {
         throw 'CanvasError';
