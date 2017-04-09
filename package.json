@@ -21,6 +21,12 @@
   },
   "dependencies": {
     "browserify": "^14.3.0",
+    "ejs": "^2.5.6",
     "express": "^4.15.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://e_e_harm@bitbucket.org/e_e_harm/beekeeper_js.git"
+  },
+  "homepage": "https://bitbucket.org/e_e_harm/beekeeper_js#readme"
 }
