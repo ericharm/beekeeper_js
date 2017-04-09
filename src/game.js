@@ -1,28 +1,26 @@
+// var Sprite = require("../../src/sprite.js");
+
 module.exports = {
 
-
-
-    new: function (context, player) {
+    new: function (context) {
 
         // constructor
         // private data
         var Sprite = {
-            create: function (texture) {
+            new: function (texture) {
                 var image = new Image();
                 image.src = texture;
                 return image;
             }
         };
 
-        var Textures = {
-            Player: "images/alien.png"
-        };
-
+        var Textures = context.textures;
         var canvas = context.canvas;
-        var sprite = Sprite.create(Textures.Player);
+        var player = context.player;
+        var sprite = Sprite.new(Textures.Player);
 
         // private methods
-        function update(deltaTime) {
+        function update (deltaTime) {
             var movement = {
                 x: 0.0,
                 y: 0.0
@@ -38,7 +36,7 @@ module.exports = {
            player.move(movement);
         }
 
-        function render() {
+        function render () {
             // clear window
             canvas.fillStyle = "#00aa00";
             canvas.fillRect(0, 0, 800, 600);
