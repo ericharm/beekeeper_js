@@ -1,4 +1,4 @@
-// var Sprite = require("../../src/sprite.js");
+var Sprite = require("./sprite.js");
 
 module.exports = {
 
@@ -6,18 +6,9 @@ module.exports = {
 
         // constructor
         // private data
-        var Sprite = {
-            new: function (texture) {
-                var image = new Image();
-                image.src = texture;
-                return image;
-            }
-        };
-
-        var Textures = context.textures;
         var canvas = context.canvas;
         var player = context.player;
-        var sprite = Sprite.new(Textures.Player);
+        var sprite = Sprite.new(context.textures.Player);
 
         // private methods
         function update (deltaTime) {
@@ -47,8 +38,8 @@ module.exports = {
 
             canvas.drawImage(
                 sprite,
-                player.position.x,
-                player.position.y
+                player.getPosition().x,
+                player.getPosition().y
             );
         }
 
