@@ -10,7 +10,7 @@ module.exports = {
                 y: 0.0
             };
             if (player.movingUp)
-                movement.y -= 1.0 * deltaTime;
+                movement.y -= 1.0 * (deltaTime);
             if (player.movingDown)
                 movement.y += 1.0 * deltaTime;
             if (player.movingLeft)
@@ -37,8 +37,8 @@ module.exports = {
         }
 
         var self = {
-            tick: function () {
-                update(1); // pass delta time
+            tick: function (deltaTime) {
+                update(deltaTime); // pass delta time
                 render();
             },
             processEvent: function (event, isKeyPressed) {

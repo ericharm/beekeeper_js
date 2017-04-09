@@ -31,12 +31,20 @@ $(document).ready(function () {
 
     var canvasElement = document.getElementById("canvas");
 
+    var previous = window.performance.now();
+    var fps = 30.0;
+
     if (canvasElement.getContext) {
         var ctx = canvas.getContext("2d");
         context.canvas = ctx;
         game = Game.new(context, player);
         addListeners(game);
-        setInterval(game.tick, 1000 / 60.0);
+        setInterval(function () {
+            var now = window.performance.now();
+            var delta = now - previous;
+            game.tick(delta / fps); // seconds
+            previous = window.performance.now();
+        }, 1000 / fps);
     }
     else {
         throw 'CanvasError';

@@ -1,4 +1,4 @@
 node_modules/*
 *.swp
-*/bundle.js
+public/js/bundle.js
 npm-debug.log
