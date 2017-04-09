@@ -7,6 +7,7 @@ module.exports = {
         // inherit from Entity
         var self = Entity.new();
         return self;
+
     }
 
 };

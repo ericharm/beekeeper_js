@@ -10,6 +10,14 @@ module.exports = {
         var movingRight = false;
         var movingDown = false;
 
+        // private methods
+        function updateCurrent(deltaTime) {
+            move({
+                x: velocity.x * deltaTime,
+                y: velocity.y * deltaTime
+            });
+        }
+
         return {
             move: function (movement) {
                 position.x += movement.x;
