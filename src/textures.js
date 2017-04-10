@@ -2,7 +2,8 @@ module.exports = {
 
     load: function () {
         return {
-            Player: "images/alien.png"
+            player: "images/alien.png",
+            hive: "images/hive.png"
         };
     }
 

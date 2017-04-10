@@ -1,6 +1,11 @@
+var SceneNode = require("./scene_node.js");
+
 module.exports = {
 
-    new: function () {
+    new: function (children, parent) {
+
+        // inherit from SceneNode
+        var self = SceneNode.new(children, parent);
 
         // private data
         var position = {x: 0, y: 0};
@@ -18,20 +23,20 @@ module.exports = {
             });
         }
 
-        return {
-            move: function (movement) {
-                position.x += movement.x;
-                position.y += movement.y;
-            },
-            getPosition: function () {
-                return position;
-            },
-            setVelocity: function (vector) {
-                velocity = vector;
-            },
-            getVelocity: function () {
-                return velocity;
-            }
+        // extended interface
+        self.move = function (movement) {
+            position.x += movement.x;
+            position.y += movement.y;
         };
+        self.getPosition = function () {
+            return position;
+        };
+        self.setVelocity = function (vector) {
+            velocity = vector;
+        };
+        self.getVelocity = function () {
+            return velocity;
+        };
+        return self;
     }
 };

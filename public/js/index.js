@@ -1,8 +1,6 @@
-var World = require("../../src/world.js");
 var Game = require("../../src/game.js");
 var Textures = require("../../src/textures.js");
 var Player = require("../../src/player.js");
-
 
 $(document).ready(function () {
 
@@ -11,7 +9,7 @@ $(document).ready(function () {
         canvas: undefined,
         textures: Textures.load(),
         fonts: undefined,
-        player: Player.new()
+        player: Player.new(),
     };
 
     var previous = window.performance.now();

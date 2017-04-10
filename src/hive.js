@@ -7,9 +7,8 @@ module.exports = {
     new: function (children, parent) {
 
         // private data
-        // load this from textures
         var textures = Textures.load();
-        var sprite = Sprite.new(textures.player);
+        var sprite = Sprite.new("images/hive.png");
 
         // inherit from Entity
         var self = Entity.new(children, parent);
@@ -43,4 +42,3 @@ module.exports = {
     }
 
 };
-

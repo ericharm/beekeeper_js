@@ -7,19 +7,13 @@ module.exports = {
         parent = parent || null;
 
         // private methods
-        function render(canvas) {
-            // states.transform *= getTransform();
-            drawCurrent(canvas);
-            drawChildren(canvas);
-        }
-
-        function drawCurrent(canvas) {
+        function renderCurrent(canvas) {
             // do nothing by default
         }
 
-        function drawChildren(canvas) {
+        function renderChildren(canvas) {
             for (var i = 0; i < children.length; i++) {
-                children[i].render();
+                children[i].render(canvas);
             }
         }
 
@@ -39,8 +33,12 @@ module.exports = {
                 updateCurrent(deltaTime);
                 updateChildren(deltaTime);
             },
-            attachChild: function (child) {
-                children.push(child);
+            render: function (canvas) {
+                renderCurrent(canvas);
+                renderChildren(canvas);
+            },
+            attachChild: function (node) {
+                children.push(node);
             },
             detachChild: function (node) {
                 var index = children.indexOf(node);
@@ -52,7 +50,6 @@ module.exports = {
                 }
             }
         };
-
         return self;
     }
 
