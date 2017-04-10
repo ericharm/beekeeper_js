@@ -6,9 +6,6 @@ $(document).ready(function () {
 
     //private data
     var context = {
-        canvas: undefined,
-        textures: Textures.load(),
-        fonts: undefined,
         player: Player.new(),
     };
 
@@ -33,8 +30,6 @@ $(document).ready(function () {
             var ctx = canvas.getContext("2d");
             context.canvas = ctx;
 
-            // eventually also pass state stack with
-            // the context
             game = Game.new(context);
             addListeners(game);
 

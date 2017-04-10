@@ -1,5 +1,4 @@
 var World = require("./world.js");
-var Sprite = require("./sprite.js");
 
 module.exports = {
 

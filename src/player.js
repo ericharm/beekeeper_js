@@ -7,14 +7,13 @@ module.exports = {
     new: function (children, parent) {
 
         // private data
-        // load this from textures
         var textures = Textures.load();
         var sprite = Sprite.new(textures.player);
 
         // inherit from Entity
         var self = Entity.new(children, parent);
 
-        // overrides 
+        // public overrides
         self.update = function (deltaTime) {
             var movement = {
                 x: 0.0,
@@ -30,7 +29,6 @@ module.exports = {
                 movement.x += 1.0 * deltaTime;
            this.move(movement);
         };
-
         self.render = function (canvas) {
             canvas.drawImage(
                 sprite,
@@ -38,8 +36,8 @@ module.exports = {
                 this.getPosition().y
             );
         };
-        return self;
 
+        return self;
     }
 
 };

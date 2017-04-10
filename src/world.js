@@ -24,17 +24,16 @@ module.exports = {
                 this.layers.background.render(canvas);
                 this.layers.foreground.render(canvas);
             }
-
         };
 
-        // initializer
-        buildScene();
-
         // private methods
-        function buildScene() {
+        var buildScene = function () {
             sceneGraph.layers.background.attachChild(background);
             sceneGraph.layers.foreground.attachChild(player);
-        }
+        };
+        
+        // initializer
+        buildScene();
 
         var self = {
             update: function (deltaTime) {
