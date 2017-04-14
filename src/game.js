@@ -1,6 +1,6 @@
 var World = require("./world.js");
-var Player = require("./player.js");
-var Hive = require("./hive.js");
+var Player = require("./entities/player.js");
+var Hive = require("./entities/hive.js");
 var Command = require("./command.js");
 
 module.exports = {

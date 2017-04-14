@@ -1,5 +1,5 @@
-var Entity = require("./entity.js");
-var Textures = require("./textures.js");
+var Entity = require("../entity.js");
+var Textures = require("../textures.js");
 var Sprite = Textures.Sprite;
 
 module.exports = {
@@ -49,10 +49,10 @@ module.exports = {
 
         self._renderCurrent = function (canvas) {
             canvas.drawImage(
-                    sprite,
-                    self.getPosition().x,
-                    self.getPosition().y
-                    );
+                sprite,
+                self.getPosition().x,
+                self.getPosition().y
+            );
         };
 
         return self;

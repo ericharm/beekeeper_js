@@ -1,6 +1,6 @@
-var Entity = require("./entity.js");
-var Textures = require("./textures.js");
-var Sprite = Textures.Sprite; //require("./sprite.js");
+var Entity = require("../entity.js");
+var Textures = require("../textures.js");
+var Sprite = Textures.Sprite;
 
 module.exports = {
 
