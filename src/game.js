@@ -21,17 +21,16 @@ module.exports = {
                 // this should probably be handled somewhere else
                 switch (event.keyCode) {
                     case 37: // Left
-                        // context.player.movingLeft = isKeyPressed;
-                        Command.moveLeft(context.player);
+                        Command.setMoving(context.player, 'left', isKeyPressed);
                         break;
                     case 38: // Up
-                        context.player.movingUp = isKeyPressed;
+                        Command.setMoving(context.player, 'up', isKeyPressed);
                         break;
                     case 39: // Right
-                        context.player.movingRight = isKeyPressed;
+                        Command.setMoving(context.player, 'right', isKeyPressed);
                         break;
                     case 40: // Down
-                        context.player.movingDown = isKeyPressed;
+                        Command.setMoving(context.player, 'down', isKeyPressed);
                         break;
                 }
             }
