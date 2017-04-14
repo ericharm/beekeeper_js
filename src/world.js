@@ -1,13 +1,19 @@
 var SceneNode = require("./scene_node.js");
-var BackgroundNode = require("./background_node.js");
-var Hive = require("./hive.js");
 
 module.exports = {
 
     new: function (context) {
 
         // private data
-        var background = BackgroundNode.new();
+        var background = SceneNode.new();
+        background.render = function (canvas) {
+            // clear window
+            canvas.fillStyle = "#00aa00";
+            canvas.fillRect(0, 0, 800, 600);
+            // draw background
+            canvas.fillStyle = "#aaaaaa";
+            canvas.strokeRect(0, 0, 800, 600);
+        };
         var hive = context.hive;
         var player = context.player;
         var canvas = context.canvas;

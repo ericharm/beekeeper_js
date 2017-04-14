@@ -2,41 +2,39 @@ var SceneNode = require("./scene_node.js");
 
 module.exports = {
 
-    new: function (children, parent) {
+    new: function () {
 
         // inherit from SceneNode
-        var self = SceneNode.new(children, parent);
-
-        // private data
-        var position = {x: 0, y: 0};
-        var velocity = {x: 0, y: 0};
-        var movingUp = false;
-        var movingLeft = false;
-        var movingRight = false;
-        var movingDown = false;
-
+        var self = SceneNode.new();
         // overrides
-        self.updateCurrent = function (deltaTime) {
+        self._updateCurrent = function (deltaTime) {
             self.move({
-                x: velocity.x * deltaTime,
-                y: velocity.y * deltaTime
+                x: self._velocity.x * deltaTime,
+                y: self._velocity.y * deltaTime
             });
         };
-
-        // extended interface
+        // augmented interface
         self.move = function (movement) {
-            position.x += movement.x;
-            position.y += movement.y;
+            self._position.x += movement.x;
+            self._position.y += movement.y;
         };
         self.getPosition = function () {
-            return position;
+            return self._position;
         };
         self.setVelocity = function (vector) {
-            velocity = vector;
+            self._velocity = vector;
         };
         self.getVelocity = function () {
-            return velocity;
+            return self._velocity;
         };
+        // protected data
+        self._position = {x: 0, y: 0};
+        self._velocity = {x: 0, y: 0};
+        self._movingUp = false;
+        self._movingLeft = false;
+        self._movingRight = false;
+        self._movingDown = false;
+        
         return self;
     }
 };

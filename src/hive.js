@@ -1,17 +1,16 @@
 var Entity = require("./entity.js");
 var Textures = require("./textures.js");
-var Sprite = require("./sprite.js");
+var Sprite = Textures.Sprite; //require("./sprite.js");
 
 module.exports = {
 
-    new: function (children, parent) {
+    new: function () {
 
         // inherit from Entity
-        var self = Entity.new(children, parent);
+        var self = Entity.new();
         
         // private data
-        var textures = Textures.load();
-        var sprite = Sprite.new(textures.hive);
+        var sprite = Sprite.new(Textures.hive);
         var position = {x: 100, y: 100};
 
         // private overrides

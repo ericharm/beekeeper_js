@@ -1,10 +1,14 @@
 module.exports = {
 
-    load: function () {
-        return {
-            player: "images/alien.png",
-            hive: "images/hive.png"
-        };
+    player: "images/alien.png",
+    hive: "images/hive.png",
+
+    Sprite: {
+        new: function (texture) {
+            var image = new Image();
+            image.src = texture;
+            return image;
+        }
     }
 
 };
