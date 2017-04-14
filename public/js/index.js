@@ -1,13 +1,9 @@
 var Game = require("../../src/game.js");
-var Player = require("../../src/player.js");
-var Hive = require("../../src/hive.js");
 
 $(document).ready(function () {
 
     //private data
     var context = {
-        player: Player.new(),
-        hive: Hive.new(),
         events: []
     };
 

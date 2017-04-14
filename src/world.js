@@ -10,7 +10,7 @@ module.exports = {
             // clear window
             canvas.fillStyle = "#00aa00";
             canvas.fillRect(0, 0, 800, 600);
-            // draw background
+            // draw border
             canvas.fillStyle = "#aaaaaa";
             canvas.strokeRect(0, 0, 800, 600);
         };

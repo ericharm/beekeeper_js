@@ -27,7 +27,7 @@ module.exports = {
         self.getVelocity = function () {
             return self._velocity;
         };
-        // protected data
+        // protected
         self._position = {x: 0, y: 0};
         self._velocity = {x: 0, y: 0};
         self._movingUp = false;

@@ -1,12 +1,16 @@
 var World = require("./world.js");
+var Player = require("./player.js");
+var Hive = require("./hive.js");
+var Command = require("./command.js");
 
 module.exports = {
 
     new: function (context) {
 
         // private data
+        context.player = Player.new();
+        context.hive = Hive.new();
         var world = World.new(context);
-
         // public interface
         var self = {
             tick: function (deltaTime) {
@@ -17,7 +21,8 @@ module.exports = {
                 // this should probably be handled somewhere else
                 switch (event.keyCode) {
                     case 37: // Left
-                        context.player.movingLeft = isKeyPressed;
+                        // context.player.movingLeft = isKeyPressed;
+                        Command.moveLeft(context.player);
                         break;
                     case 38: // Up
                         context.player.movingUp = isKeyPressed;

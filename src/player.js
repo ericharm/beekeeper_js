@@ -1,6 +1,6 @@
 var Entity = require("./entity.js");
 var Textures = require("./textures.js");
-var Sprite = Textures.Sprite; // require("./sprite.js");
+var Sprite = Textures.Sprite;
 
 module.exports = {
 
@@ -23,8 +23,9 @@ module.exports = {
                 movement.y -= self._velocity.y * deltaTime;
             if (self.movingDown)
                 movement.y += self._velocity.y * deltaTime;
-            if (self.movingLeft)
-                movement.x -= self._velocity.x * deltaTime;
+            if (self.movingLeft) {
+            }
+               //  movement.x -= self._velocity.x * deltaTime;
             if (self.movingRight)
                 movement.x += self._velocity.x * deltaTime;
            self.move(movement);
