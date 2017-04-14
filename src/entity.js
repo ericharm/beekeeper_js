@@ -15,13 +15,13 @@ module.exports = {
         var movingRight = false;
         var movingDown = false;
 
-        // private methods
-        function updateCurrent(deltaTime) {
-            move({
+        // overrides
+        self.updateCurrent = function (deltaTime) {
+            self.move({
                 x: velocity.x * deltaTime,
                 y: velocity.y * deltaTime
             });
-        }
+        };
 
         // extended interface
         self.move = function (movement) {

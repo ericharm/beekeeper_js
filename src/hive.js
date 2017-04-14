@@ -6,36 +6,26 @@ module.exports = {
 
     new: function (children, parent) {
 
-        // private data
-        var textures = Textures.load();
-        var sprite = Sprite.new("images/hive.png");
-
         // inherit from Entity
         var self = Entity.new(children, parent);
+        
+        // private data
+        var textures = Textures.load();
+        var sprite = Sprite.new(textures.hive);
+        var position = {x: 100, y: 100};
 
-        // overrides 
-        self.update = function (deltaTime) {
-            var movement = {
-                x: 0.0,
-                y: 0.0
-            };
-            if (this.movingUp)
-                movement.y -= 1.0 * deltaTime;
-            if (this.movingDown)
-                movement.y += 1.0 * deltaTime;
-            if (this.movingLeft)
-                movement.x -= 1.0 * deltaTime;
-            if (this.movingRight)
-                movement.x += 1.0 * deltaTime;
-           this.move(movement);
-        };
-
-        self.render = function (canvas) {
+        // private overrides
+        function renderCurrent(canvas) {
             canvas.drawImage(
                 sprite,
-                this.getPosition().x,
-                this.getPosition().y
+                position.x,
+                position.y
             );
+        }
+
+        // overrides 
+        self.render = function (canvas) {
+            renderCurrent(canvas);
         };
         return self;
 

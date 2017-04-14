@@ -6,37 +6,41 @@ module.exports = {
 
     new: function (children, parent) {
 
+        // inherit from Entity
+        var self = Entity.new(children, parent);
+        
         // private data
         var textures = Textures.load();
         var sprite = Sprite.new(textures.player);
-
-        // inherit from Entity
-        var self = Entity.new(children, parent);
+        var velocity = {x:2, y:2};
 
         // public overrides
-        self.update = function (deltaTime) {
+        self.updateCurrent = function(deltaTime) {
             var movement = {
                 x: 0.0,
                 y: 0.0
             };
-            if (this.movingUp)
-                movement.y -= 1.0 * deltaTime;
-            if (this.movingDown)
-                movement.y += 1.0 * deltaTime;
-            if (this.movingLeft)
-                movement.x -= 1.0 * deltaTime;
-            if (this.movingRight)
-                movement.x += 1.0 * deltaTime;
-           this.move(movement);
-        };
-        self.render = function (canvas) {
-            canvas.drawImage(
-                sprite,
-                this.getPosition().x,
-                this.getPosition().y
-            );
+            // how is this accessing the private 'movingUp' variable?
+            // in game.js, the handler is creating it as public
+            if (self.movingUp)
+                movement.y -= velocity.y * deltaTime;
+            if (self.movingDown)
+                movement.y += velocity.y * deltaTime;
+            if (self.movingLeft)
+                movement.x -= velocity.x * deltaTime;
+            if (self.movingRight)
+                movement.x += velocity.x * deltaTime;
+           self.move(movement);
         };
 
+        self.renderCurrent = function (canvas) {
+            canvas.drawImage(
+                sprite,
+                self.getPosition().x,
+                self.getPosition().y
+            );
+        };
+        
         return self;
     }
 

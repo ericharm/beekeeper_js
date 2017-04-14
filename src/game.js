@@ -14,6 +14,7 @@ module.exports = {
                 world.render();
             },
             processEvent: function (event, isKeyPressed) {
+                // this should probably be handled somewhere else
                 switch (event.keyCode) {
                     case 37: // Left
                         context.player.movingLeft = isKeyPressed;

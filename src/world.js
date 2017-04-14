@@ -8,6 +8,7 @@ module.exports = {
 
         // private data
         var background = BackgroundNode.new();
+        var hive = context.hive;
         var player = context.player;
         var canvas = context.canvas;
 
@@ -30,6 +31,7 @@ module.exports = {
         var buildScene = function () {
             sceneGraph.layers.background.attachChild(background);
             sceneGraph.layers.foreground.attachChild(player);
+            sceneGraph.layers.foreground.attachChild(hive);
         };
         
         // initializer
