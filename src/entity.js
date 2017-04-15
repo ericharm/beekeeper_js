@@ -1,40 +1,55 @@
 var SceneNode = require("./scene_node.js");
+var construct = require("mozart");
 
-module.exports = {
+var Entity = SceneNode.subclass(function (prototype, _, _protected) {
 
-    new: function () {
+    prototype.init = function (children, options) {
+        _(this).position = options.position ?
+            options.position : {x: 0, y: 0};
+        _(this).sprite = options.sprite;
+        _(this).velocity = {x: 0, y: 0};
+        _(this).movingUp = false;
+        _(this).movingDown = false;
+        _(this).movingLeft = false;
+        _(this).movingRight = false;
+        prototype.super.init.call(this, children);
+    };
 
-        // inherit from SceneNode
-        var self = SceneNode.new();
-        // overrides
-        self._updateCurrent = function (deltaTime) {
-            self.move({
-                x: self._velocity.x * deltaTime,
-                y: self._velocity.y * deltaTime
-            });
+    prototype.move = function (movement) {
+        _(this).position.x += movement.x;
+        _(this).position.y += movement.y;
+    };
+
+    // add dynamic getters
+    prototype.getPosition = function () {
+        return _(this).position;
+    };
+
+    // add dynamic accessors
+    prototype.setVelocity = function (vector) {
+        _(this).velocity = vector;
+    };
+
+    prototype.getVelocity = function () {
+        return _(this).velocity;
+    };
+
+    _protected.updateCurrent = function (deltaTime) {
+        movement = {    
+            x: this.velocity.x * deltaTime,
+            y: this.velocity.y * deltaTime
         };
-        // augmented interface
-        self.move = function (movement) {
-            self._position.x += movement.x;
-            self._position.y += movement.y;
-        };
-        self.getPosition = function () {
-            return self._position;
-        };
-        self.setVelocity = function (vector) {
-            self._velocity = vector;
-        };
-        self.getVelocity = function () {
-            return self._velocity;
-        };
-        // protected
-        self._position = {x: 0, y: 0};
-        self._velocity = {x: 0, y: 0};
-        self._movingUp = false;
-        self._movingLeft = false;
-        self._movingRight = false;
-        self._movingDown = false;
-        
-        return self;
-    }
-};
+        prototype.move.call(this, movement);
+    };
+
+    _protected.renderCurrent = function (canvas) {
+        canvas.drawImage(
+                this.sprite,
+                this.position.x,
+                this.position.y
+                );
+    };
+}); 
+
+module.exports = Entity;
+

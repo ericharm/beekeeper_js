@@ -1,62 +1,53 @@
 var Entity = require("../entity.js");
 var Textures = require("../textures.js");
 var Sprite = Textures.Sprite;
+var construct =  require("mozart");
 
-module.exports = {
+var Player = Entity.subclass(function (prototype, _, _protected) {
 
-    new: function () {
+    prototype.init = function (children, options) {
+        options = options ? options : {};
+        options.sprite = Sprite.new(Textures.player);
+        // is there a better way to do this?
+        _(this).self = this;
+        prototype.super.init.call(this, children, options);
+    };
 
-        // inherit from Entity
-        var self = Entity.new();
+    prototype.setMoving = function (direction, value) {
+        switch(direction) {
+            case 'up':
+                _(this).movingUp = value;
+                break;
+            case 'down':
+                _(this).movingDown = value;
+                break;
+            case 'left':
+                _(this).movingLeft = value;
+                break;
+            case 'right':
+                _(this).movingRight = value;
+                break;
+        }
+    };
 
-        self.setMoving = function(direction, value) {
-            switch (direction) {
-                case 'up':
-                    self._movingUp = value;
-                    break;
-                case 'down':
-                    self._movingDown = value;
-                    break;
-                case 'left':
-                    self._movingLeft = value;
-                    break;
-                case 'right':
-                    self._movingRight = value;
-                    break;
-            }
+    _protected.updateCurrent = function (deltaTime) {
+        var movement = {
+            x: 0.0,
+            y: 0.0
         };
+        if (this.movingUp) {
+            movement.y -= this.velocity.y * deltaTime;
+        }
+        if (this.movingDown)
+            movement.y += this.velocity.y * deltaTime;
+        if (this.movingLeft)
+            movement.x -= this.velocity.x * deltaTime;
+        if (this.movingRight)
+            movement.x += this.velocity.x * deltaTime;
+        prototype.super.move.call(this.self, movement);
+    };
 
-        // private data
-        var sprite = Sprite.new(Textures.player);
-        self._velocity = {x:2, y:2};
+});
 
-        // protected overrides
-        self._updateCurrent = function(deltaTime) {
-            var movement = {
-                x: 0.0,
-                y: 0.0
-            };
-            if (self._movingUp)
-                movement.y -= self._velocity.y * deltaTime;
-            if (self._movingDown)
-                movement.y += self._velocity.y * deltaTime;
-            if (self._movingLeft)
-                movement.x -= self._velocity.x * deltaTime;
-            if (self._movingRight)
-                movement.x += self._velocity.x * deltaTime;
-            self.move(movement);
-        };
-
-        self._renderCurrent = function (canvas) {
-            canvas.drawImage(
-                sprite,
-                self.getPosition().x,
-                self.getPosition().y
-            );
-        };
-
-        return self;
-    }
-
-};
+module.exports = Player;
 

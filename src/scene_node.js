@@ -1,48 +1,54 @@
-module.exports = {
+var construct = require("mozart");
 
-    new: function () {
-        // public interface
-        var self = {
-            update: function (deltaTime) {
-                this._updateCurrent(deltaTime);
-                this._updateChildren(deltaTime);
-            },
-            render: function (canvas) {
-                this._renderCurrent(canvas);
-                this._renderChildren(canvas);
-            },
-            attachChild: function (node) {
-                this._children.push(node);
-            },
-            detachChild: function (node) {
-                var index = _children.indexOf(node);
-                if (index >= 0) {
-                    _children.splice(index, 1);
-                }
-                else {
-                    throw 'NoChildError';
-                }
-            },
-            // protected
-            _children: [],
-            _updateCurrent: function (deltaTime) {
-                // do nothing by default
-            },
-            _renderCurrent: function (canvas) {
-                // do nothing by default
-            },
-            _updateChildren: function (deltaTime) {
-                for (var i = 0; i < this._children.length; i++) {
-                    this._children[i].update(deltaTime);
-                }
-            },
-            _renderChildren: function (canvas) {
-                for (var i = 0; i < this._children.length; i++) {
-                    this._children[i].render(canvas);
-                }
+var SceneNode = construct(function (prototype, _, _protected) {
+
+        prototype.init = function (children) {
+        _(this).children = children || [];
+        };
+
+        prototype.update = function (deltaTime) {
+        _(this).updateCurrent(deltaTime);
+        _(this).updateChildren(deltaTime);
+        };
+
+        prototype.render = function (canvas) {
+        _(this).renderCurrent(canvas);
+        _(this).renderChildren(canvas);
+        };
+
+        prototype.attachChild = function (node) {
+        _(this).children.push(node);
+        };
+
+        prototype.detachChild = function (node) {
+            var index = _(this).children.indexOf(node);
+            if (index >= 0) {
+                _(this).children.splice(index, 1);
+            }
+            else {
+                throw 'NoChildError';
             }
         };
-        return self;
-    }
-};
+
+        _protected.updateCurrent = function (deltaTime) {
+            // do nothing by default
+        };
+        _protected.renderCurrent = function (canvas) {
+            // do nothing by default
+        };
+        _protected.updateChildren = function (deltaTime) {
+            for (var i = 0; i < this.children.length; i++) {
+                this.children[i].update(deltaTime);
+            }
+        };
+        _protected.renderChildren = function (canvas) {
+            for (var i = 0; i < this.children.length; i++) {
+                this.children[i].render(canvas);
+            }
+        };
+
+
+});
+
+module.exports = SceneNode;
 

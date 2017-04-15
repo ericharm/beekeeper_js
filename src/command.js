@@ -5,6 +5,4 @@ module.exports = {
         player.setMoving(direction, value);
     }
 
-
-
 };

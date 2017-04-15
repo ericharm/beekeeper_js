@@ -1,27 +1,36 @@
 var SceneNode = require("./scene_node.js");
 
+var BackgroundNode = SceneNode.subclass(function(prototype, _, _protected) {
+
+    prototype.init = function () {
+        prototype.super.init.call(this);
+    };
+
+    _protected.renderCurrent = function (canvas) {
+        // clear window
+        canvas.fillStyle = "#00aa00";
+        canvas.fillRect(0, 0, 800, 600);
+        // draw border
+        canvas.fillStyle = "#aaaaaa";
+        canvas.strokeRect(0, 0, 800, 600);
+    };
+
+});
+
 module.exports = {
 
     new: function (context) {
 
         // private data
-        var background = SceneNode.new();
-        background.render = function (canvas) {
-            // clear window
-            canvas.fillStyle = "#00aa00";
-            canvas.fillRect(0, 0, 800, 600);
-            // draw border
-            canvas.fillStyle = "#aaaaaa";
-            canvas.strokeRect(0, 0, 800, 600);
-        };
         var hive = context.hive;
         var player = context.player;
+        player.setVelocity({x: 2, y: 2});
         var canvas = context.canvas;
 
         var sceneGraph = {
             layers: {
-                background: SceneNode.new(),
-                foreground: SceneNode.new()
+                background: new SceneNode(),
+                foreground: new SceneNode()
             },
             update: function (deltaTime) {
                 this.layers.background.update(deltaTime);
@@ -35,7 +44,7 @@ module.exports = {
 
         // private methods
         var buildScene = function () {
-            sceneGraph.layers.background.attachChild(background);
+            sceneGraph.layers.background.attachChild(new BackgroundNode());
             sceneGraph.layers.foreground.attachChild(player);
             sceneGraph.layers.foreground.attachChild(hive);
         };

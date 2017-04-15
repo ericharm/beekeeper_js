@@ -8,8 +8,12 @@ module.exports = {
     new: function (context) {
 
         // private data
-        context.player = Player.new();
-        context.hive = Hive.new();
+        context.player = new Player([], {
+            position: {x: 100, y: 100}
+        });
+        context.hive = new Hive([], {
+            position: {x: 300, y: 300}
+        });
         var world = World.new(context);
         // public interface
         var self = {

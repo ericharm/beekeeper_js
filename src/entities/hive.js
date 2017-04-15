@@ -1,33 +1,18 @@
 var Entity = require("../entity.js");
 var Textures = require("../textures.js");
 var Sprite = Textures.Sprite;
+var construct = require("mozart");
 
-module.exports = {
-
-    new: function () {
-
-        // inherit from Entity
-        var self = Entity.new();
+var Hive = Entity.subclass(function (prototype, _, _protected) {
         
-        // private data
-        var sprite = Sprite.new(Textures.hive);
-        var position = {x: 100, y: 100};
+    prototype.init = function (children, options) {
+        options = options ? options : {};
+        options.sprite = Sprite.new(Textures.hive);
+        
+        prototype.super.init.call(this, children, options);
+    };
 
-        // private overrides
-        function renderCurrent(canvas) {
-            canvas.drawImage(
-                sprite,
-                position.x,
-                position.y
-            );
-        }
+});
 
-        // overrides 
-        self.render = function (canvas) {
-            renderCurrent(canvas);
-        };
-        return self;
+module.exports = Hive;
 
-    }
-
-};
