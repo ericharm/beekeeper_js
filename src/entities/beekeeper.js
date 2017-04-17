@@ -3,7 +3,7 @@ var Textures = require("../textures.js");
 var Sprite = Textures.Sprite;
 var construct =  require("mozart");
 
-var Player = Entity.subclass(function (prototype, _, _protected) {
+var Beekeeper = Entity.subclass(function (prototype, _, _protected) {
 
     prototype.init = function (children, options) {
         options = options ? options : {};
@@ -49,5 +49,5 @@ var Player = Entity.subclass(function (prototype, _, _protected) {
 
 });
 
-module.exports = Player;
+module.exports = Beekeeper;
 

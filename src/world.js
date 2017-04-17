@@ -23,30 +23,24 @@ module.exports = {
 
         // private data
         var hive = context.hive;
-        var player = context.player;
+        var beekeeper = context.beekeeper;
         player.setVelocity({x: 2, y: 2});
         var canvas = context.canvas;
 
-        var sceneGraph = {
-            layers: {
-                background: new SceneNode(),
-                foreground: new SceneNode()
-            },
-            update: function (deltaTime) {
-                this.layers.background.update(deltaTime);
-                this.layers.foreground.update(deltaTime);
-            },
-            render: function (canvas) {
-                this.layers.background.render(canvas);
-                this.layers.foreground.render(canvas);
-            }
-        };
+        var commandQueue = [];
+
+        var sceneGraph = new SceneNode();
+        var backgroundLayer = new SceneNode();
+        var foregroundLayer = new SceneNode();
 
         // private methods
         var buildScene = function () {
-            sceneGraph.layers.background.attachChild(new BackgroundNode());
-            sceneGraph.layers.foreground.attachChild(player);
-            sceneGraph.layers.foreground.attachChild(hive);
+            sceneGraph.attachChild(backgroundLayer);
+            sceneGraph.attachChild(foregroundLayer);
+
+            backgroundLayer.attachChild(new BackgroundNode());
+            foregroundLayer.attachChild(beekeeper);
+            foregroundLayer.attachChild(hive);
         };
         
         // initializer

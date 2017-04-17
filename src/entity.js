@@ -43,11 +43,7 @@ var Entity = SceneNode.subclass(function (prototype, _, _protected) {
     };
 
     _protected.renderCurrent = function (canvas) {
-        canvas.drawImage(
-                this.sprite,
-                this.position.x,
-                this.position.y
-                );
+        canvas.drawImage(this.sprite, this.position.x, this.position.y);
     };
 }); 
 

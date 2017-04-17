@@ -1,5 +1,5 @@
 var World = require("./world.js");
-var Player = require("./entities/player.js");
+var Beekeeper = require("./entities/beekeeper.js");
 var Hive = require("./entities/hive.js");
 var Command = require("./command.js");
 
@@ -8,13 +8,14 @@ module.exports = {
     new: function (context) {
 
         // private data
-        context.player = new Player([], {
+        context.beekeeper = new Beekeeper([], {
             position: {x: 100, y: 100}
         });
         context.hive = new Hive([], {
             position: {x: 300, y: 300}
         });
         var world = World.new(context);
+
         // public interface
         var self = {
             tick: function (deltaTime) {
@@ -22,7 +23,7 @@ module.exports = {
                 world.render();
             },
             processEvent: function (event, isKeyPressed) {
-                // this should probably be handled somewhere else
+                // this should be sent to the player, who then adds commands to the queue
                 switch (event.keyCode) {
                     case 37: // Left
                         Command.setMoving(context.player, 'left', isKeyPressed);
