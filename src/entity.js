@@ -3,6 +3,9 @@ var construct = require("mozart");
 
 var Entity = SceneNode.subclass(function (prototype, _, _protected) {
 
+    this.addGetters('position');
+    this.addAccessors('velocity');
+
     prototype.init = function (children, options) {
         _(this).position = options.position ?
             options.position : {x: 0, y: 0};
@@ -19,18 +22,6 @@ var Entity = SceneNode.subclass(function (prototype, _, _protected) {
         _(this).position.x += movement.x;
         _(this).position.y += movement.y;
     };
-
-    // add dynamic getters
-    // prototype.getPosition = function () {
-        // return _(this).position;
-    // };
-    this.addGetters('position');
-
-    // add dynamic accessors
-    // prototype.setVelocity = function (vector) {
-        // _(this).velocity = vector;
-    // };
-    this.addAccessors('velocity');
 
     prototype.getVelocity = function () {
         return _(this).velocity;
