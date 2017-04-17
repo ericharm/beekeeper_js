@@ -21,14 +21,16 @@ var Entity = SceneNode.subclass(function (prototype, _, _protected) {
     };
 
     // add dynamic getters
-    prototype.getPosition = function () {
-        return _(this).position;
-    };
+    // prototype.getPosition = function () {
+        // return _(this).position;
+    // };
+    this.addGetters('position');
 
     // add dynamic accessors
-    prototype.setVelocity = function (vector) {
-        _(this).velocity = vector;
-    };
+    // prototype.setVelocity = function (vector) {
+        // _(this).velocity = vector;
+    // };
+    this.addAccessors('velocity');
 
     prototype.getVelocity = function () {
         return _(this).velocity;

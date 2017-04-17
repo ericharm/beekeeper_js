@@ -23,19 +23,19 @@ module.exports = {
                 world.render();
             },
             processEvent: function (event, isKeyPressed) {
-                // this should be sent to the player, who then adds commands to the queue
+                // this should be sent to the beekeeper, who then adds commands to the queue
                 switch (event.keyCode) {
                     case 37: // Left
-                        Command.setMoving(context.player, 'left', isKeyPressed);
+                        Command.setMoving(context.beekeeper, 'left', isKeyPressed);
                         break;
                     case 38: // Up
-                        Command.setMoving(context.player, 'up', isKeyPressed);
+                        Command.setMoving(context.beekeeper, 'up', isKeyPressed);
                         break;
                     case 39: // Right
-                        Command.setMoving(context.player, 'right', isKeyPressed);
+                        Command.setMoving(context.beekeeper, 'right', isKeyPressed);
                         break;
                     case 40: // Down
-                        Command.setMoving(context.player, 'down', isKeyPressed);
+                        Command.setMoving(context.beekeeper, 'down', isKeyPressed);
                         break;
                 }
             }

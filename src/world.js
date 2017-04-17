@@ -24,7 +24,7 @@ module.exports = {
         // private data
         var hive = context.hive;
         var beekeeper = context.beekeeper;
-        player.setVelocity({x: 2, y: 2});
+        beekeeper.setVelocity({x: 2, y: 2});
         var canvas = context.canvas;
 
         var commandQueue = [];
