@@ -1,5 +1,4 @@
 var SceneNode = require("./scene_node.js");
-var construct = require("mozart");
 
 var Entity = SceneNode.subclass(function (prototype, _, _protected) {
 
