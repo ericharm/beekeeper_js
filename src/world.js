@@ -1,7 +1,6 @@
 var SceneNode = require("./scene_node.js");
 
 var BackgroundNode = SceneNode.subclass(function(prototype, _, _protected) {
-
     prototype.init = function () {
         prototype.super.init.call(this);
     };
@@ -14,52 +13,48 @@ var BackgroundNode = SceneNode.subclass(function(prototype, _, _protected) {
         canvas.fillStyle = "#aaaaaa";
         canvas.strokeRect(0, 0, 800, 600);
     };
-
 });
 
-module.exports = {
+var World = function(context) {
+    // private data
+    var hive = context.hive;
+    var beekeeper = context.beekeeper;
+    beekeeper.setVelocity({x: 2, y: 2});
+    var canvas = context.canvas;
+    var commandQueue = context.commandQueue;
 
-    new: function (context) {
+    var sceneGraph = new SceneNode();
+    var backgroundLayer = new SceneNode();
+    var foregroundLayer = new SceneNode();
 
-        // private data
-        var hive = context.hive;
-        var beekeeper = context.beekeeper;
-        beekeeper.setVelocity({x: 2, y: 2});
-        var canvas = context.canvas;
-        var commandQueue = context.commandQueue;
+    // private methods
+    var buildScene = function () {
+        sceneGraph.attachChild(backgroundLayer);
+        sceneGraph.attachChild(foregroundLayer);
 
-        var sceneGraph = new SceneNode();
-        var backgroundLayer = new SceneNode();
-        var foregroundLayer = new SceneNode();
+        backgroundLayer.attachChild(new BackgroundNode());
 
-        // private methods
-        var buildScene = function () {
-            sceneGraph.attachChild(backgroundLayer);
-            sceneGraph.attachChild(foregroundLayer);
+        foregroundLayer.attachChild(beekeeper);
+        foregroundLayer.attachChild(hive);
+    };
 
-            backgroundLayer.attachChild(new BackgroundNode());
+    // initializer
+    buildScene();
 
-            foregroundLayer.attachChild(beekeeper);
-            foregroundLayer.attachChild(hive);
-        };
-        
-        // initializer
-        buildScene();
-
-        var self = {
-            update: function (deltaTime) {
-                while (commandQueue.length > 0) {
-                    sceneGraph.onCommand(commandQueue.shift(), deltaTime);
-                }
-                sceneGraph.update(deltaTime);
-            },
-            render: function () {
-                sceneGraph.render(canvas);
+    var self = {
+        update: function (deltaTime) {
+            while (commandQueue.length > 0) {
+                sceneGraph.onCommand(commandQueue.shift(), deltaTime);
             }
-        };
+            sceneGraph.update(deltaTime);
+        },
+        render: function () {
+            sceneGraph.render(canvas);
+        }
+    };
 
-        return self;
-    }
-
+    return self;
 };
+
+module.exports = World;
 

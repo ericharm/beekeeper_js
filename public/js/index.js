@@ -28,7 +28,7 @@ $(document).ready(function () {
             var ctx = canvas.getContext("2d");
             context.canvas = ctx;
 
-            game = Game.new(context);
+            game = Game(context);
             addListeners(game);
 
             // game loop 
