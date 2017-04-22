@@ -1,5 +1,8 @@
 var SceneNode = require("./scene_node.js");
 
+// pass all events from command queue to the scene graph
+// with each update
+
 var BackgroundNode = SceneNode.subclass(function(prototype, _, _protected) {
 
     prototype.init = function () {

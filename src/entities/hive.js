@@ -1,7 +1,6 @@
 var Entity = require("../entity.js");
 var Textures = require("../textures.js");
 var Sprite = Textures.Sprite;
-var construct = require("mozart");
 
 var Hive = Entity.subclass(function (prototype, _, _protected) {
         

@@ -3,6 +3,8 @@ var Beekeeper = require("./entities/beekeeper.js");
 var Hive = require("./entities/hive.js");
 var Command = require("./command.js");
 
+// pass input events to player
+
 module.exports = {
 
     new: function (context) {
