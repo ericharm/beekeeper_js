@@ -1,12 +1,20 @@
 var construct = require("mozart");
 
-// call onCommand() each update, responding to
-// commands and passing them to child nodes
-
 var SceneNode = construct(function (prototype, _, _protected) {
 
     prototype.init = function (children) {
-        _(this).children = children || [];
+        _(this).children = children ? children : [];
+        _(this).categories = [];
+    };
+
+    prototype.onCommand = function (command, deltaTime) {
+        if (_(this).haveCommonCategories(command.categories, _(this).categories)) {
+            command.action(this, deltaTime);
+        }
+
+        for (var i = 0; i < _(this).children.length; i++) {
+            _(this).children[i].onCommand(command, deltaTime);
+        }
     };
 
     prototype.update = function (deltaTime) {
@@ -48,6 +56,15 @@ var SceneNode = construct(function (prototype, _, _protected) {
         for (var i = 0; i < this.children.length; i++) {
             this.children[i].render(canvas);
         }
+    };
+    _protected.haveCommonCategories = function(first, second) {
+        var arrays = [first, second];
+        var result = arrays.shift().filter(function(v) {
+            return arrays.every(function(a) {
+                return (a.indexOf(v) !== -1);
+            });
+        });
+        return result.length > 0;
     };
 
 });

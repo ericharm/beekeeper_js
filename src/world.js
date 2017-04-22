@@ -1,8 +1,5 @@
 var SceneNode = require("./scene_node.js");
 
-// pass all events from command queue to the scene graph
-// with each update
-
 var BackgroundNode = SceneNode.subclass(function(prototype, _, _protected) {
 
     prototype.init = function () {
@@ -29,8 +26,7 @@ module.exports = {
         var beekeeper = context.beekeeper;
         beekeeper.setVelocity({x: 2, y: 2});
         var canvas = context.canvas;
-
-        var commandQueue = [];
+        var commandQueue = context.commandQueue;
 
         var sceneGraph = new SceneNode();
         var backgroundLayer = new SceneNode();
@@ -42,6 +38,7 @@ module.exports = {
             sceneGraph.attachChild(foregroundLayer);
 
             backgroundLayer.attachChild(new BackgroundNode());
+
             foregroundLayer.attachChild(beekeeper);
             foregroundLayer.attachChild(hive);
         };
@@ -51,6 +48,9 @@ module.exports = {
 
         var self = {
             update: function (deltaTime) {
+                while (commandQueue.length > 0) {
+                    sceneGraph.onCommand(commandQueue.shift(), deltaTime);
+                }
                 sceneGraph.update(deltaTime);
             },
             render: function () {

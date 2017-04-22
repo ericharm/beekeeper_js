@@ -10,6 +10,7 @@ var Beekeeper = Entity.subclass(function (prototype, _, _protected) {
         // is there a better way to do this?
         _(this).self = this;
         prototype.super.init.call(this, children, options);
+        _(this).categories = ['beekeeper'];
     };
 
     prototype.setMoving = function (direction, value) {
