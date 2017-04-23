@@ -11,7 +11,6 @@ $(document).ready(function () {
     canvasElement.setAttribute("width", Config.canvasWidth);
     canvasElement.setAttribute("height", Config.canvasHeight);
 
-    // private methods
     function addListeners(app) {
         window.addEventListener('keydown', function (event) {
             app.processRealtimeInput(event, true);
@@ -24,7 +23,6 @@ $(document).ready(function () {
         }, false);
     }
 
-    // main();
     var main = (function () {
         if (canvasElement.getContext) {
             
@@ -41,6 +39,7 @@ $(document).ready(function () {
 
             // game loop 
             setInterval(function () {
+                // fixed step
                 var now = window.performance.now();
                 var delta = now - previous;
                 app.tick(delta / fps);
