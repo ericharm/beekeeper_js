@@ -1,4 +1,4 @@
-# Up and running
+## Up and running
 git clone https://e_e_harm@bitbucket.org/e_e_harm/beekeeper_js.github
 
 cd beekeeper_js
