@@ -1,3 +1,8 @@
+/*
+ * A common type of scene node that has a position and velocity
+ * and so can move around the screen.
+ */
+
 var SceneNode = require("./scene_node.js");
 
 var Entity = SceneNode.subclass(function (prototype, _, _protected) {

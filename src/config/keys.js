@@ -1,3 +1,8 @@
+/*
+ * A list of keyCodes needed for
+ * keyboard input
+ */
+
 var keys = {
     Up: 38,
     Down: 40,

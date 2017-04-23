@@ -1,8 +1,13 @@
+/*
+ * Sets the initial state and manages the state stack.
+ */
+
 var InitialState = require("../../src/states/title_screen.js");
 
 var Application = function (context) {
 
     var canvas = context.canvas;
+
     var stateStack = {
         stack: [],
         push: function (state) {
@@ -58,7 +63,7 @@ var Application = function (context) {
             if (stateStack.isEmpty()) {
                 context.canvas.fillStyle = "#ffffff";
                 context.canvas.fillRect(0, 0, Config.canvasWidth, Config.canvasHeight);
-                // terminate execution
+                // terminate
             }
             stateStack.update(deltaTime);
             stateStack.draw(canvas);

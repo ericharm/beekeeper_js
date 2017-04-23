@@ -1,3 +1,9 @@
+/*
+ *  References to all sprite image
+ *  paths and a little helper for
+ *  creating Sprites.
+ */
+
 module.exports = {
 
     player: "images/alien.png",

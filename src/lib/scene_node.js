@@ -1,3 +1,9 @@
+/*
+* Scene Nodes and entities utilize the Mozart (https://github.com/philipwalton/mozart)
+* library to mimic classical inheritance in Javascript. Scene Nodes live on the
+* scene graph.
+*/
+
 var construct = require("mozart");
 
 var SceneNode = construct(function (prototype, _, _protected) {

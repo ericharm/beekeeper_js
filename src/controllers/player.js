@@ -1,3 +1,8 @@
+/*
+ * Player converts input into commands and sends
+ * them to the command queue.
+ */
+
 var Command = require("../lib/command.js");
 var Keys = require("../config/keys.js");
 
@@ -8,7 +13,6 @@ var Player = function (commandQueue) {
             if (event.keyCode == Keys.Up) {
                 commandQueue.push(Command.new(function (node, deltaTime) {
                     node.setMoving('up', isKeyPressed);
-                    // doesn't use deltaTime but we will figure that out
                 }, ['beekeeper']));
             }
 

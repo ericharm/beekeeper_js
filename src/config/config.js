@@ -1,3 +1,7 @@
+/*
+ * Any application-wide variables
+ */
+
 Config = {
 
     frameRate: 30.0,

@@ -3,14 +3,17 @@ var Config = require("../../src/config/config.js");
 
 $(document).ready(function () {
 
+    // holds references to canvas, commandQueue,
+    // game objects and stateStack
     var context = {};
 
-    var previous = window.performance.now();
     var fps = Config.frameRate;
+    var previous = window.performance.now();
     var canvasElement = document.getElementById("canvas");
     canvasElement.setAttribute("width", Config.canvasWidth);
     canvasElement.setAttribute("height", Config.canvasHeight);
 
+    // Keyboard input
     function addListeners(app) {
         window.addEventListener('keydown', function (event) {
             app.processRealtimeInput(event, true);
@@ -23,6 +26,9 @@ $(document).ready(function () {
         }, false);
     }
 
+    /*
+     * main
+     */
     var main = (function () {
         if (canvasElement.getContext) {
             
@@ -39,7 +45,7 @@ $(document).ready(function () {
 
             // game loop 
             setInterval(function () {
-                // fixed step
+                // fixed step updating
                 var now = window.performance.now();
                 var delta = now - previous;
                 app.tick(delta / fps);
