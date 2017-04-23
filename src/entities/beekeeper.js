@@ -1,5 +1,5 @@
-var Entity = require("../entity.js");
-var Textures = require("../textures.js");
+var Entity = require("../lib/entity.js");
+var Textures = require("../config/textures.js");
 var Sprite = Textures.Sprite;
 
 var Beekeeper = Entity.subclass(function (prototype, _, _protected) {

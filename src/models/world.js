@@ -1,4 +1,4 @@
-var SceneNode = require("./scene_node.js");
+var SceneNode = require("../lib/scene_node.js");
 
 var BackgroundNode = SceneNode.subclass(function(prototype, _, _protected) {
     prototype.init = function () {

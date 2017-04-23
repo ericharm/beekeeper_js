@@ -1,20 +1,10 @@
-// turn input into commands and send them into the command queue.
-// could create a different player object for different game states
-// by passing a custom processEvent() function to the constructor
-// and putting keys object in its own module.
-var Command = require("./command.js");
+var Command = require("../lib/command.js");
+var keys = require("../config/keys.js");
 
 var Player = function (commandQueue) {
 
-    var keys = {
-        Up: 38,
-        Down: 40,
-        Left: 37,
-        Right: 39
-    };
-
     var self = {
-        processEvent: function (event, isKeyPressed) {
+        processRealtimeInput: function (event, isKeyPressed) {
             if (event.keyCode == keys.Up) {
                 commandQueue.push(Command.new(function (node, deltaTime) {
                     node.setMoving('up', isKeyPressed);

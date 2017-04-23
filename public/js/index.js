@@ -1,4 +1,6 @@
-var Game = require("../../src/game.js");
+var Application = require("../../src/lib/application.js");
+var Config = require("../../src/config/config.js");
+var InitialState = require("../../src/states/title_screen.js");
 
 $(document).ready(function () {
 
@@ -8,16 +10,21 @@ $(document).ready(function () {
     };
 
     var previous = window.performance.now();
-    var fps = 30.0;
+    var fps = Config.frameRate;
     var canvasElement = document.getElementById("canvas");
+    canvasElement.setAttribute("width", Config.canvasWidth);
+    canvasElement.setAttribute("height", Config.canvasHeight);
 
     // private methods
-    function addListeners(game) {
+    function addListeners(app) {
         window.addEventListener('keydown', function (event) {
-            game.processEvent(event, true);
+            app.processRealtimeInput(event, true);
         }, false);
         window.addEventListener('keyup', function (event) {
-            game.processEvent(event, false);
+            app.processRealtimeInput(event, false);
+        }, false);
+        window.addEventListener('keypress', function (event) {
+           app.processEvent(event); 
         }, false);
     }
 
@@ -27,20 +34,21 @@ $(document).ready(function () {
             
             var ctx = canvas.getContext("2d");
             context.canvas = ctx;
+            context.stateStack = [];
+            context.commandQueue = [];
 
-            game = Game(context);
-            addListeners(game);
+            var app = Application(context);
+            addListeners(app);
+
+            // set the initial state
+            context.stateStack.push(InitialState(context));
 
             // game loop 
             setInterval(function () {
-
                 var now = window.performance.now();
                 var delta = now - previous;
-
-                game.tick(delta / fps);
-
+                app.tick(delta / fps);
                 previous = window.performance.now();
-            
             }, 1000 / fps);
 
         }
