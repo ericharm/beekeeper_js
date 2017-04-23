@@ -39,17 +39,15 @@ var MainMenu = function (context) {
                     case optionNames.Play:
                         context.stateStack.pop();
                         context.stateStack.push(Game(context));
-                        console.log("play");
                         break;
                     case optionNames.Exit:
-                        while (context.stateStack.length > 0) {
-                            context.stateStack.pop();
-                        }
+                        context.stateStack.emptyStack(); 
                         break;
                 }
             }
         },
         update: function (deltaTime) {
+            // not implemented
         },
         draw: function (canvas) {
             canvas.fillStyle="#000000";

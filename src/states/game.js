@@ -1,6 +1,6 @@
 var World = require("../models/world.js");
-var Beekeeper = require("../entities/beekeeper.js");
-var Hive = require("../entities/hive.js");
+var Beekeeper = require("../models/entities/beekeeper.js");
+var Hive = require("../models/entities/hive.js");
 var Player = require("../controllers/player.js");
 
 var Game = function (context) {

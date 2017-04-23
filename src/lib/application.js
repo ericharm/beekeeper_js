@@ -1,45 +1,67 @@
+var InitialState = require("../../src/states/title_screen.js");
+
 var Application = function (context) {
 
     var canvas = context.canvas;
-    var stateStack = context.stateStack;
-    
-    var isStackEmpty = function () {
-        return (stateStack.length === 0);
-    };
-
-    var update = function (deltaTime) {
-        for (var i = stateStack.length - 1; i >= 0; i--) {
-            // update each state from top of stack to bottom
-            stateStack[i].update(deltaTime);
-        }
-    };
-
-    var draw = function (canvas) {
-        for (var i = 0; i < stateStack.length; i++) {
-            // render each state starting at bottom of stateStack
-            stateStack[i].draw(canvas);
-        }
-    };
-
-    var self = {
+    var stateStack = {
+        stack: [],
+        push: function (state) {
+            this.stack.push(state);
+        },
+        pop: function (state) {
+            return this.stack.pop();
+        },
+        emptyStack: function () {
+            while (this.stack.length > 0) {
+                this.stack.pop();
+            }
+        },
+        isEmpty: function () {
+            return (this.stack.length === 0);
+        },
+        update: function (deltaTime) {
+            for (var i = this.stack.length - 1; i >= 0; i--) {
+                // update each state from top of stack to bottom
+                this.stack[i].update(deltaTime);
+            }
+        },
+        draw: function (canvas) {
+            for (var i = 0; i < this.stack.length; i++) {
+                // render each state starting at bottom of stateStack
+                this.stack[i].draw(canvas);
+            }
+        },
         processRealtimeInput: function (event, isKeyPressed) {
-            for (var i = stateStack.length - 1; i >= 0; i--) {
+            for (var i = this.stack.length - 1; i >= 0; i--) {
                 // pass events to each state from top of stack to bottom
-                stateStack[i].processRealtimeInput(event, isKeyPressed);
+                this.stack[i].processRealtimeInput(event, isKeyPressed);
             }
         },
         processEvent: function (event) {
-           for (var i = stateStack.length - 1; i >= 0; i--) {
-                stateStack[i].processEvent(event);
+           for (var i = this.stack.length - 1; i >= 0; i--) {
+                this.stack[i].processEvent(event);
             }
         },
+    };
+
+    context.stateStack = stateStack;
+    stateStack.push(InitialState(context));    
+
+    var self = {
+        processRealtimeInput: function (event, isKeyPressed) {
+            stateStack.processRealtimeInput(event, isKeyPressed);
+        },
+        processEvent: function (event) {
+            stateStack.processEvent(event);
+        },
         tick: function (deltaTime) {
-            if (isStackEmpty()) {
+            if (stateStack.isEmpty()) {
+                context.canvas.fillStyle = "#ffffff";
+                context.canvas.fillRect(0, 0, Config.canvasWidth, Config.canvasHeight);
                 // terminate execution
-                console.log("All gone!");
             }
-            update(deltaTime);
-            draw(canvas);
+            stateStack.update(deltaTime);
+            stateStack.draw(canvas);
         }
     };
 

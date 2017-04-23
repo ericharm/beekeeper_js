@@ -1,30 +1,30 @@
 var Command = require("../lib/command.js");
-var keys = require("../config/keys.js");
+var Keys = require("../config/keys.js");
 
 var Player = function (commandQueue) {
 
     var self = {
         processRealtimeInput: function (event, isKeyPressed) {
-            if (event.keyCode == keys.Up) {
+            if (event.keyCode == Keys.Up) {
                 commandQueue.push(Command.new(function (node, deltaTime) {
                     node.setMoving('up', isKeyPressed);
                     // doesn't use deltaTime but we will figure that out
                 }, ['beekeeper']));
             }
 
-            if (event.keyCode == keys.Down) {
+            if (event.keyCode == Keys.Down) {
                 commandQueue.push(Command.new(function (node, deltaTime) {
                     node.setMoving('down', isKeyPressed);
                 }, ['beekeeper']));
             }
 
-            if (event.keyCode == keys.Left) {
+            if (event.keyCode == Keys.Left) {
                 commandQueue.push(Command.new(function (node, deltaTime) {
                     node.setMoving('left', isKeyPressed);
                 }, ['beekeeper']));
             }
 
-            if (event.keyCode == keys.Right) {
+            if (event.keyCode == Keys.Right) {
                 commandQueue.push(Command.new(function (node, deltaTime) {
                     node.setMoving('right', isKeyPressed);
                 }, ['beekeeper']));

@@ -1,13 +1,9 @@
 var Application = require("../../src/lib/application.js");
 var Config = require("../../src/config/config.js");
-var InitialState = require("../../src/states/title_screen.js");
 
 $(document).ready(function () {
 
-    //private data
-    var context = {
-        events: []
-    };
+    var context = {};
 
     var previous = window.performance.now();
     var fps = Config.frameRate;
@@ -33,15 +29,15 @@ $(document).ready(function () {
         if (canvasElement.getContext) {
             
             var ctx = canvas.getContext("2d");
+
+            // render
             context.canvas = ctx;
-            context.stateStack = [];
+
+            // input
             context.commandQueue = [];
 
             var app = Application(context);
             addListeners(app);
-
-            // set the initial state
-            context.stateStack.push(InitialState(context));
 
             // game loop 
             setInterval(function () {
