@@ -2,7 +2,8 @@
  * Sets the initial state and manages the state stack.
  */
 
-var InitialState = require("../../src/states/title_screen.js");
+var Config = require("../config/config.js");
+var InitialState = Config.initialState;
 
 var Application = function (context) {
 
@@ -31,10 +32,16 @@ var Application = function (context) {
             }
         },
         draw: function (canvas) {
+            // clear window
+            canvas.fillStyle = "#000000";
+            canvas.fillRect(0, 0, 800, 600);
             for (var i = 0; i < this.stack.length; i++) {
                 // render each state starting at bottom of stateStack
                 this.stack[i].draw(canvas);
             }
+            // draw border
+            canvas.fillStyle = "#aaaaaa";
+            canvas.strokeRect(0, 0, 800, 600);
         },
         processRealtimeInput: function (event, isKeyPressed) {
             for (var i = this.stack.length - 1; i >= 0; i--) {

@@ -1,4 +1,6 @@
 ## Up and running
+-----------------
+
 git clone https://e_e_harm@bitbucket.org/e_e_harm/beekeeper_js.github
 
 cd beekeeper_js
@@ -32,7 +34,7 @@ Mostly objects which reference constants, like keyCodes, colors, frameRate, and 
 Classes to convert input into commands which can control scene nodes or other parts of the application.
 
 ### lib/
-Bedrock of the framework that is unlikely to need much change, though the initial game state must be set at the top of application.js.
+Bedrock of the framework that is unlikely to need much change.
 
 ### models/
 In-game objects and classes to support them.
@@ -42,8 +44,6 @@ Objects that live on the state stack, like main menu, game, and pause.
 
 ### views/
 Scripts to handle specialized render logic, like animations and special effects.
-
-
 
 
 ## Inspiration

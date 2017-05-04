@@ -10,28 +10,32 @@ var Player = function (commandQueue) {
 
     var self = {
         processRealtimeInput: function (event, isKeyPressed) {
-            if (event.keyCode == Keys.Up) {
+            if (event.keyCode === Keys.Up) {
                 commandQueue.push(Command.new(function (node, deltaTime) {
                     node.setMoving('up', isKeyPressed);
                 }, ['beekeeper']));
             }
 
-            if (event.keyCode == Keys.Down) {
+            if (event.keyCode === Keys.Down) {
                 commandQueue.push(Command.new(function (node, deltaTime) {
                     node.setMoving('down', isKeyPressed);
                 }, ['beekeeper']));
             }
 
-            if (event.keyCode == Keys.Left) {
+            if (event.keyCode === Keys.Left) {
                 commandQueue.push(Command.new(function (node, deltaTime) {
                     node.setMoving('left', isKeyPressed);
                 }, ['beekeeper']));
             }
 
-            if (event.keyCode == Keys.Right) {
+            if (event.keyCode === Keys.Right) {
                 commandQueue.push(Command.new(function (node, deltaTime) {
                     node.setMoving('right', isKeyPressed);
                 }, ['beekeeper']));
+            }
+
+            if (event.keyCode === Keys.Space) {
+                console.log("space");
             }
         }
     };

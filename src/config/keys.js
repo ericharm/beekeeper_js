@@ -8,7 +8,8 @@ var keys = {
     Down: 40,
     Left: 37,
     Right: 39,
-    Enter: 13
+    Enter: 13,
+    Space: 32
 };
 
 module.exports = keys;

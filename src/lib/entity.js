@@ -14,6 +14,7 @@ var Entity = SceneNode.subclass(function (prototype, _, _protected) {
         _(this).position = options.position ?
             options.position : {x: 0, y: 0};
         _(this).sprite = options.sprite;
+        _(this).spriteDescriptor = options.spriteDescriptor;
         _(this).velocity = {x: 0, y: 0};
         _(this).movingUp = false;
         _(this).movingDown = false;

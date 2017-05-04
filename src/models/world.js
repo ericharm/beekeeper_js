@@ -4,27 +4,30 @@
  * and their descendents.
  */
 
-var SceneNode = require("../lib/scene_node.js");
+// This may eventually be a template for creating Levels
+// or substates of Game
 
+var SceneNode = require("../lib/scene_node.js");
+var Beekeeper = require("../models/entities/beekeeper.js");
+var Hive = require("../models/entities/hive.js");
 var BackgroundNode = SceneNode.subclass(function(prototype, _, _protected) {
     prototype.init = function () {
         prototype.super.init.call(this);
     };
-
     _protected.renderCurrent = function (canvas) {
-        // clear window
         canvas.fillStyle = "#00aa00";
         canvas.fillRect(0, 0, 800, 600);
-        // draw border
-        canvas.fillStyle = "#aaaaaa";
-        canvas.strokeRect(0, 0, 800, 600);
     };
 });
 
 var World = function(context) {
-
-    var hive = context.hive;
-    var beekeeper = context.beekeeper;
+    // private data
+    var beekeeper = new Beekeeper([], {
+        position: {x: 100, y: 100}
+    });
+    var hive = new Hive([], {
+        position: {x: 300, y: 300}
+    });
     beekeeper.setVelocity({x: 2, y: 2});
 
     var canvas = context.canvas;

@@ -6,7 +6,8 @@ Config = {
 
     frameRate: 30.0,
     canvasWidth: 800,
-    canvasHeight: 600
+    canvasHeight: 600,
+    initialState: require("../states/title_screen.js")
 
 };
 
