@@ -1,6 +1,6 @@
 var MainMenu = require("./main_menu.js");
-var Config = require("../config/config.js");
-var Keys = require("../config/keys.js");
+var Config = require("../../config/app.js");
+var Keys = require("../../config/keys.js");
 
 var TitleScreen = function (context) {
 

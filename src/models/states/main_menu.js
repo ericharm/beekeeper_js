@@ -1,5 +1,5 @@
-var Config = require("../config/config.js");
-var Keys = require("../config/keys.js");
+var Config = require("../../config/app.js");
+var Keys = require("../../config/keys.js");
 var Game = require("../states/game.js");
 
 var MainMenu = function (context) {

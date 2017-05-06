@@ -37,10 +37,7 @@ Classes to convert input into commands which can control scene nodes or other pa
 Bedrock of the framework that is unlikely to need much change.
 
 ### models/
-In-game objects and classes to support them.
-
-### states/
-Objects that live on the state stack, like main menu, game, and pause.
+In-game objects and classes to support them. models/entities/ will contain most scene nodes that move and render sprites, models/states will contain application states like game, pause, and title screen, and models/levels/ contains setup objects for each level that gets passed to the application when the game state is active.
 
 ### views/
 Scripts to handle specialized render logic, like animations and special effects.

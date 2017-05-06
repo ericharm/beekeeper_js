@@ -2,7 +2,7 @@
  * Sets the initial state and manages the state stack.
  */
 
-var Config = require("../config/config.js");
+var Config = require("../config/app.js");
 var InitialState = Config.initialState;
 
 var Application = function (context) {

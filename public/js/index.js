@@ -1,5 +1,5 @@
 var Application = require("../../src/lib/application.js");
-var Config = require("../../src/config/config.js");
+var Config = require("../../src/config/app.js");
 
 $(document).ready(function () {
 

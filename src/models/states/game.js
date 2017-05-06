@@ -1,10 +1,12 @@
-var World = require("../models/world.js");
-var Player = require("../controllers/player.js");
+var World = require("../../lib/world.js");
+var Player = require("../../controllers/player.js");
+var LevelOne = require("../levels/level_one.js");
 
 var Game = function (context) {
 
     context.commandQueue = [];
-    var world = World(context);
+    var level = LevelOne();
+    var world = World(context, level);
     var player = Player(context.commandQueue);
 
     var self = {
