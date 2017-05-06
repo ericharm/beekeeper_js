@@ -34,8 +34,15 @@ var Player = function (commandQueue) {
                 }, ['beekeeper']));
             }
 
+        },
+        processEvent: function (event) {
             if (event.keyCode === Keys.Space) {
-                console.log("space");
+                console.log("SPACE!");
+                // add a new projectile (stinger) to the foreground
+                // at the center of a hive
+                // commandQueue.push(Command.new(function (node, deltaTime) {
+                    // node.speak('a new child');
+                // }, ['foreground']));
             }
         }
     };

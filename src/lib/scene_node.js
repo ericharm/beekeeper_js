@@ -4,66 +4,71 @@
 * scene graph.
 */
 
-var construct = require("mozart");
+var SceneNode = function (callback) {
 
-var SceneNode = construct(function (prototype, _, _protected) {
-
-    prototype.init = function (children) {
-        _(this).children = children ? children : [];
-        _(this).categories = [];
-    };
-
-    prototype.onCommand = function (command, deltaTime) {
-        if (_(this).haveCommonCategories(command.categories, _(this).categories)) {
-            command.action(this, deltaTime);
-        }
-
-        for (var i = 0; i < _(this).children.length; i++) {
-            _(this).children[i].onCommand(command, deltaTime);
-        }
-    };
-
-    prototype.update = function (deltaTime) {
-        _(this).updateCurrent(deltaTime);
-        _(this).updateChildren(deltaTime);
-    };
-
-    prototype.render = function (canvas) {
-        _(this).renderCurrent(canvas);
-        _(this).renderChildren(canvas);
-    };
-
-    prototype.attachChild = function (node) {
-        _(this).children.push(node);
-    };
-
-    prototype.detachChild = function (node) {
-        var index = _(this).children.indexOf(node);
-        if (index >= 0) {
-            _(this).children.splice(index, 1);
+    var self = {
+      // public
+        onCommand: function (command, deltaTime) {
+            if (haveCommonCategories(command.categories, this._categories)) {
+                command.action(this, deltaTime);
             }
-        else {
-            throw 'NoChildError';
+            for (var i = 0; i < this._children.length; i++) {
+                this._children[i].onCommand(command, deltaTime);
+            }
+        },
+
+        update: function (deltaTime) {
+            this._updateCurrent(deltaTime);
+            this._updateChildren(deltaTime);
+        },
+
+        render: function (canvas) {
+            this._renderCurrent(canvas);
+            this._renderChildren(canvas);
+        },
+
+        attachChild: function (node) {
+            this._children.push(node);
+        },
+
+        detachChild: function (node) {
+            var index = this._children.indexOf(node);
+            if (index >= 0) {
+                this._children.splice(index, 1);
+            }
+            else {
+                throw 'NoChildError';
+            }
+        },
+
+      // protected
+        _children: [],
+        _categories: [],
+
+        _updateCurrent: function (deltaTime) {
+            // do nothing by default
+        },
+
+        _renderCurrent: function (canvas) {
+            // do nothing by default
+        },
+
+        _updateChildren: function (deltaTime) {
+            for (var i = 0; i < this._children.length; i++) {
+            this._children[i].update(deltaTime);
+            }
+        },
+
+        _renderChildren: function (canvas) {
+            for (var i = 0; i < this._children.length; i++) {
+                this._children[i].render(canvas);
+            }
         }
+
     };
 
-    _protected.updateCurrent = function (deltaTime) {
-        // do nothing by default
-    };
-    _protected.renderCurrent = function (canvas) {
-        // do nothing by default
-    };
-    _protected.updateChildren = function (deltaTime) {
-        for (var i = 0; i < this.children.length; i++) {
-            this.children[i].update(deltaTime);
-        }
-    };
-    _protected.renderChildren = function (canvas) {
-        for (var i = 0; i < this.children.length; i++) {
-            this.children[i].render(canvas);
-        }
-    };
-    _protected.haveCommonCategories = function(first, second) {
+    // private
+    function haveCommonCategories(first, second) {
         var arrays = [first, second];
         var result = arrays.shift().filter(function(v) {
             return arrays.every(function(a) {
@@ -71,9 +76,12 @@ var SceneNode = construct(function (prototype, _, _protected) {
             });
         });
         return result.length > 0;
-    };
+    }
 
-});
+    if (callback) callback(self);
+    return self;
+
+};
 
 module.exports = SceneNode;
 

@@ -1,49 +1,94 @@
 /*
- * A common type of scene node that has a position and velocity
- * and so can move around the screen.
+ * A common type of scene node that has a position, velocity,
+ * and a sprite, able to move an image file around the scene.
  */
 
 var SceneNode = require("./scene_node.js");
 
-var Entity = SceneNode.subclass(function (prototype, _, _protected) {
+var Entity = function (callback) {
 
-    this.addGetters('position');
-    this.addAccessors('velocity');
+    // public
+    var extended = {
+        move: function (vector) {
+            this._position.x += vector.x;
+            this._position.y += vector.y;
+        },
+        getPosition: function () {
+            return this._position;
+        },
+        setPosition: function (position) {
+            this._position = position;
+        },
+        getVelocity: function () {
+            return this._velocity;
+        },
+        setVelocity: function (velocity) {
+            this._velocity = velocity;
+        },
+        getCenter: function () {
+            return {
+                x: this._position.x + (this._width / 2),
+                y: this._position.y + (this._height / 2)
+            };
+        },
+        hitBox: function () {
+            var hitBox = this._hitBox();
+            return hitBox;
+        },
 
-    prototype.init = function (children, options) {
-        _(this).position = options.position ?
-            options.position : {x: 0, y: 0};
-        _(this).sprite = options.sprite;
-        _(this).spriteDescriptor = options.spriteDescriptor;
-        _(this).velocity = {x: 0, y: 0};
-        _(this).movingUp = false;
-        _(this).movingDown = false;
-        _(this).movingLeft = false;
-        _(this).movingRight = false;
-        prototype.super.init.call(this, children);
+        // protected
+        _position: {x: 0, y: 0},
+        _velocity: {x: 0, y: 0},
+        _height: 0,
+        _width: 0,
+        _sprite: null,
+
+        _hitBox: function () {
+             var p = this._position;
+             var w = this._width;
+             var h = this._height;
+
+             var bounds = {
+                 x: p.x + 2, y: p.y + 2,
+                 width: w - 4, height: h - 4
+             };
+
+             return {
+                bounds: bounds,
+                render: function (canvas) {
+                    canvas.strokeStyle = "#000000";
+                    canvas.strokeRect(
+                        this.bounds.x, this.bounds.y,
+                        this.bounds.width, this.bounds.height
+                    );
+                }
+             };
+        },
+
+        _updateCurrent: function (deltaTime) {
+            movement = {    
+                x: this._velocity.x * deltaTime,
+                y: this._velocity.y * deltaTime
+            };
+            this.move(movement);
+        },
+
+        _renderCurrent: function (canvas) {
+            canvas.drawImage(this._sprite, this._position.x, this._position.y);
+        }
+
     };
+ 
+    // extends SceneNode
+    var self = SceneNode();
+    for (var attribute in extended) { 
+        self[attribute] = extended[attribute];
+    }        
 
-    prototype.move = function (movement) {
-        _(this).position.x += movement.x;
-        _(this).position.y += movement.y;
-    };
+    if (callback) callback(self);
+    return self;
 
-    prototype.getVelocity = function () {
-        return _(this).velocity;
-    };
-
-    _protected.updateCurrent = function (deltaTime) {
-        movement = {    
-            x: this.velocity.x * deltaTime,
-            y: this.velocity.y * deltaTime
-        };
-        prototype.move.call(this, movement);
-    };
-
-    _protected.renderCurrent = function (canvas) {
-        canvas.drawImage(this.sprite, this.position.x, this.position.y);
-    };
-}); 
+};
 
 module.exports = Entity;
 

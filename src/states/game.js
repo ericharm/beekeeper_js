@@ -18,7 +18,7 @@ var Game = function (context) {
             player.processRealtimeInput(event, isKeyPressed); 
         },
         processEvent: function (event) {
-            // not implemented
+            player.processEvent(event); 
         }
     };
     return self;

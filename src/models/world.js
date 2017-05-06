@@ -9,38 +9,38 @@
 
 var SceneNode = require("../lib/scene_node.js");
 var Beekeeper = require("../models/entities/beekeeper.js");
-var Hive = require("../models/entities/hive.js");
-var BackgroundNode = SceneNode.subclass(function(prototype, _, _protected) {
-    prototype.init = function () {
-        prototype.super.init.call(this);
-    };
-    _protected.renderCurrent = function (canvas) {
+var Hive      = require("../models/entities/hive.js");
+
+var backgroundLayer = SceneNode(function (self) {
+    self._renderCurrent = function (canvas) {
         canvas.fillStyle = "#00aa00";
         canvas.fillRect(0, 0, 800, 600);
     };
 });
 
+var foregroundLayer = SceneNode(function (self) {
+    self._categories = ['foreground'];
+});
+
 var World = function(context) {
-    // private data
-    var beekeeper = new Beekeeper([], {
-        position: {x: 100, y: 100}
+
+    var beekeeper = Beekeeper(function (self) {
+        self.setPosition({x: 100, y: 300});
+        self.setVelocity({x: 2, y: 2});
     });
-    var hive = new Hive([], {
-        position: {x: 300, y: 300}
+
+    var hive = Hive(function (self) {
+        self.setPosition({x: 400, y: 300});
     });
-    beekeeper.setVelocity({x: 2, y: 2});
 
     var canvas = context.canvas;
     var commandQueue = context.commandQueue;
 
     var sceneGraph = new SceneNode();
-    var backgroundLayer = new SceneNode();
-    var foregroundLayer = new SceneNode();
 
     var buildScene = function () {
         sceneGraph.attachChild(backgroundLayer);
         sceneGraph.attachChild(foregroundLayer);
-        backgroundLayer.attachChild(new BackgroundNode());
         foregroundLayer.attachChild(beekeeper);
         foregroundLayer.attachChild(hive);
     };
@@ -49,6 +49,8 @@ var World = function(context) {
     buildScene();
 
     var self = {
+        // This update function is going to be used in every state
+        // Maybe move up to an abstract class
         update: function (deltaTime) {
             while (commandQueue.length > 0) {
                 sceneGraph.onCommand(commandQueue.shift(), deltaTime);
