@@ -1,5 +1,5 @@
-describe("Entity", function () {
-    var Entity = require("../src/lib/entity.js");
+describe("EntityCollision", function () {
+    var Entity = require("../../src/lib/entity.js");
 
     describe("collidesWith an overlapping node", function () {
         it("returns true", function () {
@@ -57,3 +57,4 @@ describe("Entity", function () {
         });
     });
 });
+
