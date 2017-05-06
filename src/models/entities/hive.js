@@ -6,6 +6,8 @@ var Hive = function (callback) {
 
     var extended = {
         // protected
+        _width: 32,
+        _height: 32,
         _sprite: Sprite(Textures.hive),
         _categories: ['hive'],
     };

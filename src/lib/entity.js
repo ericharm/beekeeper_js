@@ -31,9 +31,8 @@ var Entity = function (callback) {
                 y: this._position.y + (this._height / 2)
             };
         },
-        hitBox: function () {
-            var hitBox = this._hitBox();
-            return hitBox;
+        isRigid: function () {
+            return this._rigid;
         },
 
         // protected
@@ -42,28 +41,8 @@ var Entity = function (callback) {
         _height: 0,
         _width: 0,
         _sprite: null,
-
-        _hitBox: function () {
-             var p = this._position;
-             var w = this._width;
-             var h = this._height;
-
-             var bounds = {
-                 x: p.x + 2, y: p.y + 2,
-                 width: w - 4, height: h - 4
-             };
-
-             return {
-                bounds: bounds,
-                render: function (canvas) {
-                    canvas.strokeStyle = "#000000";
-                    canvas.strokeRect(
-                        this.bounds.x, this.bounds.y,
-                        this.bounds.width, this.bounds.height
-                    );
-                }
-             };
-        },
+        _rigid: true,
+        _debug: false,
 
         _updateCurrent: function (deltaTime) {
             movement = {    
@@ -75,6 +54,10 @@ var Entity = function (callback) {
 
         _renderCurrent: function (canvas) {
             canvas.drawImage(this._sprite, this._position.x, this._position.y);
+            if (this._debug) {
+                var hitBox = this.hitBox();
+                hitBox.render(canvas);
+            }
         }
 
     };

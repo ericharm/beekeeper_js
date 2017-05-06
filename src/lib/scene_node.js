@@ -8,7 +8,7 @@
 var SceneNode = function (callback) {
 
     var self = {
-      // public
+        // public
         onCommand: function (command, deltaTime) {
             if (haveCommonCategories(command.categories, this._categories)) {
                 command.action(this, deltaTime);
@@ -42,7 +42,35 @@ var SceneNode = function (callback) {
             }
         },
 
-      // protected
+        collidesWith: function (node) {
+            // Can't collide with itself
+            if (node === this) return false;
+
+            var hitBox1 = this.hitBox().bounds;
+            var hitBox2 = node.hitBox().bounds;
+            var r1 = {
+                x: hitBox1.x + hitBox1.width,
+                y: hitBox1.y + hitBox1.height          
+            };
+            var r2 = {
+                x: hitBox2.x + hitBox2.width,
+                y: hitBox2.y + hitBox2.height          
+            };
+
+            // If one rectangle is on left side of other
+            if (hitBox1.x > r2.x || hitBox2.x > r1.x) return false;
+            // If one rectangle is above other
+            if (hitBox1.y > r2.y || hitBox2.y > r1.y) return false;
+
+            return true;
+        },
+
+        hitBox: function () {
+            var hitBox = this._hitBox();
+            return hitBox;
+        },
+
+        // protected
         _children: [],
         _categories: [],
 
@@ -64,8 +92,29 @@ var SceneNode = function (callback) {
             for (var i = 0; i < this._children.length; i++) {
                 this._children[i].render(canvas);
             }
-        }
+        },
 
+        _hitBox: function () {
+             var p = this._position;
+             var w = this._width;
+             var h = this._height;
+
+             var bounds = {
+                 x: p.x + 2, y: p.y + 2,
+                 width: w - 4, height: h - 4
+             };
+
+             return {
+                bounds: bounds,
+                render: function (canvas) {
+                    canvas.strokeStyle = "#000000";
+                    canvas.strokeRect(
+                        this.bounds.x, this.bounds.y,
+                        this.bounds.width, this.bounds.height
+                    );
+                }
+             };
+        }
     };
 
     // private

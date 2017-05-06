@@ -6,9 +6,8 @@ var app = express();
 var path = require("path");
 
 /*
- *  Path definitions
+ *  Asset paths
  */
-app.set("views", path.join(__dirname, "/templates"));
 app.use("/js", express.static(__dirname + "/public/js"));
 app.use("/css", express.static(__dirname + "/public/css"));
 app.use("/images", express.static(__dirname + "/public/images"));
@@ -16,6 +15,7 @@ app.use("/images", express.static(__dirname + "/public/images"));
 /*
  *  Templates
  */
+app.set("views", path.join(__dirname, "/templates"));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 
@@ -26,13 +26,11 @@ var host = "localhost";
 var port = "8081";
 
 app.listen(port, function () {
-
-    console.log(" ,-.");
+    console.log(" .-.");
     console.log(" \\ /");
     console.log("{|||)<");
     console.log(" / \\ b e e k e e p e r");
-    console.log(" `-^");
-
+    console.log(" `-´");
     console.log("Listening at http://%s:%s", host, port);
 });
 

@@ -11,7 +11,8 @@ var LevelOne = function() {
     });
 
     var hive = Hive(function (self) {
-        self.setPosition({x: 400, y: 300});
+        self.setPosition({x: 200, y: 300});
+        self._debug = true;
     });
 
     // layers

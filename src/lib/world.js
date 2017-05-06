@@ -1,7 +1,7 @@
 /*
  * Initializes stuff for the Game state and manages the scene graph,
  * which passes commands, deltaTime and context to all of its scene nodes
- * and their descendents.
+ * and their descendants.
  */
 
 var SceneNode = require("./scene_node.js");
@@ -19,13 +19,19 @@ var World = function(context, level) {
                 sceneGraph.onCommand(commandQueue.shift(), deltaTime);
             }
             sceneGraph.update(deltaTime);
+            checkForCollisions();
         },
         render: function () {
             sceneGraph.render(canvas);
         }
     };
 
+    function checkForCollisions() {
+
+    }
+
     return self;
+
 };
 
 module.exports = World;
