@@ -1,7 +1,8 @@
 /*
-* Scene Nodes and entities utilize the Mozart (https://github.com/philipwalton/mozart)
-* library to mimic classical inheritance in Javascript. Scene Nodes live on the
-* scene graph.
+* Scene Nodes live on the scene graph. Each scene node can
+* update, render, and handle input each tick based on the
+* deltaTime, canvas and commands passed from the scene graph
+* and controllers.
 */
 
 var SceneNode = function (callback) {
@@ -37,7 +38,7 @@ var SceneNode = function (callback) {
                 this._children.splice(index, 1);
             }
             else {
-                throw 'NoChildError';
+                throw "NoChildError";
             }
         },
 
