@@ -13,8 +13,10 @@ describe("Entity", function () {
                 self._width = 100;
                 self._height = 100;
             });
-            var colliding = node_a.collidesWith(node_b);
+            var collidingPairs = [];
+            var colliding = node_a.collidesWith(node_b, collidingPairs);
             expect(colliding).toEqual(true);
+            expect(collidingPairs).toEqual([[node_a, node_b]]);
 
         });
     });
@@ -31,8 +33,10 @@ describe("Entity", function () {
                 self._width = 50;
                 self._height = 50;
             });
-            var colliding = node_a.collidesWith(node_b);
+            var collidingPairs = [];
+            var colliding = node_a.collidesWith(node_b, collidingPairs);
             expect(colliding).toEqual(false);
+            expect(collidingPairs).toEqual([]);
 
         });
     });
@@ -45,9 +49,10 @@ describe("Entity", function () {
                 self._width = 50;
                 self._height = 50;
             });
-
-            var colliding = node_a.collidesWith(node_a);
+            var collidingPairs = [];
+            var colliding = node_a.collidesWith(node_a, collidingPairs);
             expect(colliding).toEqual(false);
+            expect(collidingPairs).toEqual([]);
 
         });
     });

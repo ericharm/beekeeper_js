@@ -42,7 +42,7 @@ var SceneNode = function (callback) {
             }
         },
 
-        collidesWith: function (node) {
+        collidesWith: function (node, collidingPairs) {
             // Can't collide with itself
             if (node === this) return false;
 
@@ -62,6 +62,7 @@ var SceneNode = function (callback) {
             // If one rectangle is above other
             if (hitBox1.y > r2.y || hitBox2.y > r1.y) return false;
 
+            collidingPairs.push([this, node]);
             return true;
         },
 
