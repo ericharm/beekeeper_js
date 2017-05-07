@@ -17,21 +17,17 @@ var SceneNode = function (callback) {
                 this._children[i].onCommand(command, deltaTime);
             }
         },
-
         update: function (deltaTime) {
             this._updateCurrent(deltaTime);
             this._updateChildren(deltaTime);
         },
-
         render: function (canvas) {
             this._renderCurrent(canvas);
             this._renderChildren(canvas);
         },
-
         attachChild: function (node) {
             this._children.push(node);
         },
-
         detachChild: function (node) {
             var index = this._children.indexOf(node);
             if (index >= 0) {
@@ -41,10 +37,39 @@ var SceneNode = function (callback) {
                 throw "NoChildError";
             }
         },
+        isRigid: function () {
+            return this._rigid;
+        },
+        registersCollisions: function () {
+            return this._registersCollisions;
+        },
+        collidesWith: function (node, collidingPairs) {
+            // only two rigid bodies register collisions
+            if (this.registersCollisions() && node.registersCollisions()) {
+                // Can't collide with itself
+                if (node === this) return false;
+
+                var isColliding = checkNodesForCollision(this, node);
+                if (collidingPairs && isColliding) {
+                collidingPairs.push([this, node]);
+                }
+                return isColliding;
+            }
+
+            // consider this sort of implementation that should return
+                // an array of collidingPairs if there aren't any other
+                // return statements
+            // for (var i = 0; i < this._children.length; i++) {
+                // this._children[i].collidesWith(node, collidingPairs);
+            // }
+            
+        },
 
         // protected
         _children: [],
         _categories: [],
+        _rigid: false,
+        _registersCollisions: false,
 
         _updateCurrent: function (deltaTime) {
             // do nothing by default
@@ -68,6 +93,25 @@ var SceneNode = function (callback) {
     };
 
     // private
+    function checkNodesForCollision(nodeA, nodeB) {
+        var hitBox1 = nodeA.hitBox().bounds;
+        var hitBox2 = nodeB.hitBox().bounds;
+        var r1 = {
+            x: hitBox1.x + hitBox1.width,
+            y: hitBox1.y + hitBox1.height          
+        };
+        var r2 = {
+            x: hitBox2.x + hitBox2.width,
+            y: hitBox2.y + hitBox2.height          
+        };
+
+        // If one rectangle is on left side of other
+        if (hitBox1.x > r2.x || hitBox2.x > r1.x) return false;
+        // If one rectangle is above other
+        if (hitBox1.y > r2.y || hitBox2.y > r1.y) return false;
+        return true;
+    }
+
     function haveCommonCategories(first, second) {
         var arrays = [first, second];
         var result = arrays.shift().filter(function(v) {
