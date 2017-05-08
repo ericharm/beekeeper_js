@@ -19,15 +19,17 @@ var World = function(context, level) {
                 sceneGraph.onCommand(commandQueue.shift(), deltaTime);
             }
             sceneGraph.update(deltaTime);
-
-            collidingPairs = [];
-            sceneGraph.collidesWith(sceneGraph, collidingPairs);
-            console.log(collidingPairs);
+            handleCollisions();
         },
         render: function () {
             sceneGraph.render(canvas);
         }
     };
+
+    function handleCollisions() {
+        collidingPairs = [];
+        sceneGraph.checkSceneCollision(sceneGraph, collidingPairs);
+    }
 
     return self;
 

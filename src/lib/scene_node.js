@@ -37,32 +37,33 @@ var SceneNode = function (callback) {
                 throw "NoChildError";
             }
         },
+        getChildren: function () {
+            return this._children;
+        },
         isRigid: function () {
             return this._rigid;
         },
         registersCollisions: function () {
             return this._registersCollisions;
         },
-        collidesWith: function (node, collidingPairs) {
-            // only two rigid bodies register collisions
-            if (this.registersCollisions() && node.registersCollisions()) {
-                // Can't collide with itself
-                if (node === this) return false;
 
-                var isColliding = checkNodesForCollision(this, node);
-                if (collidingPairs && isColliding) {
-                collidingPairs.push([this, node]);
+        checkNodesForCollision: function (node, collidingPairs) {
+            if (this.registersCollisions() && node.registersCollisions()) {
+                if (node !== this && colliding(this, node)) {
+                    // console.log("hit!");
+                    collidingPairs.push([this, node]);
                 }
-                return isColliding;
             }
 
-            // consider this sort of implementation that should return
-                // an array of collidingPairs if there aren't any other
-                // return statements
-            // for (var i = 0; i < this._children.length; i++) {
-                // this._children[i].collidesWith(node, collidingPairs);
-            // }
-            
+            for (var i = 0; i < node._children.length; i++) {
+                this.checkNodesForCollision(node._children[i], collidingPairs);
+            }
+        },
+        checkSceneCollision: function (sceneGraph, collidingPairs) {
+            this.checkNodesForCollision(sceneGraph, collidingPairs);
+            for (var i = 0; i < sceneGraph.getChildren().length; i++) {
+                sceneGraph.getChildren()[i].checkSceneCollision(this, collidingPairs);
+            }
         },
 
         // protected
@@ -93,7 +94,7 @@ var SceneNode = function (callback) {
     };
 
     // private
-    function checkNodesForCollision(nodeA, nodeB) {
+    function colliding(nodeA, nodeB) {
         var hitBox1 = nodeA.hitBox().bounds;
         var hitBox2 = nodeB.hitBox().bounds;
         var r1 = {
@@ -104,7 +105,6 @@ var SceneNode = function (callback) {
             x: hitBox2.x + hitBox2.width,
             y: hitBox2.y + hitBox2.height          
         };
-
         // If one rectangle is on left side of other
         if (hitBox1.x > r2.x || hitBox2.x > r1.x) return false;
         // If one rectangle is above other
