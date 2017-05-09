@@ -10,7 +10,9 @@ var World = function(context, level) {
 
     var canvas = context.canvas;
     var commandQueue = context.commandQueue;
+
     var sceneGraph = SceneNode();
+
     level.buildScene(sceneGraph);
 
     var self = {
@@ -29,6 +31,7 @@ var World = function(context, level) {
     function handleCollisions() {
         collidingPairs = [];
         sceneGraph.checkSceneCollision(sceneGraph, collidingPairs);
+        //if (collidingPairs.length > 0) console.log(collidingPairs);
     }
 
     return self;

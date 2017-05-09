@@ -37,12 +37,9 @@ var Player = function (commandQueue) {
         },
         processEvent: function (event) {
             if (event.keyCode === Keys.Space) {
-                console.log("SPACE!");
-                // add a new projectile (stinger) to the foreground
-                // at the center of a hive
-                // commandQueue.push(Command.new(function (node, deltaTime) {
-                    // node.speak('a new child');
-                // }, ['foreground']));
+                commandQueue.push(Command.new(function (node, deltaTime) {
+                    node.shootBee(deltaTime, node.getPosition(), commandQueue);
+                }, ['hive']));
             }
         }
     };

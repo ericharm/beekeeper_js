@@ -50,13 +50,10 @@ var SceneNode = function (callback) {
         checkNodesForCollision: function (node, collidingPairs) {
             if (this.registersCollisions() && node.registersCollisions()) {
                 if (node !== this && colliding(this, node)) {
-                    // console.log("hit!");
+                    // should also test if collidingPairs contains
+                    // [this, node] or [node, this]
                     collidingPairs.push([this, node]);
                 }
-            }
-
-            for (var i = 0; i < node._children.length; i++) {
-                this.checkNodesForCollision(node._children[i], collidingPairs);
             }
         },
         checkSceneCollision: function (sceneGraph, collidingPairs) {

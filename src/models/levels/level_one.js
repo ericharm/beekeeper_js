@@ -5,14 +5,13 @@ var Hive      = require("../entities/hive.js");
 var LevelOne = function() {
 
     // objects for the level
+    var hive = Hive(function (self) {
+        self.setPosition({x: 200, y: 300});
+    });
+
     var beekeeper = Beekeeper(function (self) {
         self.setPosition({x: 100, y: 300});
         self.setVelocity({x: 2, y: 2});
-    });
-
-    var hive = Hive(function (self) {
-        self.setPosition({x: 200, y: 300});
-        self._debug = true;
     });
 
     // layers
@@ -32,8 +31,8 @@ var LevelOne = function() {
         buildScene: function (sceneGraph) {
             sceneGraph.attachChild(backgroundLayer);
             sceneGraph.attachChild(foregroundLayer);
-            foregroundLayer.attachChild(beekeeper);
             foregroundLayer.attachChild(hive);
+            foregroundLayer.attachChild(beekeeper);
         }
     };
 

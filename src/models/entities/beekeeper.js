@@ -26,7 +26,6 @@ var Beekeeper = function (callback) {
                 case 'right':
                     this._movingRight = value;
                     break;
-
             }
         },
         
@@ -51,8 +50,6 @@ var Beekeeper = function (callback) {
                 this._position.x, this._position.y,
                 currentSprite.width, currentSprite.height
             );
-            var hitBox = this.hitBox();
-            hitBox.render(canvas);
         },
 
         _updateCurrent: function (deltaTime) {
