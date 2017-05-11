@@ -2,16 +2,22 @@ var SceneNode = require("../../lib/scene_node.js");
 var Beekeeper = require("../entities/beekeeper.js");
 var Hive      = require("../entities/hive.js");
 
+var HealthBar = require("../ui/health_bar.js");
+
 var LevelOne = function() {
 
     // objects for the level
     var hive = Hive(function (self) {
-        self.setPosition({x: 200, y: 300});
+        self._position = {x: 200, y: 300};
     });
 
     var beekeeper = Beekeeper(function (self) {
-        self.setPosition({x: 100, y: 300});
-        self.setVelocity({x: 2, y: 2});
+        self._position = {x: 100, y: 300};
+        self._velocity = {x: 2, y: 2};
+    });
+
+    var healthBar = HealthBar(function (self) {
+        self._entity = beekeeper;
     });
 
     // layers
@@ -33,6 +39,7 @@ var LevelOne = function() {
             sceneGraph.attachChild(foregroundLayer);
             foregroundLayer.attachChild(hive);
             foregroundLayer.attachChild(beekeeper);
+            beekeeper.attachChild(healthBar);
         }
     };
 

@@ -46,6 +46,9 @@ var SceneNode = function (callback) {
         registersCollisions: function () {
             return this._registersCollisions;
         },
+        getCategories: function () {
+            return this._categories;
+        },
 
         checkNodesForCollision: function (node, collidingPairs) {
             if (this.registersCollisions() && node.registersCollisions()) {
@@ -96,11 +99,11 @@ var SceneNode = function (callback) {
         var hitBox2 = nodeB.hitBox().bounds;
         var r1 = {
             x: hitBox1.x + hitBox1.width,
-            y: hitBox1.y + hitBox1.height          
+            y: hitBox1.y + hitBox1.height
         };
         var r2 = {
             x: hitBox2.x + hitBox2.width,
-            y: hitBox2.y + hitBox2.height          
+            y: hitBox2.y + hitBox2.height
         };
         // If one rectangle is on left side of other
         if (hitBox1.x > r2.x || hitBox2.x > r1.x) return false;

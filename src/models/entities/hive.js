@@ -15,7 +15,7 @@ var Hive = function (callback) {
             commandQueue.push(Command.new(function (node, deltaTime) {
                 var bee = Bee(function (that) {
                     that.setPosition({x: position.x,y: position.y});
-                    that.setVelocity({x: 0.3, y: 0.1});
+                    that.setVelocity({x: 1, y: 0});
                 });
                 node.attachChild(bee);
             }, ['foreground']));
@@ -33,8 +33,6 @@ var Hive = function (callback) {
     }
 
     if (callback) callback(self);
-
-
 
     return self;
 };

@@ -28,7 +28,7 @@ var Beekeeper = function (callback) {
                     break;
             }
         },
-        
+
         // protected
         _width: 65,
         _height: 92,
@@ -36,7 +36,7 @@ var Beekeeper = function (callback) {
         _spriteDescriptor: Textures.beekeeperDescriptor,
         _renderState: renderStates.still,
         _categories: ['beekeeper'],
-        
+
         _movingUp: false,
         _movingDown: false,
         _movingLeft: false,
