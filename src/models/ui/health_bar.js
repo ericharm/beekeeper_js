@@ -21,8 +21,6 @@ HealthBar = function (callback) {
             canvas.strokeRect(pos.x, pos.y + size.y, size.x, 10);
         },
         _updateCurrent: function () {
-            // this isn't actually necessary but is a good example
-            // of calling super methods
             self.setPosition.call(this, this._entity.getPosition());
         }
 
