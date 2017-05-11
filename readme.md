@@ -37,7 +37,7 @@ Modules to manage event-driven command creation. In particular, a controller is 
 Bedrock of the framework that is unlikely to need much change.
 
 ### models/
-In-game objects and modules to support them. models/entities/ contains most scene nodes that move and render sprites, models/states is application states like game, pause, and title screen, and models/levels/ contains setup objects for each level that gets passed to the application when the game state is active.
+In-game objects and modules to support them. models/entities/ contains most scene nodes that move and render sprites, models/states/ is application states like game, pause, and title screen, and models/levels/ contains setup objects for each level that gets passed to the application when the game state is active.
 
 ### views/
 Scripts to handle specialized render logic, like animations and special effects.
@@ -45,12 +45,17 @@ Scripts to handle specialized render logic, like animations and special effects.
 
 ## Features
 -----------
-**Fixed-step game loop** - adjust frameRate in `config/app.js`
-**State management** - set initial state in `config/app.js`, switch out state by calling `stateStack.pop(); stateStack.push(newState)`
+**Fixed-step game loop** - adjust frameRate in config/app.js.
+
+**State management** - set initial state in config/app.js, switch out state by calling `stateStack.pop(); stateStack.push(newState);`
+
 **Scene Graph** - Easily send messages to objects on the screen by creating commands which target scene nodes by category.
+
 **Collision Detection** - By default, all Entities check collision with each other. Other types of scene nodes can set `_registersCollisions` manually. State can delegate specific collision events to a controller, which can create a command when a certain category of scene node collides with a certain other category.
-**Graphics** - Put images somewhere in the public/ directory and reference them throughout your project from `config/textures.js`
-**Keyboard Input** - Create a controller and reference key bindings from `config/keys/js`
+
+**Graphics** - Put images somewhere in the public/ directory and reference them throughout your project from config/textures.js.
+
+**Keyboard Input** - Create a controller and reference key bindings from config/keys.js.
 
 ## Inspiration
 --------------
