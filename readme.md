@@ -68,15 +68,17 @@ There is an inheritance pattern which can be observed by looking at SceneNode, E
 --------
 -Class for managing the View and Viewport
 
--Collision detection system
-
--Projectiles
-
 -Animation system
+
+-Rigid bodies
+
+-Cooldowns
 
 -Audio support
 
 -Saving high scores and other data with Mongo
 
--Write tests
+-More unit tests
+
+-JSDoc
 
