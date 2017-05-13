@@ -7,6 +7,33 @@
 
 var SceneNode = function (callback) {
 
+    // private
+    var colliding = function (nodeA, nodeB) {
+        var hitBox1 = nodeA.hitBox().bounds;
+        var hitBox2 = nodeB.hitBox().bounds;
+        var r1 = {
+            x: hitBox1.x + hitBox1.width,
+            y: hitBox1.y + hitBox1.height
+        };
+        var r2 = {
+            x: hitBox2.x + hitBox2.width,
+            y: hitBox2.y + hitBox2.height
+        };
+        if (hitBox1.x > r2.x || hitBox2.x > r1.x) return false;
+        if (hitBox1.y > r2.y || hitBox2.y > r1.y) return false;
+        return true;
+    };
+
+    var haveCommonCategories = function (first, second) {
+        var arrays = [first, second];
+        var result = arrays.shift().filter(function(v) {
+            return arrays.every(function(a) {
+                return (a.indexOf(v) !== -1);
+            });
+        });
+        return result.length > 0;
+    };
+
     var self = {
         // public
         onCommand: function (command, deltaTime) {
@@ -27,8 +54,10 @@ var SceneNode = function (callback) {
         },
         attachChild: function (node) {
             this._children.push(node);
+            node._parent = this;
         },
         detachChild: function (node) {
+            console.log(this._categories);
             var index = this._children.indexOf(node);
             if (index >= 0) {
                 this._children.splice(index, 1);
@@ -65,9 +94,18 @@ var SceneNode = function (callback) {
                 sceneGraph.getChildren()[i].checkSceneCollision(this, collidingPairs);
             }
         },
+        pluck: function () {
+            this._parent.detachChild(this);
+        },
+        outOfBounds: function () {
+            return (this._position.x > Config.canvasWidth || this._position.x < 0 ||
+                    this._position.y > Config.canvasHeight || this._position.y < 0);
+        },
 
         // protected
+        _position: {x: 0, y: 0},
         _children: [],
+        _parent: null,
         _categories: [],
         _rigid: false,
         _registersCollisions: false,
@@ -92,35 +130,6 @@ var SceneNode = function (callback) {
             }
         }
     };
-
-    // private
-    function colliding(nodeA, nodeB) {
-        var hitBox1 = nodeA.hitBox().bounds;
-        var hitBox2 = nodeB.hitBox().bounds;
-        var r1 = {
-            x: hitBox1.x + hitBox1.width,
-            y: hitBox1.y + hitBox1.height
-        };
-        var r2 = {
-            x: hitBox2.x + hitBox2.width,
-            y: hitBox2.y + hitBox2.height
-        };
-        // If one rectangle is on left side of other
-        if (hitBox1.x > r2.x || hitBox2.x > r1.x) return false;
-        // If one rectangle is above other
-        if (hitBox1.y > r2.y || hitBox2.y > r1.y) return false;
-        return true;
-    }
-
-    function haveCommonCategories(first, second) {
-        var arrays = [first, second];
-        var result = arrays.shift().filter(function(v) {
-            return arrays.every(function(a) {
-                return (a.indexOf(v) !== -1);
-            });
-        });
-        return result.length > 0;
-    }
 
     if (callback) callback(self);
     return self;

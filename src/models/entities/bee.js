@@ -9,7 +9,6 @@ var Bee = function (callback) {
         _width: 28,
         _height: 19,
         _sprite: Sprite(Textures.bee),
-        _categories: ['bee'],
 
         _renderCurrent: function (canvas) {
             canvas.drawImage(
@@ -26,6 +25,8 @@ var Bee = function (callback) {
     for (var attribute in extended) {
         self[attribute] = extended[attribute];
     }
+
+    self._categories.push('bee', 'world-bound');
 
     if (callback) callback(self);
     return self;

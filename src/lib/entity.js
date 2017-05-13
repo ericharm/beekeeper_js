@@ -4,6 +4,7 @@
  */
 
 var SceneNode = require("./scene_node.js");
+var Config = require("../config/app.js");
 
 var Entity = function (callback) {
 
@@ -39,9 +40,15 @@ var Entity = function (callback) {
         },
         getHealth: function () {
             return {
-                current: this._hitPoints,
-                max: this._maxHitPoints
+                current: this._stats.currentHealth,
+                max: this._stats.maxHealth
             };
+        },
+        modifyStat: function (statName, amount) {
+            this._stats[statName] += amount;
+            if (this._stats.currentHealth <= 0) {
+                this._parent.detachChild(this);
+            }
         },
         // Might someday get its own module
         hitBox: function () {
@@ -67,10 +74,6 @@ var Entity = function (callback) {
         },
 
         // protected
-
-        // some of this could be contained in a
-        // a stat or config module
-        _position: {x: 0, y: 0},
         _velocity: {x: 0, y: 0},
         _height: 0,
         _width: 0,
@@ -78,9 +81,10 @@ var Entity = function (callback) {
         _rigid: true,
         _registersCollisions: true,
         _debug: false,
-
-        _hitPoints: 1,
-        _maxHitPoints: 1,
+        _stats: {
+            currentHealth: 1,
+            maxHealth: 1
+        },
 
         _updateCurrent: function (deltaTime) {
             movement = {
@@ -95,6 +99,10 @@ var Entity = function (callback) {
                 var hitBox = this.hitBox();
                 hitBox.render(canvas);
             }
+        },
+        _startingHealth: function (hitPoints) {
+            this._stats.currentHealth = hitPoints;
+            this._stats.maxHealth = hitPoints;
         }
 
     };

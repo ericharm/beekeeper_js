@@ -57,7 +57,7 @@ var Application = function (context) {
     };
 
     context.stateStack = stateStack;
-    stateStack.push(InitialState(context));    
+    stateStack.push(InitialState(context));
 
     var self = {
         processRealtimeInput: function (event, isKeyPressed) {

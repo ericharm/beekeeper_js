@@ -1,13 +1,11 @@
 var SceneNode = require("../../lib/scene_node.js");
-// won't be needed once a controller is handling collision
-var Command   = require("../../lib/command.js");
 var Beekeeper = require("../entities/beekeeper.js");
 var Hive      = require("../entities/hive.js");
+var CollisionController = require("../../controllers/collision_controller.js");
 // This could go straight into the beekeeper module
 var HealthBar = require("../ui/health_bar.js");
 
-
-var LevelOne = function() {
+var LevelOne = function () {
 
     // objects for the level
     var hive = Hive(function (self) {
@@ -17,7 +15,9 @@ var LevelOne = function() {
     var beekeeper = Beekeeper(function (self) {
         self._position = {x: 100, y: 300};
         self._velocity = {x: 2, y: 2};
+        self._startingHealth(100);
     });
+
 
     // This could go straight into the beekeeper module
     var healthBar = HealthBar(function (self) {
@@ -33,39 +33,13 @@ var LevelOne = function() {
     });
 
     var foregroundLayer = SceneNode(function (self) {
-        self._categories = ['foreground'];
+        self._categories.push('foreground');
     });
 
-    //private
-    function matchesCategories(nodePair, type1, type2) {
-
-        var categories1 = nodePair[0].getCategories();
-        var categories2 = nodePair[1].getCategories();
-
-        //this will match twice if you pass it the same argument
-        //for both types
-        if (categories1.indexOf(type1) >= 0 && categories2.indexOf(type2) >= 0) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    var damageNode = function (node, deltaTime) {
-        node._hitPoints = 0.5;
-    };
-
     var self = {
-        // this along with matchesCategories could be in a controller
         handleCollisions: function (collidingPairs, commandQueue) {
-            for (var i = 0; i < collidingPairs.length; i++) {
-                if (matchesCategories(collidingPairs[i], "beekeeper", "bee")) {
-                    commandQueue.push(Command.new(damageNode, ["beekeeper"]));
-                }
-            }
+            CollisionController.handleCollisions(collidingPairs, commandQueue);
         },
-
         buildScene: function (sceneGraph) {
             sceneGraph.attachChild(backgroundLayer);
             sceneGraph.attachChild(foregroundLayer);

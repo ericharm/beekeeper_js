@@ -4,6 +4,8 @@ var LevelOne = require("../levels/level_one.js");
 
 var Game = function (context) {
 
+    // World object should manage commandQueue
+    // and add it to context
     context.commandQueue = [];
     var level = LevelOne();
     var world = World(context, level);
@@ -21,7 +23,7 @@ var Game = function (context) {
         },
         processEvent: function (event) {
             player.processEvent(event); 
-        }
+        },
     };
     return self;
 };

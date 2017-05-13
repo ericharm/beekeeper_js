@@ -28,6 +28,21 @@ var Beekeeper = function (callback) {
                     break;
             }
         },
+        pushBack: function (deltaTime) {
+            var movement = {
+                x: 0.0,
+                y: 0.0
+            };
+            if (this._movingUp)
+                movement.y += this._velocity.y * deltaTime;
+            if (this._movingDown)
+                movement.y -= this._velocity.y * deltaTime;
+            if (this._movingLeft)
+                movement.x += this._velocity.x * deltaTime;
+            if (this._movingRight)
+                movement.x -= this._velocity.x * deltaTime;
+            this.move(movement);
+        },
 
         // protected
         _width: 65,
@@ -35,7 +50,6 @@ var Beekeeper = function (callback) {
         _sprite: Sprite(Textures.beekeeper),
         _spriteDescriptor: Textures.beekeeperDescriptor,
         _renderState: renderStates.still,
-        _categories: ['beekeeper'],
 
         _movingUp: false,
         _movingDown: false,
@@ -75,6 +89,8 @@ var Beekeeper = function (callback) {
     for (var attribute in extended) {
         self[attribute] = extended[attribute];
     }
+
+    self._categories.push('beekeeper');
 
     if (callback) callback(self);
     return self;

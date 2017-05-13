@@ -14,8 +14,8 @@ var Hive = function (callback) {
         shootBee: function (deltaTime, position, commandQueue) {
             commandQueue.push(Command.new(function (node, deltaTime) {
                 var bee = Bee(function (that) {
-                    that.setPosition({x: position.x,y: position.y});
-                    that.setVelocity({x: 1, y: 0});
+                    that.setPosition({x: position.x, y: position.y});
+                    that.setVelocity({x: 3, y: 0});
                 });
                 node.attachChild(bee);
             }, ['foreground']));
@@ -23,14 +23,15 @@ var Hive = function (callback) {
         // protected
         _width: 32,
         _height: 32,
-        _sprite: Sprite(Textures.hive),
-        _categories: ['hive']
+        _sprite: Sprite(Textures.hive)
     };
 
 
     for (var attribute in extended) {
         self[attribute] = extended[attribute];
     }
+
+    self._categories.push('hive');
 
     if (callback) callback(self);
 
