@@ -25,6 +25,9 @@ var World = function(context, state) {
         }
     };
 
+    //this should be in the context
+    state.timers = timers;
+    //this also should be in the context
     var sceneGraph = SceneNode();
 
     state.buildScene(sceneGraph);

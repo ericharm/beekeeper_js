@@ -21,7 +21,7 @@ var Bee = function (callback) {
     };
 
     // extends Entity
-    self = Entity();
+    var self = Entity();
     for (var attribute in extended) {
         self[attribute] = extended[attribute];
     }

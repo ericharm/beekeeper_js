@@ -2,7 +2,7 @@ describe("Entity", function () {
     var Entity = require("../src/lib/entity.js");
     var Config = require("../src/config/app.js");
 
-    describe("Entity Collision", function () {
+    describe("Collision", function () {
         describe("collidesWith an overlapping node", function () {
             it("adds that pair to the passed array", function () {
                 var node_a = Entity(function (self) {
@@ -41,7 +41,7 @@ describe("Entity", function () {
             });
         });
 
-        describe("collidesWith the node itself", function () {
+        describe("collidesWith itself", function () {
             it("does not add the node pair", function () {
                 var node_a = Entity(function (self) {
                     self._position = {x: 10, y: 10};
@@ -56,7 +56,7 @@ describe("Entity", function () {
 
     });
 
-    describe("Entity Position and Velocity", function () {
+    describe("Position and Velocity", function () {
         describe("apply a velocity to an entity", function () {
             it("changes the entity's position over time", function () {
                 var myEntity = Entity(function (self) {

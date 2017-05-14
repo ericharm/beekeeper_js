@@ -1,6 +1,6 @@
 var Entity = require("../../lib/entity.js");
 
-HealthBar = function (callback) {
+Label = function (callback) {
 
     // extends SceneNode
     var self = Entity();
@@ -9,20 +9,20 @@ HealthBar = function (callback) {
 
         // protected
         _entity: null,
+        _value: 0,
+        _statName: '',
 
         _renderCurrent: function (canvas) {
+            // Background
+            // Config.labels.fillColor
+            // Config.labels.font;
+            canvas.fillStyle = "#efefef";
             var pos = self.getPosition.call(this);
-            var size = this._entity.getSize();
-            var health = this._entity.getHealth();
-            var ratio = health.current / health.max;
-            canvas.fillStyle = "#ffff00";
-            // Config.statBars.height
-            canvas.fillRect(pos.x, pos.y + size.y, size.x * ratio, 10);
-            canvas.strokeStyle = "#000000";
-            // Config.statBars.height
-            canvas.strokeRect(pos.x, pos.y + size.y, size.x, 10);
+            canvas.fillText(Math.round(this._value), this._position.x, this._position.y);
         },
         _updateCurrent: function () {
+            //add an accessor to entity
+            this._value = this._entity._stats[this._statName];
             self.setPosition.call(this, this._entity.getPosition());
         }
 
@@ -37,5 +37,5 @@ HealthBar = function (callback) {
 
 };
 
-module.exports = HealthBar;
+module.exports = Label;
 

@@ -57,6 +57,7 @@ var Application = function (context) {
     };
 
     context.stateStack = stateStack;
+    //context.world = World();
     stateStack.push(InitialState(context));
 
     var self = {

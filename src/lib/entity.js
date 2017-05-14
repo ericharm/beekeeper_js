@@ -4,7 +4,7 @@
  */
 
 var SceneNode = require("./scene_node.js");
-var Config = require("../config/app.js");
+//var Config = require("../config/app.js");
 
 var Entity = function (callback) {
 
@@ -38,6 +38,9 @@ var Entity = function (callback) {
                 y: this._position.y + (this._height / 2)
             };
         },
+        getStats: function () {
+            return this._stats;
+        },
         getHealth: function () {
             return {
                 current: this._stats.currentHealth,
@@ -49,6 +52,9 @@ var Entity = function (callback) {
             if (this._stats.currentHealth <= 0) {
                 this._parent.detachChild(this);
             }
+        },
+        isDead: function () {
+            return (this._stats.currentHealth <= 0);
         },
         // Might someday get its own module
         hitBox: function () {

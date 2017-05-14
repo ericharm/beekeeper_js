@@ -7,7 +7,7 @@
 
 module.exports = {
     new: function (action, categories) {
-        self = {
+        var self = {
             action: action,
             categories: categories
         };

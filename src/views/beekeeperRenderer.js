@@ -13,7 +13,7 @@ BeekeeperRenderer = function (options) {
         
      }
 
-     self = {
+     var self = {
 
         render: function (canvas, position, spriteState) {
             // switch (spriteState) {
