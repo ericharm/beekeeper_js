@@ -4,7 +4,7 @@
  */
 
 var SceneNode = require("./scene_node.js");
-//var Config = require("../config/app.js");
+var Config = require("../config/app.js");
 
 var Entity = function (callback) {
 

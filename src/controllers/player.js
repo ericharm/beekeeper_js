@@ -4,9 +4,14 @@
  */
 
 var Command = require("../lib/command.js");
-var Keys = require("../config/keys.js");
+var Keys    = require("../config/keys.js");
+var Pause = require("../models/states/pause.js");
 
-var Player = function (commandQueue) {
+// rename this KeyboardController
+var Player = function (context) {
+
+    var commandQueue = context.commandQueue;
+    var stateStack = context.stateStack;
 
     var self = {
         processRealtimeInput: function (event, isKeyPressed) {
@@ -40,6 +45,9 @@ var Player = function (commandQueue) {
                 commandQueue.push(Command.new(function (node, deltaTime) {
                     node.shootBee(deltaTime, node.getPosition(), commandQueue);
                 }, ['hive']));
+            }
+            if (event.keyCode === Keys.a) {
+                stateStack.push(Pause(context));
             }
         }
     };

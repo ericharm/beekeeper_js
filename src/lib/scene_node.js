@@ -5,6 +5,8 @@
  * and controllers.
  */
 
+Config = require("../config/app.js");
+
 var SceneNode = function (callback) {
 
     // private
@@ -57,7 +59,6 @@ var SceneNode = function (callback) {
             node._parent = this;
         },
         detachChild: function (node) {
-            console.log(this._categories);
             var index = this._children.indexOf(node);
             if (index >= 0) {
                 this._children.splice(index, 1);

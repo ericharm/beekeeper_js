@@ -14,8 +14,8 @@ var Application = function (context) {
         push: function (state) {
             this.stack.push(state);
         },
-        pop: function (state) {
-            return this.stack.pop();
+        pop: function () {
+            this.stack.pop();
         },
         emptyStack: function () {
             while (this.stack.length > 0) {
@@ -26,9 +26,11 @@ var Application = function (context) {
             return (this.stack.length === 0);
         },
         update: function (deltaTime) {
-            for (var i = this.stack.length - 1; i >= 0; i--) {
-                // update each state from top of stack to bottom
-                this.stack[i].update(deltaTime);
+            var stackSize = this.stack.length;
+            if (stackSize > 0) {
+                var topState = this.stack[stackSize - 1];
+                topState.update(deltaTime);
+                // if (topState.fluid) update the other states
             }
         },
         draw: function (canvas) {
@@ -50,9 +52,15 @@ var Application = function (context) {
             }
         },
         processEvent: function (event) {
-           for (var i = this.stack.length - 1; i >= 0; i--) {
-                this.stack[i].processEvent(event);
+            var stackSize = this.stack.length;
+            if (stackSize > 0) {
+                var topState = this.stack[stackSize - 1];
+                topState.processEvent(event);
+                // if (topState.fluid) update the other states
             }
+           //for (var i = this.stack.length - 1; i >= 0; i--) {
+                //this.stack[i].processEvent(event);
+            //}
         },
     };
 

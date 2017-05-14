@@ -9,13 +9,13 @@ var Game = function (context) {
     context.commandQueue = [];
     var level = LevelOne();
     var world = World(context, level);
-    var player = Player(context.commandQueue);
+    var player = Player(context);
 
     var self = {
         update: function (deltaTime) {
             world.update(deltaTime);
         },
-        draw: function (deltaTime) {
+        draw: function () {
             world.render();
         },
         processRealtimeInput: function (event, isKeyPressed) {

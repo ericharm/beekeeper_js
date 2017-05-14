@@ -1,7 +1,7 @@
 var SceneNode = require("../../lib/scene_node.js");
 var Beekeeper = require("../entities/beekeeper.js");
 var Hive      = require("../entities/hive.js");
-var CollisionController = require("../../controllers/collision_controller.js");
+var CollisionController = require("../../controllers/collision_controller.js")();
 // This could go straight into the beekeeper module
 var Label = require("../ui/label.js");
 var HealthBar = require("../ui/health_bar.js");
