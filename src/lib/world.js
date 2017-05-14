@@ -12,21 +12,21 @@ var World = function(context, state) {
     var canvas = context.canvas;
     var commandQueue = context.commandQueue;
 
-    timers = {
-        list: [],
-        push: function (timer) {
-            timer.container = this.list;
-            this.list.push(timer);
-        },
-        update: function (deltaTime) {
-            for (var timer = 0; timer < this.list.length; timer++) {
-                this.list[timer].update(deltaTime);
-            }
-        }
-    };
+    //timers = {
+        //list: [],
+        //push: function (timer) {
+            //timer.container = this.list;
+            //this.list.push(timer);
+        //},
+        //update: function (deltaTime) {
+            //for (var timer = 0; timer < this.list.length; timer++) {
+                //this.list[timer].update(deltaTime);
+            //}
+        //}
+    //};
 
     //this should be in the context
-    state.timers = timers;
+    //state.timers = timers;
     //this also should be in the context
     var sceneGraph = SceneNode();
 
@@ -35,7 +35,7 @@ var World = function(context, state) {
     var self = {
         update: function (deltaTime) {
             /** Update any existing timers */
-            timers.update(deltaTime);
+            //timers.update(deltaTime);
 
             /** Execute all queued commands */
             while (commandQueue.length > 0) {
@@ -60,6 +60,12 @@ var World = function(context, state) {
 
     function handleCollisions() {
         collidingPairs = [];
+        collidingPairs.where = function (index, category) {
+            var pair = collidingPairs[index];
+            for (var node = 0; node < pair.length; node++) {
+                if (pair[node].getCategories().indexOf(category) > -1) return pair[node];
+            }
+        };
         sceneGraph.checkSceneCollision(sceneGraph, collidingPairs);
         state.handleCollisions(collidingPairs, commandQueue);
     }

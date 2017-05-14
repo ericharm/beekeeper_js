@@ -1,4 +1,5 @@
 var Command = require('../lib/command.js');
+//var Config = require('../config/app.js');
 
 // maybe there's a better place for these functions
 var matchesCategories = function (nodePair, type1, type2) {
@@ -21,33 +22,21 @@ var pushBack = function (node, deltaTime) {
     node.pushBack(deltaTime);
 };
 
-var drainHoney = function (node, deltaTime) {
-    //Config.beekeeper.harvestRate
-    node.modifyStat('honey', (-10 * deltaTime));
-};
-
-var addHoney = function (node, deltaTime) {
-    //unless hive has less than 10 honey
-    node.modifyStat('honey', (10 * deltaTime));
-};
-
-var pluck = function (node, deltaTime) {
-    node.pluck();
-};
-
 var CollisionController = {
     handleCollisions: function (collidingPairs, commandQueue) {
-        for (var i = 0; i < collidingPairs.length; i++) {
-            if (matchesCategories(collidingPairs[i], "beekeeper", "bee")) {
+        for (var pair = 0; pair < collidingPairs.length; pair++) {
+            // Bee hits beekeeper
+            if (matchesCategories(collidingPairs[pair], "beekeeper", "bee")) {
                 commandQueue.push(Command.new(damageNode, ["beekeeper"]));
-                // maybe pass the bee from collidingPairs[i]
-                commandQueue.push(Command.new(pluck, ["bee"]));
+                var bee = collidingPairs.where(pair, "bee");
+                bee.pluck();
             }
-            if (matchesCategories(collidingPairs[i], "beekeeper", "hive")) {
+            // Beekeeper hits hive
+            if (matchesCategories(collidingPairs[pair], "beekeeper", "hive")) {
                 commandQueue.push(Command.new(pushBack, ["beekeeper"]));
-                // maybe pass the hive from collidingPairs[i]
-                commandQueue.push(Command.new(drainHoney, ["hive"]));
-                commandQueue.push(Command.new(addHoney, ["beekeeper"]));
+                var hive = collidingPairs.where(pair, "hive");
+                var beekeeper = collidingPairs.where(pair, "beekeeper");
+                beekeeper.harvest(hive, Config.beekeeper.harvestRate);
             }
         }
     }

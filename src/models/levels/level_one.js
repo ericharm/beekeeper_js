@@ -13,6 +13,10 @@ var LevelOne = function () {
         self._position = {x: 200, y: 300};
     });
 
+    var hive2 = Hive(function (self) {
+        self._position = {x: 400, y: 200};
+    });
+
     var beekeeper = Beekeeper(function (self) {
         self._position = {x: 250, y: 300};
         self._velocity = {x: 2, y: 2};
@@ -29,6 +33,13 @@ var LevelOne = function () {
         self._entity.modifyStat('honey', 100);
         self._statName = 'honey';
     });
+
+    var hive2Label = Label(function (self) {
+        self._entity = hive2;
+        self._entity.modifyStat('honey', 120);
+        self._statName = 'honey';
+    });
+
 
     //turn this into a honey pot
     var beekeeperLabel = Label(function (self) {
@@ -57,10 +68,12 @@ var LevelOne = function () {
             sceneGraph.attachChild(backgroundLayer);
             sceneGraph.attachChild(foregroundLayer);
             foregroundLayer.attachChild(hive);
+            foregroundLayer.attachChild(hive2);
             foregroundLayer.attachChild(beekeeper);
             beekeeper.attachChild(healthBar);
             beekeeper.attachChild(beekeeperLabel);
             hive.attachChild(hiveLabel);
+            hive2.attachChild(hive2Label);
         }
     };
 

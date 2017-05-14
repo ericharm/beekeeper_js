@@ -47,7 +47,18 @@ var Beekeeper = function (callback) {
             this.move(movement);
         },
         timers: Timers(),
+        harvest: function (hive, amount) {
+            var honeyLeft = hive.getStats().honey;
+            if (honeyLeft > amount) {
+                this._stats.honey += amount;
+                hive.modifyStat('honey', amount * -1);
+            } else {
+                this._stats.honey += honeyLeft;
+                hive.modifyStat('honey', honeyLeft * -1);
+            }
+        },
         damage: function (amount) {
+            //this can be moved to entity
             if (!this._invincible) {
                 var that = this;
                 that._stats.currentHealth -= amount * (1);
