@@ -1,3 +1,5 @@
+var Config = require("../config/app.js");
+
 var Timers = function (callback) {
 
     var self = {

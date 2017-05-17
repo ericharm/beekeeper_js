@@ -1,3 +1,4 @@
+var Config = require("../../config/app.js");
 var Keys = require("../../config/keys.js");
 
 var Pause = function (context) {

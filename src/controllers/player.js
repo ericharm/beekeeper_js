@@ -6,8 +6,6 @@
 var Command = require("../lib/command.js");
 var Keys    = require("../config/keys.js");
 var Pause = require("../models/states/pause.js");
-
-// rename this KeyboardController
 var Player = function (context) {
 
     var commandQueue = context.commandQueue;

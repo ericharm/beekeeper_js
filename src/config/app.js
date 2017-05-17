@@ -2,15 +2,31 @@
  * Any application-wide variables
  */
 
-Config = {
+var Config = {
 
     frameRate: 30.0,
     canvasWidth: 800,
     canvasHeight: 600,
-    initialState: require("../models/states/title_screen.js"),
 
     beekeeper: {
         harvestRate: 10
+    },
+
+    bees: {
+        basePower: 10
+    },
+
+    hives: {
+        width: 32,
+        height: 32
+    },
+
+    labels: {
+        textColor: "#efefef"
+    },
+
+    statBars: {
+        height: 10
     }
 
 };

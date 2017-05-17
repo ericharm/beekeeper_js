@@ -1,4 +1,5 @@
 var Entity = require("./entity.js");
+var Config = require("../config/app.js");
 //var Command = require("./command.js");
 
 var Wall = function (callback) {

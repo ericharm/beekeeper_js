@@ -1,3 +1,4 @@
+var Config = require("../../config/app.js");
 var Entity = require("../../lib/entity.js");
 
 Label = function (callback) {
@@ -14,9 +15,7 @@ Label = function (callback) {
 
         _renderCurrent: function (canvas) {
             // Background
-            // Config.labels.fillColor
-            // Config.labels.font;
-            canvas.fillStyle = "#efefef";
+            canvas.fillStyle = Config.labels.textColor;
             var pos = self.getPosition.call(this);
             canvas.fillText(Math.round(this._value), this._position.x, this._position.y);
         },

@@ -1,5 +1,5 @@
-var Application = require("../../src/lib/application.js");
 var Config = require("../../src/config/app.js");
+var Application = require("../../src/lib/application.js");
 
 $(document).ready(function () {
 
@@ -31,7 +31,7 @@ $(document).ready(function () {
      */
     var main = (function () {
         if (canvasElement.getContext) {
-            
+
             var ctx = canvas.getContext("2d");
 
             // render

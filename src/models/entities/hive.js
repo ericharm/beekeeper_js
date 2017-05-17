@@ -1,5 +1,6 @@
 var Entity = require("../../lib/entity.js");
 var Command = require("../../lib/command.js");
+var Config = require("../../config/app.js");
 var Textures = require("../../config/textures.js");
 var Bee = require("./bee.js");
 var Sprite = Textures.Sprite;
@@ -26,9 +27,8 @@ var Hive = function (callback) {
             if (stats.honey <= 0) self.pluck.call(this);
         },
         // protected
-        // Config.hive.width, height
-        _width: 32,
-        _height: 32,
+        _width: Config.hives.width,
+        _height: Config.hives.height,
         _sprite: Sprite(Textures.hive),
     };
 

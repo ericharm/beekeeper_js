@@ -5,7 +5,7 @@
  * and controllers.
  */
 
-Config = require("../config/app.js");
+var Config = require("../config/app.js");
 
 var SceneNode = function (callback) {
 

@@ -1,5 +1,5 @@
+var Config  = require("../config/app.js");
 var Command = require("../lib/command.js");
-//var Config  = require("../config/app.js");
 
 var CollisionController = function () {
 
@@ -17,7 +17,7 @@ var CollisionController = function () {
     };
 
     var damageNode = function (node, deltaTime) {
-        node.damage(10);
+        node.damage(Config.bees.basePower);
     };
 
     var pushBack = function (node, deltaTime) {

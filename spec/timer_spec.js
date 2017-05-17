@@ -1,3 +1,4 @@
+var Config = require("../src/config/app.js");
 var Timers = require("../src/lib/timers.js");
 var Entity = require("../src/lib/entity.js");
 

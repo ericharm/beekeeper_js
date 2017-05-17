@@ -1,9 +1,8 @@
 /*
  * Sets the initial state and manages the state stack.
  */
-
 var Config = require("../config/app.js");
-var InitialState = Config.initialState;
+var InitialState = require("../config/init.js").state;
 
 var Application = function (context) {
 
@@ -36,14 +35,14 @@ var Application = function (context) {
         draw: function (canvas) {
             // clear window
             canvas.fillStyle = "#000000";
-            canvas.fillRect(0, 0, 800, 600);
+            canvas.fillRect(0, 0, Config.canvasWidth, Config.canvasHeight);
             for (var i = 0; i < this.stack.length; i++) {
                 // render each state starting at bottom of stateStack
                 this.stack[i].draw(canvas);
             }
             // draw border
             canvas.fillStyle = "#aaaaaa";
-            canvas.strokeRect(0, 0, 800, 600);
+            canvas.strokeRect(0, 0, Config.canvasWidth, Config.canvasHeight);
         },
         processRealtimeInput: function (event, isKeyPressed) {
             for (var i = this.stack.length - 1; i >= 0; i--) {

@@ -1,7 +1,6 @@
-var MainMenu = require("./main_menu.js");
-//is this the circular dependency causing all the config problems?
 var Config = require("../../config/app.js");
 var Keys = require("../../config/keys.js");
+var MainMenu = require("./main_menu.js");
 
 var TitleScreen = function (context) {
 

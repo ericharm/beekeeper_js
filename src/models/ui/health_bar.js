@@ -1,3 +1,4 @@
+var Config = require("../../config/app.js");
 var Entity = require("../../lib/entity.js");
 
 HealthBar = function (callback) {
@@ -16,11 +17,9 @@ HealthBar = function (callback) {
             var health = this._entity.getHealth();
             var ratio = health.current / health.max;
             canvas.fillStyle = "#ffff00";
-            // Config.statBars.height
-            canvas.fillRect(pos.x, pos.y + size.y, size.x * ratio, 10);
+            canvas.fillRect(pos.x, pos.y + size.y, size.x * ratio, Config.statBars.height);
             canvas.strokeStyle = "#000000";
-            // Config.statBars.height
-            canvas.strokeRect(pos.x, pos.y + size.y, size.x, 10);
+            canvas.strokeRect(pos.x, pos.y + size.y, size.x, Config.statBars.height);
         },
         _updateCurrent: function () {
             self.setPosition.call(this, this._entity.getPosition());
