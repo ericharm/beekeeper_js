@@ -1,8 +1,9 @@
 var SceneNode = require("../../lib/scene_node.js");
 var Beekeeper = require("../entities/beekeeper.js");
 var Hive      = require("../entities/hive.js");
+var Wall      = require("../../lib/wall.js");
+//var Config    = require("../../config/app.js");
 var CollisionController = require("../../controllers/collision_controller.js")();
-// This could go straight into the beekeeper module
 var Label = require("../ui/label.js");
 var HealthBar = require("../ui/health_bar.js");
 
@@ -23,6 +24,18 @@ var LevelOne = function () {
         self._startingHealth(100);
     });
 
+    var leftWall = Wall(function (self) {
+        self._position = {x: -10, y: 0};
+        self._width = 10;
+        self._height = Config.canvasHeight;
+    });
+
+    var rightWall = Wall(function (self) {
+        self._position = {x: Config.canvasWidth, y: 0};
+        self._width = 10;
+        self._height = Config.canvasHeight;
+    });
+
     // ui
     var healthBar = HealthBar(function (self) {
         self._entity = beekeeper;
@@ -39,7 +52,6 @@ var LevelOne = function () {
         self._entity.modifyStat('honey', 120);
         self._statName = 'honey';
     });
-
 
     //turn this into a honey pot
     var beekeeperLabel = Label(function (self) {
@@ -61,6 +73,8 @@ var LevelOne = function () {
     });
 
     var self = {
+        // this could be handled by state instead of scene
+        // scene preferably only deals with scene nodes
         handleCollisions: function (collidingPairs, commandQueue) {
             CollisionController.handleCollisions(collidingPairs, commandQueue);
         },
@@ -70,6 +84,8 @@ var LevelOne = function () {
             foregroundLayer.attachChild(hive);
             foregroundLayer.attachChild(hive2);
             foregroundLayer.attachChild(beekeeper);
+            foregroundLayer.attachChild(leftWall);
+            foregroundLayer.attachChild(rightWall);
             beekeeper.attachChild(healthBar);
             beekeeper.attachChild(beekeeperLabel);
             hive.attachChild(hiveLabel);

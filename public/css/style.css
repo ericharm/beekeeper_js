@@ -1,5 +1,11 @@
+@font-face {
+    font-family: PressStart;
+    src: url('/fonts/PressStart2P.ttf');
+}
+
 body {
     background: #efefef;
+    font-family: PressStart;
 }
 
 header {
@@ -9,3 +15,4 @@ header {
 #canvas-div {
     text-align: center;
 }
+

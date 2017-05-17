@@ -1,12 +1,13 @@
 var MainMenu = require("./main_menu.js");
+//is this the circular dependency causing all the config problems?
 var Config = require("../../config/app.js");
 var Keys = require("../../config/keys.js");
 
 var TitleScreen = function (context) {
 
     var canvas = context.canvas;
-    var titleFont= "30px Arial";
-    var messageFont = "16px Arial";
+    var titleFont= "30px PressStart";
+    var messageFont = "16px PressStart";
 
     var self = {
         processRealtimeInput: function (event, isKeyPressed) {
@@ -28,11 +29,11 @@ var TitleScreen = function (context) {
             // Title
             canvas.fillStyle = "#00ff00";
             canvas.font = titleFont;
-            canvas.fillText("b e e k e e p e r", 280, 190);
+            canvas.fillText("b e e k e e p e r", 150, 190);
             // Message
             canvas.fillStyle = "#cdcdcd";
             canvas.font = messageFont;
-            canvas.fillText("Press enter to continue", 288, 290);
+            canvas.fillText("Press enter to continue", 228, 290);
         }
     };
 

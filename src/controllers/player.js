@@ -16,25 +16,25 @@ var Player = function (context) {
     var self = {
         processRealtimeInput: function (event, isKeyPressed) {
             if (event.keyCode === Keys.Up) {
-                commandQueue.push(Command.new(function (node, deltaTime) {
+                commandQueue.push(Command(function (node, deltaTime) {
                     node.setMoving('up', isKeyPressed);
                 }, ['beekeeper']));
             }
 
             if (event.keyCode === Keys.Down) {
-                commandQueue.push(Command.new(function (node, deltaTime) {
+                commandQueue.push(Command(function (node, deltaTime) {
                     node.setMoving('down', isKeyPressed);
                 }, ['beekeeper']));
             }
 
             if (event.keyCode === Keys.Left) {
-                commandQueue.push(Command.new(function (node, deltaTime) {
+                commandQueue.push(Command(function (node, deltaTime) {
                     node.setMoving('left', isKeyPressed);
                 }, ['beekeeper']));
             }
 
             if (event.keyCode === Keys.Right) {
-                commandQueue.push(Command.new(function (node, deltaTime) {
+                commandQueue.push(Command(function (node, deltaTime) {
                     node.setMoving('right', isKeyPressed);
                 }, ['beekeeper']));
             }
@@ -42,12 +42,17 @@ var Player = function (context) {
         },
         processEvent: function (event) {
             if (event.keyCode === Keys.Space) {
-                commandQueue.push(Command.new(function (node, deltaTime) {
+                commandQueue.push(Command(function (node, deltaTime) {
                     node.shootBee(deltaTime, node.getPosition(), commandQueue);
                 }, ['hive']));
             }
             if (event.keyCode === Keys.a) {
                 stateStack.push(Pause(context));
+            }
+            if (event.keyCode === Keys.z) {
+                commandQueue.push(Command(function (node, deltaTime) {
+                    node.shootSmoke(deltaTime, node.getCenter(), commandQueue);
+                }, ['beekeeper']));
             }
         }
     };

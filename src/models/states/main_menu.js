@@ -5,7 +5,7 @@ var Game = require("../states/game.js");
 var MainMenu = function (context) {
 
     var canvas = context.canvas;
-    var font="30px Arial";
+    var font="30px PressStart";
     canvas.font = font;
 
     var options = [
@@ -53,7 +53,7 @@ var MainMenu = function (context) {
             canvas.fillStyle="#000000";
             canvas.fillRect(0, 0, Config.canvasWidth, Config.canvasHeight);
             canvas.fillStyle="#00ff00";
-            canvas.fillText("Menu", 280, 90);
+            canvas.fillText("Main Menu", 280, 90);
 
             for (var i = 0; i < options.length; i++ ) { 
                 if (i == activeOption) {

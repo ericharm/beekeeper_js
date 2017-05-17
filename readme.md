@@ -70,10 +70,6 @@ There is an inheritance pattern which can be observed by looking at SceneNode, E
 
 -Animation system
 
--Rigid bodies
-
--Cooldowns
-
 -Audio support
 
 -Saving high scores and other data with Mongo

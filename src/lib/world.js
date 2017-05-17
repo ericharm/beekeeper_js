@@ -7,7 +7,7 @@
 var SceneNode = require("./scene_node.js");
 var Command = require("./command.js");
 
-var World = function(context, state) {
+var World = function(context, scene) {
 
     var canvas = context.canvas;
     var commandQueue = context.commandQueue;
@@ -15,7 +15,7 @@ var World = function(context, state) {
     //this also should be in the context
     var sceneGraph = SceneNode();
 
-    state.buildScene(sceneGraph);
+    scene.buildScene(sceneGraph);
 
     var self = {
         update: function (deltaTime) {
@@ -29,7 +29,7 @@ var World = function(context, state) {
             handleCollisions();
 
             /** Remove out-of-bounds entites */
-            commandQueue.push(Command.new(function (node, deltaTime) {
+            commandQueue.push(Command(function (node, deltaTime) {
                 if (node.outOfBounds()) {
                     node.pluck();
                 }
@@ -49,7 +49,9 @@ var World = function(context, state) {
             }
         };
         sceneGraph.checkSceneCollision(sceneGraph, collidingPairs);
-        state.handleCollisions(collidingPairs, commandQueue);
+        // this is maybe something state should handle so scene
+        // can stick to just dealing with nodes
+        scene.handleCollisions(collidingPairs, commandQueue);
     }
 
     return self;

@@ -1,7 +1,7 @@
 var Entity = require("../../lib/entity.js");
-var Timers = require("../../lib/timers.js");
 var Textures = require("../../config/textures.js");
 var Sprite = Textures.Sprite;
+var SmokeShot = require("./smoke_shot.js");
 
 var Beekeeper = function (callback) {
 
@@ -46,7 +46,6 @@ var Beekeeper = function (callback) {
                 movement.x -= this._velocity.x * deltaTime;
             this.move(movement);
         },
-        timers: Timers(),
         harvest: function (hive, amount) {
             var honeyLeft = hive.getStats().honey;
             if (honeyLeft > amount) {
@@ -65,7 +64,6 @@ var Beekeeper = function (callback) {
                 this.timers.addTimer(function (timer) {
                     timer.onStart = function () {
                         that._invincible = true;
-                        if (that._stats.currentHealth <= 0) that.pluck();
                     };
                     timer.onEnd = function () {
                         that._invincible = false;
@@ -73,6 +71,15 @@ var Beekeeper = function (callback) {
                     timer.ms = 1000;
                 });
             }
+        },
+        shootSmoke: function (deltaTime, position, commandQueue) {
+            commandQueue.push(Command(function (node, deltaTime) {
+                var smokeShot = SmokeShot(function (that) {
+                    that.setPosition({x: position.x, y: position.y});
+                    that._debug = true;
+                });
+                node.attachChild(smokeShot);
+            }, ['foreground']));
         },
 
         // protected
@@ -91,15 +98,17 @@ var Beekeeper = function (callback) {
         _renderCurrent: function (canvas) {
             var currentSprite = this._spriteDescriptor[this._renderState];
             canvas.drawImage(
-                this._sprite, currentSprite.x, currentSprite.y,
-                currentSprite.width, currentSprite.height,
-                this._position.x, this._position.y,
-                currentSprite.width, currentSprite.height
-            );
+                    this._sprite, currentSprite.x, currentSprite.y,
+                    currentSprite.width, currentSprite.height,
+                    this._position.x, this._position.y,
+                    currentSprite.width, currentSprite.height
+                    );
         },
 
         _updateCurrent: function (deltaTime) {
-            this.timers.update(deltaTime);
+            // after implementing moveSpeed over velocity,
+            // this should call Entity.updateCurrent
+            if (this._stats.currentHealth <= 0) this.pluck();
             var movement = {
                 x: 0.0,
                 y: 0.0

@@ -5,13 +5,13 @@
  * through the SceneGraph.  Implemented by Player.
  */
 
-module.exports = {
-    new: function (action, categories) {
-        var self = {
-            action: action,
-            categories: categories
-        };
-        return self;
-    }
+Command = function (action, categories) {
+    var self = {
+        action: action,
+        categories: categories
+    };
+    return self;
 };
+
+module.exports = Command;
 

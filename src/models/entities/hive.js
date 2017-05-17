@@ -9,12 +9,11 @@ var Hive = function (callback) {
     // extends Entity
     var self = Entity();
 
-
     var extended = {
 
         // public
         shootBee: function (deltaTime, position, commandQueue) {
-            commandQueue.push(Command.new(function (node, deltaTime) {
+            commandQueue.push(Command(function (node, deltaTime) {
                 var bee = Bee(function (that) {
                     that.setPosition({x: position.x, y: position.y});
                     that.setVelocity({x: 3, y: 0});

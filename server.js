@@ -11,6 +11,7 @@ var path = require("path");
 app.use("/js", express.static(__dirname + "/public/js"));
 app.use("/css", express.static(__dirname + "/public/css"));
 app.use("/images", express.static(__dirname + "/public/images"));
+app.use("/fonts", express.static(__dirname + "/public/fonts"));
 
 /*
  *  Templates

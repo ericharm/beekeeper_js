@@ -4,12 +4,14 @@
  */
 
 var SceneNode = require("./scene_node.js");
+var Timers = require("./timers.js");
 var Config = require("../config/app.js");
 
 var Entity = function (callback) {
 
     // public
     var extended = {
+
         move: function (vector) {
             this._position.x += vector.x;
             this._position.y += vector.y;
@@ -78,6 +80,7 @@ var Entity = function (callback) {
                 }
             };
         },
+        timers: Timers(),
 
         // protected
         _velocity: {x: 0, y: 0},
@@ -93,6 +96,8 @@ var Entity = function (callback) {
         },
 
         _updateCurrent: function (deltaTime) {
+            this.timers.update(deltaTime);
+            if (this._stats.currentHealth <= 0) this.pluck();
             movement = {
                 x: this._velocity.x * deltaTime,
                 y: this._velocity.y * deltaTime

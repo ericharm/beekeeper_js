@@ -14,7 +14,8 @@ var keys = {
     Space: 32,
 
     a: 97,
-    s: 115
+    s: 115,
+    z: 122
 };
 
 module.exports = keys;
