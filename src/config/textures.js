@@ -6,31 +6,25 @@
 
 module.exports = {
 
-    beekeeper: "images/alien.png",
+    beekeeper: "images/alien2.png",
     beekeeperDescriptor: {
-        "alien": {
-            "x": 70, "y": 95, "width": 66, "height": 92    
+        "still": {
+            "x": 70, "y": 95, "width": 65, "height": 92
         },
         "climb1": {
-            "x": 70, "y": 0, "width": 66, "height": 95    
+            "x": 70, "y": 0, "width": 66, "height": 95
         },
         "climb2": {
-            "x": 134, "y": 289, "width": 66, "height": 95
+            "x": 134, "y": 295, "width": 66, "height": 95
         },
         "duck": {
             "x": 67, "y": 387, "width": 67, "height": 72
         },
-        "hurt": {
-            "x": 0, "y": 387, "width": 67, "height": 92
-        },
         "jump": {
             "x": 69, "y": 196, "width": 66, "height": 93
         },
-        "stand": {
+        "hurt": {
             "x": 68, "y": 294, "width": 66, "height": 92
-        },
-        "swim1": {
-            "x": 0, "y": 196, "width": 69, "height": 98
         },
         "swim2": {
             "x": 60, "y": 0, "width": 70, "height": 100
@@ -39,7 +33,18 @@ module.exports = {
             "x": 0, "y": 294, "width": 68, "height": 93
         },
         "walk2": {
-            "x": 0, "y": 0, "width": 70, "height": 96
+            "x": 0, "y": 196, "width": 69, "height": 98
+        },
+        "walk3": {
+            "x": 0, "y": 100, "width": 68, "height": 96
+        },
+        "walk4": {
+            "x": 0, "y": 0, "width": 68, "height": 96
+        },
+        "walk1mirror": {
+
+        },
+        "walk2mirror": {
         }
     },
 
@@ -50,7 +55,7 @@ module.exports = {
         var image = new Image();
         image.src = texture;
         return image;
-    }
+    },
 
 };
 

@@ -1,9 +1,7 @@
 var Config   = require("../../config/app.js");
 var Entity   = require("../../lib/entity.js");
-var Textures = require("../../config/textures.js");
-var Sprite   = Textures.Sprite;
 var SmokeShot = require("./smoke_shot.js");
-
+var Renderer = require("../../views/beekeeper_renderer.js");
 var Beekeeper = function (callback) {
 
     // private
@@ -86,11 +84,10 @@ var Beekeeper = function (callback) {
         // protected
         _width: 65,
         _height: 92,
-        _sprite: Sprite(Textures.beekeeper),
-        _spriteDescriptor: Textures.beekeeperDescriptor,
-        _renderState: renderStates.still,
-        _moveSpeed: Config.beekeeper.moveSpeed,
 
+        //_renderState: renderStates.still,
+        _renderer: Renderer(),
+        _moveSpeed: Config.beekeeper.moveSpeed,
         _movingUp: false,
         _movingDown: false,
         _movingLeft: false,
@@ -98,13 +95,11 @@ var Beekeeper = function (callback) {
         _invincible: false,
 
         _renderCurrent: function (canvas) {
-            var currentSprite = this._spriteDescriptor[this._renderState];
-            canvas.drawImage(
-                    this._sprite, currentSprite.x, currentSprite.y,
-                    currentSprite.width, currentSprite.height,
-                    this._position.x, this._position.y,
-                    currentSprite.width, currentSprite.height
-                    );
+            var that = this;
+            this._renderer.render(canvas, {
+                velocity: that._velocity,
+                position: that._position,
+            });
         },
 
         _updateCurrent: function (deltaTime) {
