@@ -9,13 +9,16 @@ var Animator = function (spriteSheet, descriptor) {
             var position = options.position;
             var sprites = options.sprites;
             var ms = options.ms;
+
             if (_currentTick >= ms / Config.frameRate) {
                 _currentTick = 0;
             }
+
             var totalTicks = ms / Config.frameRate;
             var ticksPerSprite = totalTicks / sprites.length;
             var currentSpriteIndex = Math.floor(_currentTick / ticksPerSprite);
             if (currentSpriteIndex > sprites.length) currentSpriteIndex -= 1;
+
             var currentSprite = descriptor[sprites[currentSpriteIndex]];
             canvas.drawImage(
                 spriteSheet, currentSprite.x, currentSprite.y,

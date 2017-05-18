@@ -12,22 +12,10 @@ module.exports = {
             "x": 70, "y": 95, "width": 65, "height": 92
         },
         "climb1": {
-            "x": 70, "y": 0, "width": 66, "height": 95
+            "x": 70, "y": 0, "width": 65, "height": 95
         },
         "climb2": {
-            "x": 134, "y": 295, "width": 66, "height": 95
-        },
-        "duck": {
-            "x": 67, "y": 387, "width": 67, "height": 72
-        },
-        "jump": {
-            "x": 69, "y": 196, "width": 66, "height": 93
-        },
-        "hurt": {
-            "x": 68, "y": 294, "width": 66, "height": 92
-        },
-        "swim2": {
-            "x": 60, "y": 0, "width": 70, "height": 100
+            "x": 134, "y": 295, "width": 65, "height": 95
         },
         "walk1": {
             "x": 0, "y": 294, "width": 68, "height": 93
@@ -42,9 +30,22 @@ module.exports = {
             "x": 0, "y": 0, "width": 68, "height": 96
         },
         "walk1mirror": {
-
+            "x": 134, "y": 390, "width": 68, "height": 96
         },
         "walk2mirror": {
+            "x": 134, "y": 196, "width": 69, "height": 98
+        },
+        "walk3mirror": {
+            "x": 135, "y": 100, "width": 68, "height": 96
+        },
+        "walk4mirror": {
+            "x": 135, "y": 0, "width": 68, "height": 96
+        },
+        "standleft": {
+            "x": 68, "y": 295, "width": 66, "height": 96
+        },
+        "standright": {
+            "x": 200, "y": 295, "width": 66, "height": 96
         }
     },
 

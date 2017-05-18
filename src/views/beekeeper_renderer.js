@@ -9,7 +9,6 @@ BeekeeperRenderer = function () {
     var descriptor  = Textures.beekeeperDescriptor;
     var animator = Animator(spriteSheet, descriptor);
 
-
     var self = {
 
         render: function (canvas, options) {
@@ -20,7 +19,7 @@ BeekeeperRenderer = function () {
                 animator.animate(canvas, {
                     position: position,
                     sprites: ["walk1", "walk2", "walk3", "walk4"],
-                    ms: 1000
+                    ms: 800
                 });
             } else if (velocity.y == -2.0) {
                 animator.animate(canvas, {
@@ -28,7 +27,25 @@ BeekeeperRenderer = function () {
                     sprites: ["climb1", "climb2"],
                     ms: 300
                 });
-            } else {
+            } else if (velocity.x < -1.3){
+                animator.animate(canvas, {
+                    position: position,
+                    sprites: [
+                        "walk1mirror", "walk2mirror",
+                        "walk3mirror", "walk4mirror"
+                    ],
+                    ms: 800
+                });
+            } else if (velocity.y == 2.0) {
+                animator.animate(canvas, {
+                    position: position,
+                    sprites: [
+                        "standleft", "still",
+                        "standright", "still"
+                    ],
+                    ms: 800
+                });
+            }else {
                 canvas.drawImage(
                     spriteSheet, currentSprite.x, currentSprite.y,
                     currentSprite.width, currentSprite.height,

@@ -56,7 +56,6 @@ var Beekeeper = function (callback) {
             }
         },
         damage: function (amount) {
-            //this can be moved to entity
             if (!this._invincible) {
                 var that = this;
                 that._stats.currentHealth -= amount * (1);
