@@ -8,6 +8,7 @@ BeekeeperRenderer = function () {
     var spriteSheet = Sprite(Textures.beekeeper);
     var descriptor  = Textures.beekeeperDescriptor;
     var animator = Animator(spriteSheet, descriptor);
+    var moveSpeed = Config.beekeeper.moveSpeed;
 
     var self = {
 
@@ -15,35 +16,35 @@ BeekeeperRenderer = function () {
             var velocity = options.velocity;
             var position = options.position;
             var currentSprite = descriptor.still;
-            if (velocity.x > 1.3) {
+            if (velocity.x >= (moveSpeed.x / Math.sqrt(2))) {
                 animator.animate(canvas, {
                     position: position,
                     sprites: ["walk1", "walk2", "walk3", "walk4"],
-                    ms: 800
+                    ms: 600
                 });
-            } else if (velocity.y == -2.0) {
+            } else if (velocity.y == -(moveSpeed.y)) {
                 animator.animate(canvas, {
                     position: position,
                     sprites: ["climb1", "climb2"],
                     ms: 300
                 });
-            } else if (velocity.x < -1.3){
+            } else if (velocity.x <= -(moveSpeed.x / Math.sqrt(2))){
                 animator.animate(canvas, {
                     position: position,
                     sprites: [
                         "walk1mirror", "walk2mirror",
                         "walk3mirror", "walk4mirror"
                     ],
-                    ms: 800
+                    ms: 600
                 });
-            } else if (velocity.y == 2.0) {
+            } else if (velocity.y == moveSpeed.y) {
                 animator.animate(canvas, {
                     position: position,
                     sprites: [
                         "standleft", "still",
                         "standright", "still"
                     ],
-                    ms: 800
+                    ms: 600
                 });
             }else {
                 canvas.drawImage(

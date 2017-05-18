@@ -10,7 +10,7 @@ var Config = {
 
     beekeeper: {
         harvestRate: 4,
-        moveSpeed: {x: 2, y: 2},
+        moveSpeed: {x: 3.0, y: 3.0},
     },
 
     bees: {
