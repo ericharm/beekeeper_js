@@ -2,7 +2,6 @@ var Config = require("../config/app.js");
 
 var Animator = function (spriteSheet, descriptor) {
     var _currentTick = 0;
-    console.log(descriptor);
 
     var self = {
         animate: function (canvas, options) {
