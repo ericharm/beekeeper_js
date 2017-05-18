@@ -10,6 +10,7 @@ HealthBar = function (callback) {
 
         // protected
         _entity: null,
+        _registersCollisions: false,
 
         _renderCurrent: function (canvas) {
             var pos = self.getPosition.call(this);

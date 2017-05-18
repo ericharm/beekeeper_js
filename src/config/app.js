@@ -9,7 +9,8 @@ var Config = {
     canvasHeight: 600,
 
     beekeeper: {
-        harvestRate: 10
+        harvestRate: 10,
+        moveSpeed: {x: 2, y: 2}
     },
 
     bees: {

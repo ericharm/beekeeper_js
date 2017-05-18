@@ -95,7 +95,7 @@ var Entity = function (callback) {
             maxHealth: 1
         },
 
-        _updateCurrent: function (deltaTime) {
+        _superUpdate: function (deltaTime) {
             this.timers.update(deltaTime);
             if (this._stats.currentHealth <= 0) this.pluck();
             movement = {
@@ -103,6 +103,9 @@ var Entity = function (callback) {
                 y: this._velocity.y * deltaTime
             };
             this.move(movement);
+        },
+        _updateCurrent: function (deltaTime) {
+            this._superUpdate(deltaTime);
         },
         _renderCurrent: function (canvas) {
             canvas.drawImage(this._sprite, this._position.x, this._position.y);

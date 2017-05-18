@@ -1,6 +1,7 @@
-var Entity = require("../../lib/entity.js");
+var Config   = require("../../config/app.js");
+var Entity   = require("../../lib/entity.js");
 var Textures = require("../../config/textures.js");
-var Sprite = Textures.Sprite;
+var Sprite   = Textures.Sprite;
 var SmokeShot = require("./smoke_shot.js");
 
 var Beekeeper = function (callback) {
@@ -37,13 +38,13 @@ var Beekeeper = function (callback) {
                 y: 0.0
             };
             if (this._movingUp)
-                movement.y += this._velocity.y * deltaTime;
+                movement.y += this._moveSpeed.y * deltaTime;
             if (this._movingDown)
-                movement.y -= this._velocity.y * deltaTime;
+                movement.y -= this._moveSpeed.y * deltaTime;
             if (this._movingLeft)
-                movement.x += this._velocity.x * deltaTime;
+                movement.x += this._moveSpeed.x * deltaTime;
             if (this._movingRight)
-                movement.x -= this._velocity.x * deltaTime;
+                movement.x -= this._moveSpeed.x * deltaTime;
             this.move(movement);
         },
         harvest: function (hive, amount) {
@@ -88,6 +89,7 @@ var Beekeeper = function (callback) {
         _sprite: Sprite(Textures.beekeeper),
         _spriteDescriptor: Textures.beekeeperDescriptor,
         _renderState: renderStates.still,
+        _moveSpeed: Config.beekeeper.moveSpeed,
 
         _movingUp: false,
         _movingDown: false,
@@ -106,22 +108,20 @@ var Beekeeper = function (callback) {
         },
 
         _updateCurrent: function (deltaTime) {
-            // after implementing moveSpeed over velocity,
-            // this should call Entity.updateCurrent
-            if (this._stats.currentHealth <= 0) this.pluck();
-            var movement = {
-                x: 0.0,
-                y: 0.0
-            };
+            this._velocity = {x: 0, y: 0};
             if (this._movingUp)
-                movement.y -= this._velocity.y * deltaTime;
+                this._velocity.y -= this._moveSpeed.y;
             if (this._movingDown)
-                movement.y += this._velocity.y * deltaTime;
+                this._velocity.y += this._moveSpeed.y;
             if (this._movingLeft)
-                movement.x -= this._velocity.x * deltaTime;
+                this._velocity.x -= this._moveSpeed.x;
             if (this._movingRight)
-                movement.x += this._velocity.x * deltaTime;
-            this.move(movement);
+                this._velocity.x += this._moveSpeed.x;
+            if (this._velocity.x !== 0 && this._velocity.y !== 0) {
+                  this._velocity.x /= Math.sqrt(2);
+                  this._velocity.y /= Math.sqrt(2);
+            }
+            self._superUpdate.call(this, deltaTime);
         }
 
     };

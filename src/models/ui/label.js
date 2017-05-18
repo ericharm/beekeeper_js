@@ -12,6 +12,7 @@ Label = function (callback) {
         _entity: null,
         _value: 0,
         _statName: '',
+        _registersCollisions: false,
 
         _renderCurrent: function (canvas) {
             // Background
