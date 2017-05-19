@@ -70,9 +70,9 @@ var SceneNode = function (callback) {
         getChildren: function () {
             return this._children;
         },
-        isRigid: function () {
-            return this._rigid;
-        },
+        // isRigid: function () {
+            // return this._rigid;
+        // },
         registersCollisions: function () {
             return this._registersCollisions;
         },

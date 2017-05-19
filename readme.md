@@ -51,11 +51,13 @@ Scripts to handle specialized render logic, like animations and special effects.
 
 **Scene Graph** - Easily send messages to objects on the screen by creating commands which target scene nodes by category.
 
-**Collision Detection** - By default, all Entities check collision with each other. Other types of scene nodes can set `_registersCollisions` manually. State can delegate specific collision events to a controller, which can create a command when a certain category of scene node collides with a certain other category.
+**Collision Detection** - By default, all Entities check collision with each other. Other types of scene nodes can set `_registersCollisions` manually. State can delegate specific collision events to a controller, which can create a command when a certain category of scene node collides with a certain other category. Two out-of-the-box categories are worth mentioning: the 'wall' category comes with the library Wall entity, and the 'world-bound' category automatically plucks the entity from the scene graph if it leaves the boundaries of the canvas.
+
+**Keyboard Input** - Create a controller and reference key bindings from config/keys.js.
 
 **Graphics** - Put images somewhere in the public/ directory and reference them throughout your project from config/textures.js.
 
-**Keyboard Input** - Create a controller and reference key bindings from config/keys.js.
+**Animation** - Put a reference to your spriteSheet and its descriptor in config/textures.js, and create an animator from lib/animator.js. Pass to the animator a reference to the canvas and an object containing your entity's position, an array of sprite names from the descriptor, and the length of the animation in milliseconds.
 
 ## Inspiration
 --------------
@@ -67,8 +69,6 @@ There is an inheritance pattern which can be observed by looking at SceneNode, E
 ## To Do
 --------
 -Class for managing the View and Viewport
-
--Animation system
 
 -Audio support
 
