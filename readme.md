@@ -9,6 +9,8 @@ npm install
 
 npm install -g nodemon browserify
 
+mongo db/seed.js (mongo must be running)
+
 npm test
 
 npm start

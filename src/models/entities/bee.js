@@ -1,4 +1,5 @@
 var Entity = require("../../lib/entity.js");
+var Config = require("../../config/app.js");
 var Textures = require("../../config/textures.js");
 var Sprite = Textures.Sprite;
 
@@ -17,6 +18,15 @@ var Bee = function (callback) {
                 this._position.x, this._position.y,
                 this._width, this._height
             );
+        },
+        setVelocity: function (velocity) {
+            var _this= this;
+            this.timers.addTimer(function (timer) {
+                timer.onEnd = function () {
+                    _this._velocity = velocity;
+                };
+                timer.ms = Config.bees.waitTime;
+            });
         },
     };
 

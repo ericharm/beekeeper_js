@@ -2,13 +2,8 @@ var Config   = require("../../config/app.js");
 var Entity   = require("../../lib/entity.js");
 var SmokeShot = require("./smoke_shot.js");
 var Renderer = require("../../views/beekeeper_renderer.js");
-var Beekeeper = function (callback) {
 
-    // private
-    // this might be moved into Entity protected
-    var renderStates = {
-        still: "alien"
-    };
+var Beekeeper = function (callback) {
 
     var self = Entity();
 
@@ -66,7 +61,7 @@ var Beekeeper = function (callback) {
                     timer.onEnd = function () {
                         that._invincible = false;
                     };
-                    timer.ms = 1000;
+                    timer.ms = Config.beekeeper.damageBuffer;
                 });
             }
         },
@@ -81,10 +76,8 @@ var Beekeeper = function (callback) {
         },
 
         // protected
-        _width: 65,
-        _height: 92,
-
-        //_renderState: renderStates.still,
+        _width: Config.beekeeper.width,
+        _height: Config.beekeeper.height,
         _renderer: Renderer(),
         _moveSpeed: Config.beekeeper.moveSpeed,
         _movingUp: false,

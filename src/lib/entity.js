@@ -55,9 +55,6 @@ var Entity = function (callback) {
                 this._parent.detachChild(this);
             }
         },
-        // isDead: function () {
-            // return (this._stats.currentHealth <= 0);
-        // },
         // Might someday get its own module
         hitBox: function () {
             var p = this._position;
