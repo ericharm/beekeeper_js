@@ -1,9 +1,13 @@
 /*
  *  Modules for express
  */
+
 var express = require("express");
-var app = express();
 var path = require("path");
+var bodyParser = require("body-parser");
+var multer = require("multer");
+
+var app = express();
 
 /*
  *  Asset paths
@@ -12,6 +16,9 @@ app.use("/js", express.static(__dirname + "/public/js"));
 app.use("/css", express.static(__dirname + "/public/css"));
 app.use("/images", express.static(__dirname + "/public/images"));
 app.use("/fonts", express.static(__dirname + "/public/fonts"));
+
+app.use(bodyParser.json()); // support json encoded bodies
+//app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 /*
  *  Templates
@@ -59,6 +66,12 @@ app.get("/highscores", function (req, res) {
 });
 
 app.post("/highscores", function (req, res) {
-    console.log(db);
+    var score = {
+        initials: req.body.initials,
+        score: req.body.score
+    };
+    db.collection('highscores').insert(score);
+    res.setHeader('Content-Type', 'application/json');
+    res.json(score);
 });
 
