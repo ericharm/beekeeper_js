@@ -17,6 +17,20 @@ var GameOver = function (context, score) {
         $(".initials:first").focus();
     };
 
+    var postToHighscores = function (score, initials) {
+        $.ajax({
+            type: "POST",
+            url: "/highscores",
+            data: JSON.stringify({ score: score, initials: initials }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data) { console.log(data); },
+            failure: function(errMsg) {
+                console.log(errMsg);
+            }
+        });
+    };
+
     var self = {
         update: function (deltaTime) {
             //world.update(deltaTime);
@@ -38,8 +52,8 @@ var GameOver = function (context, score) {
         },
         processEvent: function (event) {
             if (event.keyCode == Keys.Enter) {
-                //call the high scores API with the value in the
-                //input field
+                var initials = $(".initials:first").val();
+                postToHighscores(score, initials);
                 $(".initials").remove();
                 var MainMenu = require("./main_menu.js");
                 context.stateStack.pop();

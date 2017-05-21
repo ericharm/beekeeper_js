@@ -4,7 +4,7 @@
 
 Init = {
 
-    state: require("../models/states/game_over.js")
+    state: require("../models/states/title_screen.js")
 
 };
 
