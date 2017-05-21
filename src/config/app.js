@@ -9,6 +9,7 @@ var Config = {
     canvasHeight: 600,
 
     beekeeper: {
+        startingHealth: 100,
         harvestRate: 4,
         moveSpeed: {x: 3.0, y: 3.0},
         damageBuffer: 1000,

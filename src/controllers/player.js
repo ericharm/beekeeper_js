@@ -39,15 +39,10 @@ var Player = function (context) {
 
         },
         processEvent: function (event) {
-            if (event.keyCode === Keys.Space) {
-                commandQueue.push(Command(function (node, deltaTime) {
-                    node.shootBee(deltaTime, node.getPosition(), commandQueue);
-                }, ['hive']));
-            }
             if (event.keyCode === Keys.a) {
                 stateStack.push(Pause(context));
             }
-            if (event.keyCode === Keys.z) {
+            if (event.keyCode === Keys.Space) {
                 commandQueue.push(Command(function (node, deltaTime) {
                     node.shootSmoke(deltaTime, node.getCenter(), commandQueue);
                 }, ['beekeeper']));

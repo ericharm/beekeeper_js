@@ -2,6 +2,7 @@ var Config   = require("../../config/app.js");
 var Entity   = require("../../lib/entity.js");
 var SmokeShot = require("./smoke_shot.js");
 var Renderer = require("../../views/beekeeper_renderer.js");
+var GameOver = require("../states/game_over.js");
 
 var Beekeeper = function (callback) {
 
@@ -66,15 +67,40 @@ var Beekeeper = function (callback) {
             }
         },
         shootSmoke: function (deltaTime, position, commandQueue) {
-            commandQueue.push(Command(function (node, deltaTime) {
-                var smokeShot = SmokeShot(function (that) {
-                    that.setPosition({x: position.x, y: position.y});
-                    that._debug = true;
+            _this = this;
+            if (_this._shotReady) {
+                _this._shotReady = false;
+                _this.timers.addTimer(function (timer) {
+                    timer.onEnd = function () {
+                        _this._shotReady = true;
+                    };
+                    timer.ms = 1000;
                 });
-                node.attachChild(smokeShot);
-            }, ['foreground']));
+                commandQueue.push(Command(function (node, deltaTime) {
+                    var smokeShot = SmokeShot(function (that) {
+                        that.setPosition({x: position.x, y: position.y});
+                        that._debug = true;
+                    });
+                    node.attachChild(smokeShot);
+                }, ['foreground']));
+            }
         },
-
+        pluck: function () {
+            //so you can't keep gathering honey
+            this._registersCollisions = false;
+            for (var i = this._children.length - 1; i >=0; i--) {
+                // detach the health bar
+                this.detachChild(this._children[i]);
+            }
+            _this = this;
+            this.timers.addTimer(function (timer) {
+                timer.onEnd = function () {
+                    _this._context.stateStack.emptyStack();
+                    _this._context.stateStack.push(GameOver(_this._context, _this._stats.honey));
+                };
+                timer.ms = 2000;
+            });
+        },
         // protected
         _width: Config.beekeeper.width,
         _height: Config.beekeeper.height,
@@ -85,6 +111,9 @@ var Beekeeper = function (callback) {
         _movingLeft: false,
         _movingRight: false,
         _invincible: false,
+        _shotReady: true,
+
+        _context: {},
 
         _renderCurrent: function (canvas) {
             var that = this;

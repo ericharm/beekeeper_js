@@ -1,9 +1,9 @@
 var Config    = require("../../config/app.js");
 var Chance    = require("../../lib/chance.js");
 var SceneNode = require("../../lib/scene_node.js");
+var Wall      = require("../../lib/wall.js");
 var Beekeeper = require("../entities/beekeeper.js");
 var Hive      = require("../entities/hive.js");
-var Wall      = require("../../lib/wall.js");
 var CollisionController = require("../../controllers/collision_controller.js")();
 var Label = require("../ui/label.js");
 var HealthBar = require("../ui/health_bar.js");
@@ -15,8 +15,8 @@ var LevelOne = function (context) {
     // entities
     var beekeeper = Beekeeper(function (self) {
         self._position = {x: 250, y: 300};
-        self._velocity = {x: 2, y: 2};
-        self._startingHealth(100);
+        self._startingHealth(Config.beekeeper.startingHealth);
+        self._context = context;
     });
 
     var leftWall = Wall(function (self) {
@@ -47,7 +47,7 @@ var LevelOne = function (context) {
     var backgroundLayer = SceneNode(function (self) {
         self._renderCurrent = function (canvas) {
             canvas.fillStyle = "#00aa00";
-            canvas.fillRect(0, 0, 800, 600);
+            canvas.fillRect(0, 0, Config.canvasWidth, Config.canvasHeight);
         };
     });
 
