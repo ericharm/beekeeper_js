@@ -24,7 +24,9 @@ var GameOver = function (context, score) {
             data: JSON.stringify({ score: score, initials: initials }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function(data) { console.log(data); },
+            success: function(data) {
+                console.log("Highscore saved.");
+            },
             failure: function(errMsg) {
                 console.log(errMsg);
             }

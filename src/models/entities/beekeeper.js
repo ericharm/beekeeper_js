@@ -88,7 +88,7 @@ var Beekeeper = function (callback) {
         pluck: function () {
             //so you can't keep gathering honey
             this._registersCollisions = false;
-            for (var i = this._children.length - 1; i >= 0; i--) {
+            for (var i = this._children.length - 1; i > 0; i--) {
                 // detach the health bar
                 this.detachChild(this._children[i]);
             }

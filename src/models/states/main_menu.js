@@ -1,6 +1,7 @@
 var Config = require("../../config/app.js");
 var Keys = require("../../config/keys.js");
 var Game = require("../states/game.js");
+var HighScores = require("../states/highscores.js");
 
 var MainMenu = function (context) {
 
@@ -10,12 +11,14 @@ var MainMenu = function (context) {
 
     var options = [
         { text: "Play", location: {x: 200, y: 300} },
-        { text: "Exit", location: {x: 200, y: 400} }
+        { text: "High Scores", location: {x: 200, y: 400} },
+        { text: "Exit", location: {x: 200, y: 500} }
     ];
 
     var optionNames = {
         Play: 0,
-        Exit: 1
+        Highscores: 1,
+        Exit: 2
     };
 
     var activeOption = 0;
@@ -27,9 +30,9 @@ var MainMenu = function (context) {
 
     var self = {
         processRealtimeInput: function (event, isKeyPressed) {
-            if (event.keyCode == Keys.Up && activeOption > 0) {
+            if (event.keyCode == Keys.Up && activeOption > 0 && isKeyPressed) {
                 activeOption -= 1;
-            } else if (event.keyCode == Keys.Down && activeOption < (options.length - 1)) {
+            } else if (event.keyCode == Keys.Down && activeOption < (options.length - 1) && isKeyPressed) {
                 activeOption += 1;
             }
         },
@@ -39,6 +42,10 @@ var MainMenu = function (context) {
                     case optionNames.Play:
                         context.stateStack.pop();
                         context.stateStack.push(Game(context));
+                        break;
+                    case optionNames.Highscores:
+                        context.stateStack.pop();
+                        context.stateStack.push(HighScores(context));
                         break;
                     case optionNames.Exit:
                         context.stateStack.emptyStack(); 

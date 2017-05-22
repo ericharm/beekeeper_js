@@ -8,6 +8,7 @@ var bodyParser = require("body-parser");
 var multer = require("multer");
 
 var app = express();
+app.use(bodyParser.json());
 
 /*
  *  Asset paths
@@ -17,8 +18,6 @@ app.use("/css", express.static(__dirname + "/public/css"));
 app.use("/images", express.static(__dirname + "/public/images"));
 app.use("/fonts", express.static(__dirname + "/public/fonts"));
 
-app.use(bodyParser.json()); // support json encoded bodies
-//app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 /*
  *  Templates
@@ -58,7 +57,9 @@ app.get("/", function (req, res) {
 
 // Highscores API
 app.get("/highscores", function (req, res) {
-    db.collection('highscores').find().toArray(function (err, scores) {
+    db.collection('highscores')
+        .find().sort({score: -1})
+        .limit(10).toArray(function (err, scores) {
         if (err) return console.dir(err);
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(scores));
@@ -67,7 +68,7 @@ app.get("/highscores", function (req, res) {
 
 app.post("/highscores", function (req, res) {
     var score = {
-        initials: req.body.initials,
+        initials: req.body.initials.toUpperCase(),
         score: req.body.score
     };
     db.collection('highscores').insert(score);

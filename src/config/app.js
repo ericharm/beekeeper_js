@@ -25,8 +25,8 @@ var Config = {
     },
 
     hives: {
-        width: 32,
-        height: 32,
+        width: 60,
+        height: 63,
         moveSpeed: {x: 1.0, y: 1.0},
         avgSpawnInterval: 3.0,
         maxHoney: 300

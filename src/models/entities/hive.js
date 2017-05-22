@@ -21,7 +21,7 @@ var Hive = function (callback) {
             }, ['beekeeper']));
             commandQueue.push(Command(function (node, deltaTime) {
                 var bee = Bee(function (that) {
-                    that.setPosition({x: position.x, y: position.y});
+                    that.setPosition(_this.getCenter());
                     that.setVelocity({
                         x: _this._shootVelocity.x * Config.bees.moveSpeed.x,
                         y: _this._shootVelocity.y * Config.bees.moveSpeed.y
