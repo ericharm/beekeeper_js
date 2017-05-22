@@ -56,6 +56,10 @@ navigate to: http://localhost:8081
 
 **Animation** - Put a reference to your spriteSheet and its descriptor in config/textures.js, and create an animator from lib/animator.js. Pass to the animator a reference to the canvas and an object containing your entity's position, an array of sprite names from the descriptor, and the length of the animation in milliseconds.
 
+**Random Number Generation** - A la dice rolling and coin flipping.
+
+**Timers** - Entities have a timers object that can be used by calling `entity.timers.addTimer(callback)` and in the callback defining a function the runs now (timer.onStart()), a number of milliseconds for the timer to last (timer.ms), and a function that runs after that many milliseconds (timer.onEnd()).
+
 ## Inspiration
 --------------
 The architecture of the framework is inspired by the book _[SFML Game Development](https://www.packtpub.com/game-development/sfml-game-development)_ by Jan Haller, Henrik Vogelius Hansson, Artur Moreira.
@@ -65,7 +69,7 @@ I tried to get the benefits of inheritance by cascading object factories instead
 
 ## To Do
 --------
--Class for managing a game camera
+- Class for managing a game camera
 
--Audio support
+- Audio support
 
