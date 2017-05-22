@@ -46,7 +46,7 @@ BeekeeperRenderer = function () {
                     ],
                     ms: 600
                 });
-            }else {
+            } else {
                 canvas.drawImage(
                     spriteSheet, currentSprite.x, currentSprite.y,
                     currentSprite.width, currentSprite.height,
@@ -62,3 +62,4 @@ BeekeeperRenderer = function () {
 };
 
 module.exports = BeekeeperRenderer;
+

@@ -35,8 +35,8 @@ var Hive = function (callback) {
             var vectorY = (vector.y - this._position.y);
             var distance = Math.sqrt(Math.pow(vectorX, 2) + Math.pow(vectorY, 2));
             this._shootVelocity = {
-                x: vectorX / distance * this._moveSpeed.x,
-                y: vectorY / distance * this._moveSpeed.y
+                x: vectorX / distance,
+                y: vectorY / distance
             };
         },
         _updateCurrent: function (deltaTime) {
@@ -51,7 +51,6 @@ var Hive = function (callback) {
         _width: Config.hives.width,
         _height: Config.hives.height,
         _sprite: Sprite(Textures.hive),
-        _moveSpeed: Config.hives.moveSpeed,
         _shootVelocity: {x: 0, y: 0},
         _commandQueue: []
     };

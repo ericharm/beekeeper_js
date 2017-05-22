@@ -1,7 +1,7 @@
 ## Up and running
 -----------------
 
-git clone https://e_e_harm@bitbucket.org/e_e_harm/beekeeper_js.github
+git clone https://e_e_harm@bitbucket.org/e_e_harm/beekeeper_js.git
 
 cd beekeeper_js
 
@@ -9,37 +9,39 @@ npm install
 
 npm install -g nodemon browserify
 
-mongo db/seed.js (mongo must be running)
+(in another shell) mongod
+
+mongo db/seed.js
 
 npm test
 
 npm start
 
-npm run open or navigate to: http://localhost:8081
+navigate to: http://localhost:8081
 
 
 ## Framework
 ------------
 
 ### server.js
-The framework runs on Express, so you can go in here to connect your game to a database or configure the setup for the server.
+The app runs on Express, go in here to set up the database/server/routes/paths however you like.
 
 ### public/js/index.js
-Connects the framework to the browser.  The main loop lives here; it simply calls game.tick() on a fixed timestep.  The framerate is set in this file.  Browser events are passed from here into the game.  The base setup accepts keyboard input, but support for mouse and joystick will come along soon.
+Connects the framework to the browser.  The main loop lives here.  Browser events are passed from here into the game.  The base setup accepts keyboard input, but adding mouse and joystick support should be pretty easy.
 
 ## src/
 
 ### config/
-Mostly objects which reference constants, like keyCodes, colors, frameRate, and resource paths.
+Mappings for keyCodes, frameRate, resource paths, and as much as possible any numeric values aside from 0 and 1 that would otherwise be hardcoded into the game objects.
 
 ### controllers/
 Modules to manage event-driven command creation. In particular, a controller is useful for responding to input and entity collisions.
 
 ### lib/
-Bedrock of the framework that is unlikely to need much change.
+Reusable abstractions.
 
 ### models/
-In-game objects and modules to support them. models/entities/ contains most scene nodes that move and render sprites, models/states/ is application states like game, pause, and title screen, and models/levels/ contains setup objects for each level that gets passed to the application when the game state is active.
+In-game objects and modules to support them. models/entities/ contains most scene nodes that move and render sprites, models/states/ is application states like game, pause, and title screen, and models/scenes/ contains setup objects for each level that gets passed to the application when the game state is active.
 
 ### views/
 Scripts to handle specialized render logic, like animations and special effects.
@@ -47,11 +49,11 @@ Scripts to handle specialized render logic, like animations and special effects.
 
 ## Features
 -----------
-**Fixed-step game loop** - adjust frameRate in config/app.js.
+**Fixed-step game loop** - Adjust frameRate in config/app.js.
 
-**State management** - set initial state in config/app.js, switch out state by calling `stateStack.pop(); stateStack.push(newState);`
+**State management** - Set initial state in config/init.js, switch out state by calling `stateStack.pop(); stateStack.push(newState);`
 
-**Scene Graph** - Easily send messages to objects on the screen by creating commands which target scene nodes by category.
+**Scene Graph** - Send messages to objects on the screen by creating commands which target scene nodes by category.
 
 **Collision Detection** - By default, all Entities check collision with each other. Other types of scene nodes can set `_registersCollisions` manually. State can delegate specific collision events to a controller, which can create a command when a certain category of scene node collides with a certain other category. Two out-of-the-box categories are worth mentioning: the 'wall' category comes with the library Wall entity, and the 'world-bound' category automatically plucks the entity from the scene graph if it leaves the boundaries of the canvas.
 
@@ -65,18 +67,12 @@ Scripts to handle specialized render logic, like animations and special effects.
 --------------
 The architecture of the framework is inspired by the book _[SFML Game Development](https://www.packtpub.com/game-development/sfml-game-development)_ by Jan Haller, Henrik Vogelius Hansson, Artur Moreira.
 
-There is an inheritance pattern which can be observed by looking at SceneNode, Entity, and (for example) Beekeeper modules. Anyone is of course free to use prototypes to extend the framework but the basic library instead uses factory functions to create, extend and override object data and interfaces.  This idea is adapted from _[JavaScript: The Good Parts](https://www.safaribooksonline.com/library/view/javascript-the-good/9780596517748/)_ by Douglas Crockford.  Truly private variables can exist if placed in the factory function but outside the scope of the object that gets returned by the factory.  Variables prefixed with an underscore are suggesting that they should be treated as protected, and preferably are only referenced within the factory or an extending factory, or altered within the callback passed to the factory when creating a new object.
+I tried to get the benefits of inheritance by cascading object factories instead of creating prototypes and instantiating objects with the 'new' keyword.  I got this idea from _[JavaScript: The Good Parts](https://www.safaribooksonline.com/library/view/javascript-the-good/9780596517748/)_ by Douglas Crockford.
 
 
 ## To Do
 --------
--Class for managing the View and Viewport
+-Class for managing a game camera
 
 -Audio support
-
--Saving high scores and other data with Mongo
-
--More unit tests
-
--JSDoc
 

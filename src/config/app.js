@@ -11,7 +11,7 @@ var Config = {
     beekeeper: {
         startingHealth: 100,
         harvestRate: 4,
-        moveSpeed: {x: 3.0, y: 3.0},
+        moveSpeed: {x: 3.5, y: 3.5},
         damageBuffer: 1000,
         width: 65,
         height: 92
@@ -27,7 +27,6 @@ var Config = {
     hives: {
         width: 60,
         height: 63,
-        moveSpeed: {x: 1.0, y: 1.0},
         avgSpawnInterval: 3.0,
         maxHoney: 300
     },
