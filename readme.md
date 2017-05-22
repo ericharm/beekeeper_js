@@ -23,28 +23,21 @@ navigate to: http://localhost:8081
 ## Framework
 ------------
 
-### server.js
-The app runs on Express, go in here to set up the database/server/routes/paths however you like.
+**server.js** The app runs on Express, go in here to set up the database/server/routes/paths however you like.
 
-### public/js/index.js
-Connects the framework to the browser.  The main loop lives here.  Browser events are passed from here into the game.  The base setup accepts keyboard input, but adding mouse and joystick support should be pretty easy.
+**public/js/index.js** Connects the framework to the browser.  The main loop lives here.  Browser events are passed from here into the game.  The base setup accepts keyboard input, but adding mouse and joystick support should be pretty easy.
 
 ## src/
 
-### config/
-Mappings for keyCodes, frameRate, resource paths, and as much as possible any numeric values aside from 0 and 1 that would otherwise be hardcoded into the game objects.
+**config/** Mappings for keyCodes, frameRate, resource paths, and as much as possible any numeric values aside from 0 and 1 that would otherwise be hardcoded into the game objects.
 
-### controllers/
-Modules to manage event-driven command creation. In particular, a controller is useful for responding to input and entity collisions.
+**controllers/** Modules to manage event-driven command creation. In particular, a controller is useful for responding to input and entity collisions.
 
-### lib/
-Reusable abstractions.
+**lib/** Reusable abstractions.
 
-### models/
-In-game objects and modules to support them. models/entities/ contains most scene nodes that move and render sprites, models/states/ is application states like game, pause, and title screen, and models/scenes/ contains setup objects for each level that gets passed to the application when the game state is active.
+**models/** In-game objects and modules to support them. models/entities/ contains most scene nodes that move and render sprites, models/states/ is application states like game, pause, and title screen, and models/scenes/ contains setup objects for each level that gets passed to the application when the game state is active.
 
-### views/
-Scripts to handle specialized render logic, like animations and special effects.
+**views/** Scripts to handle specialized render logic, like animations and special effects.
 
 
 ## Features
