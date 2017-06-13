@@ -50,9 +50,9 @@ var Entity = function (callback) {
             };
         },
         modifyStat: function (statName, amount) {
-            this._stats[statName] += amount;
-            if (this._stats.currentHealth <= 0) {
-                this._parent.detachChild(this);
+            extended._stats[statName] += amount;
+            if (extended._stats.currentHealth <= 0) {
+                extended._parent.detachChild(extended);
             }
         },
         // Might someday get its own module
@@ -112,8 +112,8 @@ var Entity = function (callback) {
             }
         },
         _startingHealth: function (hitPoints) {
-            this._stats.currentHealth = hitPoints;
-            this._stats.maxHealth = hitPoints;
+            extended._stats.currentHealth = hitPoints;
+            extended._stats.maxHealth = hitPoints;
         }
 
     };

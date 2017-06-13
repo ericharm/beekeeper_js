@@ -2,7 +2,7 @@
  * Pass initial state to the application
  */
 
-Init = {
+var Init = {
 
     state: require("../models/states/title_screen.js")
 

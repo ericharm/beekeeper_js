@@ -1,7 +1,7 @@
 var Config = require("../../config/app.js");
 var Keys = require("../../config/keys.js");
 
-var TitleScreen = function (context) {
+var HighscoresState = function (context) {
 
     var canvas = context.canvas;
     var titleFont= "30px PressStart";
@@ -36,7 +36,7 @@ var TitleScreen = function (context) {
             var y = 100;
             var scores = this._highscores;
             for (var i = 0; i < scores.length; i++) {
-                canvas.fillText(scores[i].initials + " " + scores[i].score, 228, y);
+                canvas.fillText((i+1) + " " + scores[i].initials + " " + scores[i].score, 228, y);
                 y += 50;
             }
         },
@@ -67,5 +67,5 @@ var TitleScreen = function (context) {
 
 };
 
-module.exports = TitleScreen;
+module.exports = HighscoresState;
 

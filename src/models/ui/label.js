@@ -1,7 +1,7 @@
 var Config = require("../../config/app.js");
 var Entity = require("../../lib/entity.js");
 
-Label = function (callback) {
+var Label = function (callback) {
 
     // extends SceneNode
     var self = Entity();

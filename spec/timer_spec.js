@@ -29,6 +29,7 @@ describe("Timer", function () {
         });
 
         expect(entity.getHealth().current).toEqual(10);
+        expect(entity.getHealth().max).toEqual(1);
     });
 
     it("calls the onEnd method after the given time in ms", function () {
@@ -36,14 +37,16 @@ describe("Timer", function () {
             self.onEnd = function () {
                 entity.modifyStat('currentHealth', 9);
             };
-            self.ms = 1000;
+            self.ms = 2000;
         });
 
-        updateEntity(Config.frameRate - 1);
+        for (var i = 0; i < (Config.frameRate * 2 - 1); i++) {
+            updateEntity(1);
+        }
 
         expect(entity.getHealth().current).toEqual(1);
 
-        updateEntity(1);
+        updateEntity(2);
 
         expect(entity.getHealth().current).toEqual(10);
         expect(entity.getHealth().max).toEqual(1);

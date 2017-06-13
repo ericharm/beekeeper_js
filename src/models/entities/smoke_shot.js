@@ -1,4 +1,5 @@
 var Entity = require("../../lib/entity.js");
+var Config = require("../../config/app.js");
 
 var SmokeShot = function (callback) {
 
@@ -56,7 +57,7 @@ var SmokeShot = function (callback) {
             timer.onEnd = function () {
                 self.pluck();
             };
-            timer.ms = 1000;
+            timer.ms = Config.beekeeper.smokeLength;
         });
     }());
 

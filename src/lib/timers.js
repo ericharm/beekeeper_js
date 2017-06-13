@@ -21,14 +21,15 @@ var Timers = function (callback) {
 
         var timer = {
             update: function (deltaTime) {
-                this.timeLeft -= this.ms / Config.frameRate * deltaTime;
-                if (this.timeLeft <= 0) {
-                    this.onEnd();
-                    this.destroy();
+                var msPerFrame = 1000 / Config.frameRate;
+                timer.timeLeft -= msPerFrame * deltaTime;
+                if (timer.timeLeft <= 0) {
+                    timer.onEnd();
+                    timer.destroy();
                 }
             },
             destroy: function () {
-                this.container.splice(this.container.indexOf(this), 1);
+                timer.container.splice(timer.container.indexOf(timer), 1);
             },
             onStart: function () {
                 //do nothing by default

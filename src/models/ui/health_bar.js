@@ -1,7 +1,7 @@
 var Config = require("../../config/app.js");
 var Entity = require("../../lib/entity.js");
 
-HealthBar = function (callback) {
+var HealthBar = function (callback) {
 
     // extends SceneNode
     var self = Entity();

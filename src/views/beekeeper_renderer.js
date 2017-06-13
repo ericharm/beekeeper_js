@@ -3,7 +3,7 @@ var Textures = require("../config/textures.js");
 var Sprite   = Textures.Sprite;
 var Animator = require("../lib/animator.js");
 
-BeekeeperRenderer = function () {
+var BeekeeperRenderer = function () {
 
     var spriteSheet = Sprite(Textures.beekeeper);
     var descriptor  = Textures.beekeeperDescriptor;
@@ -16,6 +16,7 @@ BeekeeperRenderer = function () {
             var velocity = options.velocity;
             var position = options.position;
             var currentSprite = descriptor.still;
+
             if (velocity.x >= (moveSpeed.x / Math.sqrt(2))) {
                 animator.animate(canvas, {
                     position: position,

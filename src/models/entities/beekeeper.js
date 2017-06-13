@@ -67,14 +67,16 @@ var Beekeeper = function (callback) {
             }
         },
         shootSmoke: function (deltaTime, position, commandQueue) {
-            _this = this;
-            if (_this._shotReady) {
-                _this._shotReady = false;
+            if (this._shotReady) {
+                _this = this;
                 _this.timers.addTimer(function (timer) {
+                    timer.onStart = function () {
+                        _this._shotReady = false;
+                    };
                     timer.onEnd = function () {
                         _this._shotReady = true;
                     };
-                    timer.ms = 1000;
+                    timer.ms = Config.beekeeper.smokeCooldown;
                 });
                 commandQueue.push(Command(function (node, deltaTime) {
                     var smokeShot = SmokeShot(function (that) {
