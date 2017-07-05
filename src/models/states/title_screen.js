@@ -28,7 +28,7 @@ var TitleScreen = function (context) {
             // Title
             canvas.fillStyle = "#00ff00";
             canvas.font = titleFont;
-            canvas.fillText("b e e k e e p r", 150, 190);
+            canvas.fillText("b e e k e e p e r", 150, 190);
             // Message
             canvas.fillStyle = "#cdcdcd";
             canvas.font = messageFont;
