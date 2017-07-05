@@ -1,8 +1,0 @@
-#!/bin/bash
-toy-server
-rm -rf beekeeper_js
-git clone https://e_e_harm@bitbucket.org/e_e_harm/beekeeper_js.git
-cd beekeeper_js
-npm install
-killall node
-browserify public/js/index.js -o public/js/bundle.js & nodemon server.js &
