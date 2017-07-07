@@ -20,14 +20,6 @@ npm start
 navigate to: http://localhost:8081
 
 
-## Deploy
----------
-
-git push
-toy-server
-./.beekeeper_deploy
-
-
 ## Framework
 ------------
 
