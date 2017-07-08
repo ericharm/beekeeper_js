@@ -39,7 +39,8 @@ var Player = function (context) {
 
             if (event.keyCode === Keys.Space && isKeyPressed) {
                 commandQueue.push(Command(function (node, deltaTime) {
-                    if (node._stats.currentSmoke > 1) {
+                    // move this number to config
+                    if (node._stats.currentSmoke > 2) {
                         node.activateSmoke(commandQueue);
                     }
                 }, ['beekeeper']));
@@ -49,6 +50,9 @@ var Player = function (context) {
                 commandQueue.push(Command(function (node, deltaTime) {
                     node.deactivateSmoke(commandQueue);
                 }, ['beekeeper']));
+                commandQueue.push(Command(function (node, deltaTime) {
+                    node.pluck();
+                }, ['smoke']));
             }
         },
         processEvent: function (event) {

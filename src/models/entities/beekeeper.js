@@ -71,19 +71,42 @@ var Beekeeper = function (callback) {
             var self_ = this;
             if (!self_._smokerActive) {
                 self_._smokerActive = true;
+                self_._smokerCanCharge = false;
                 var smokeShot = SmokeShot();
                 self_.attachChild(smokeShot);
             }
         },
 
         deactivateSmoke: function (commandQueue) {
-            if (this._smokerActive) {
-                commandQueue.push(Command(function (node, deltaTime) {
-                    node.pluck();
-                }, ['smoke']));
-                this._smokerActive = false;
+            var self_ = this;
+            if (self_._smokerActive) {
+                self_._smokerActive = false;
+                self_.timers.addTimer(function (timer) {
+                    timer.onEnd = function () {
+                        self_._smokerCanCharge = true;
+                    };
+                    timer.ms = 500;
+                });
             }
         },
+
+        _updateSmoker: function () {
+            //console.log("hi");
+            if (this._smokerActive && this._stats.currentSmoke > 0) {
+                this._stats.currentSmoke -= 2;
+            }
+            if (this._stats.currentSmoke < 1) {
+                this._context.commandQueue.push(Command(function (node, deltaTime) {
+                    node.pluck();
+                }, ['smoke']));
+            }
+            if (!this._smokerActive &&
+                this._stats.currentSmoke < this._stats.maxSmoke &&
+                this._smokerCanCharge) {
+                this._stats.currentSmoke += 1;
+            }
+        },
+
         pluck: function () {
             //so you can't keep gathering honey
             this._registersCollisions = false;
@@ -97,22 +120,10 @@ var Beekeeper = function (callback) {
                     _this._context.stateStack.emptyStack();
                     _this._context.stateStack.push(GameOver(_this._context, _this._stats.honey));
                 };
-                timer.ms = 2000;
+                timer.ms = 500;
             });
         },
-        _updateSmoker: function () {
-            if (this._smokerActive && this._stats.currentSmoke > 0) {
-                this._stats.currentSmoke -= 2;
-            }
-            if (this._stats.currentSmoke < 1) {
-                this._context.commandQueue.push(Command(function (node, deltaTime) {
-                    node.pluck();
-                }, ['smoke']));
-            }
-            if (!this._smokerActive && this._stats.currentSmoke < this._stats.maxSmoke) {
-                this._stats.currentSmoke += 1;
-            }
-        },
+
         // protected
         _width: Config.beekeeper.width,
         _height: Config.beekeeper.height,
@@ -125,6 +136,7 @@ var Beekeeper = function (callback) {
         _invincible: false,
         _shotReady: true,
         _smokerActive: false,
+        _smokerCanCharge: true,
 
         _context: {},
 
@@ -147,11 +159,10 @@ var Beekeeper = function (callback) {
             if (this._movingRight)
                 this._velocity.x += this._moveSpeed.x;
             if (this._velocity.x !== 0 && this._velocity.y !== 0) {
-                  this._velocity.x /= Math.sqrt(2);
-                  this._velocity.y /= Math.sqrt(2);
+                this._velocity.x /= Math.sqrt(2);
+                this._velocity.y /= Math.sqrt(2);
             }
             this._updateSmoker();
-
             self._superUpdate.call(this, deltaTime);
         }
     };
