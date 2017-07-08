@@ -4,12 +4,9 @@ var SceneNode = require("../../lib/scene_node.js");
 var Wall      = require("../../lib/wall.js");
 var Beekeeper = require("../entities/beekeeper.js");
 var Hive      = require("../entities/hive.js");
-
-var SmokeShot      = require("../entities/smoke_shot.js");
-
 var CollisionController = require("../../controllers/collision_controller.js")();
 var Label = require("../ui/label.js");
-var HealthBar = require("../ui/health_bar.js");
+var StatBar = require("../ui/stat_bar.js");
 
 var LevelOne = function (context) {
 
@@ -35,9 +32,24 @@ var LevelOne = function (context) {
     });
 
     // ui
-    var healthBar = HealthBar(function (self) {
+    var healthBar = StatBar(function (self) {
         self._entity = beekeeper;
     });
+
+    var smokeBar = StatBar(function (bar) {
+        bar._entity = beekeeper;
+        bar._offset = {
+            x: 0, y: 10
+        };
+        bar._fillColor = "#aa00aa";
+        bar._getMaxStat = function () {
+            return bar._entity.getStats().maxSmoke;
+        };
+        bar._getCurrentStat = function () {
+            return bar._entity.getStats().currentSmoke;
+        };
+    });
+
 
     //turn this into a honey pot
     var beekeeperLabel = Label(function (self) {
@@ -92,6 +104,7 @@ var LevelOne = function (context) {
             foregroundLayer.attachChild(leftWall);
             foregroundLayer.attachChild(rightWall);
             beekeeper.attachChild(healthBar);
+            beekeeper.attachChild(smokeBar);
             beekeeper.attachChild(beekeeperLabel);
         }
     };

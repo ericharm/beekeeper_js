@@ -66,7 +66,8 @@ var Beekeeper = function (callback) {
                 });
             }
         },
-        activateSmoke: function (deltaTime, position, commandQueue) {
+
+        activateSmoke: function (commandQueue) {
             var self_ = this;
             if (!self_._smokerActive) {
                 self_._smokerActive = true;
@@ -74,7 +75,8 @@ var Beekeeper = function (callback) {
                 self_.attachChild(smokeShot);
             }
         },
-        deactivateSmoke: function (deltaTime, position, commandQueue) {
+
+        deactivateSmoke: function (commandQueue) {
             if (this._smokerActive) {
                 commandQueue.push(Command(function (node, deltaTime) {
                     node.pluck();
@@ -97,6 +99,19 @@ var Beekeeper = function (callback) {
                 };
                 timer.ms = 2000;
             });
+        },
+        _updateSmoker: function () {
+            if (this._smokerActive && this._stats.currentSmoke > 0) {
+                this._stats.currentSmoke -= 2;
+            }
+            if (this._stats.currentSmoke < 1) {
+                this._context.commandQueue.push(Command(function (node, deltaTime) {
+                    node.pluck();
+                }, ['smoke']));
+            }
+            if (!this._smokerActive && this._stats.currentSmoke < this._stats.maxSmoke) {
+                this._stats.currentSmoke += 1;
+            }
         },
         // protected
         _width: Config.beekeeper.width,
@@ -135,9 +150,10 @@ var Beekeeper = function (callback) {
                   this._velocity.x /= Math.sqrt(2);
                   this._velocity.y /= Math.sqrt(2);
             }
+            this._updateSmoker();
+
             self._superUpdate.call(this, deltaTime);
         }
-
     };
 
     // extends Entity
@@ -146,6 +162,8 @@ var Beekeeper = function (callback) {
     }
 
     self._stats.honey = 0;
+    self._stats.maxSmoke = 20;
+    self._stats.currentSmoke = 20;
     self._categories.push('beekeeper');
 
     if (callback) callback(self);

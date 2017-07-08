@@ -39,13 +39,15 @@ var Player = function (context) {
 
             if (event.keyCode === Keys.Space && isKeyPressed) {
                 commandQueue.push(Command(function (node, deltaTime) {
-                    node.activateSmoke(deltaTime, node.getCenter(), commandQueue);
+                    if (node._stats.currentSmoke > 1) {
+                        node.activateSmoke(commandQueue);
+                    }
                 }, ['beekeeper']));
             }
 
             if (event.keyCode === Keys.Space && !isKeyPressed) {
                 commandQueue.push(Command(function (node, deltaTime) {
-                    node.deactivateSmoke(deltaTime, node.getCenter(), commandQueue);
+                    node.deactivateSmoke(commandQueue);
                 }, ['beekeeper']));
             }
         },
