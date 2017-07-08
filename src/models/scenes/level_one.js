@@ -4,6 +4,9 @@ var SceneNode = require("../../lib/scene_node.js");
 var Wall      = require("../../lib/wall.js");
 var Beekeeper = require("../entities/beekeeper.js");
 var Hive      = require("../entities/hive.js");
+
+var SmokeShot      = require("../entities/smoke_shot.js");
+
 var CollisionController = require("../../controllers/collision_controller.js")();
 var Label = require("../ui/label.js");
 var HealthBar = require("../ui/health_bar.js");
@@ -71,6 +74,10 @@ var LevelOne = function (context) {
         };
     });
 
+    var topLayer = SceneNode(function (layer) {
+        layer._categories.push('top');
+    });
+
     var self = {
         // this could be handled by state instead of scene
         // scene preferably only deals with scene nodes
@@ -80,7 +87,8 @@ var LevelOne = function (context) {
         buildScene: function (sceneGraph) {
             sceneGraph.attachChild(backgroundLayer);
             sceneGraph.attachChild(foregroundLayer);
-            foregroundLayer.attachChild(beekeeper);
+            sceneGraph.attachChild(topLayer);
+            topLayer.attachChild(beekeeper);
             foregroundLayer.attachChild(leftWall);
             foregroundLayer.attachChild(rightWall);
             beekeeper.attachChild(healthBar);

@@ -27,14 +27,18 @@ var CollisionController = function () {
     var self = {
         handleCollisions: function (collidingPairs, commandQueue) {
             for (var pair = 0; pair < collidingPairs.length; pair++) {
+                //console.log("pair " + pair + ":");
+                //for (var node = 0; node < collidingPairs[pair].length; node++) {
+                    //console.log(collidingPairs[pair][node]._categories);
+                //}
                 // Bee hits beekeeper
-                if (matchesCategories(collidingPairs[pair], "beekeeper", "bee")) {
+                if (matchesCategories(collidingPairs[pair], "bee", "beekeeper")) {
                     commandQueue.push(Command(damageNode, ["beekeeper"]));
                     var bee = collidingPairs.where(pair, "bee");
                     bee.pluck();
                 }
                 // Beekeeper hits hive
-                if (matchesCategories(collidingPairs[pair], "beekeeper", "hive")) {
+                if (matchesCategories(collidingPairs[pair], "hive", "beekeeper")) {
                     commandQueue.push(Command(pushBack, ["beekeeper"]));
                     var hive = collidingPairs.where(pair, "hive");
                     var beekeeper = collidingPairs.where(pair, "beekeeper");
@@ -45,12 +49,12 @@ var CollisionController = function () {
                     commandQueue.push(Command(pushBack, ["beekeeper"]));
                 }
                 // bee hits smoke
-                if (matchesCategories(collidingPairs[pair], "bee", "smoke")) {
+                if (matchesCategories(collidingPairs[pair], "smoke", "bee")) {
                     var smokedBee = collidingPairs.where(pair, "bee");
                     smokedBee.pluck();
                 }
                 // smoke hits hive
-                if (matchesCategories(collidingPairs[pair], "hive", "smoke")) {
+                if (matchesCategories(collidingPairs[pair], "smoke", "hive")) {
                     var smokedHive = collidingPairs.where(pair, "hive");
                     smokedHive.modifyStat('honey', -1);
                 }

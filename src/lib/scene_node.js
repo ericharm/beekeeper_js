@@ -78,6 +78,7 @@ var SceneNode = function (callback) {
         },
 
         checkNodesForCollision: function (node, collidingPairs) {
+            //console.log(node._categories);
             if (this.registersCollisions() && node.registersCollisions()) {
                 if (node !== this && colliding(this, node)) {
                     // should also test if collidingPairs contains
@@ -90,6 +91,7 @@ var SceneNode = function (callback) {
             this.checkNodesForCollision(sceneGraph, collidingPairs);
             for (var i = 0; i < sceneGraph.getChildren().length; i++) {
                 sceneGraph.getChildren()[i].checkSceneCollision(this, collidingPairs);
+                //this.checkSceneCollision(sceneGraph.getChildren()[i], collidingPairs);
             }
         },
         pluck: function () {

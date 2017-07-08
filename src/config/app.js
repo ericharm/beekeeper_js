@@ -13,8 +13,6 @@ var Config = {
         harvestRate: 4,
         moveSpeed: {x: 3.5, y: 3.5},
         damageBuffer: 1000,
-        smokeCooldown: 5000,
-        smokeLength: 1000,
         width: 50,
         height: 72
     },

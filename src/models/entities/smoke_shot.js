@@ -1,5 +1,4 @@
 var Entity = require("../../lib/entity.js");
-var Config = require("../../config/app.js");
 
 var SmokeShot = function (callback) {
 
@@ -10,37 +9,31 @@ var SmokeShot = function (callback) {
         // protected
         _width: 200,
         _height: 200,
-        hitBox: function () {
-            var p = this._position;
-            var w = this._width;
-            var h = this._height;
-
-            var bounds = {
-                x: p.x - (w / 2) + 2, y: p.y - (h / 2) + 2,
-                width: w - 4, height: h - 4
-            };
-
-            return {
-                bounds: bounds,
-                render: function (canvas) {
-                    canvas.strokeStyle = "#ffffff";
-                    canvas.strokeRect(
-                        this.bounds.x, this.bounds.y,
-                        this.bounds.width, this.bounds.height
-                    );
-                }
-            };
-        },
         _renderCurrent: function (canvas) {
-            canvas.globalAlpha = 0.5;
-            canvas.beginPath();
-            canvas.arc(
-                this._position.x, this._position.y,
-                this._width / 2, 0, 2 * Math.PI, false
-            );
-            canvas.fillStyle = "#000000";
-            canvas.fill();
-            canvas.globalAlpha = 1;
+            var hitBox = this.hitBox();
+            hitBox.render(canvas);
+        },
+        _updateCurrent: function (deltaTime) {
+            var this_ = this;
+            var parentCenter = this._parent.getCenter();
+            var halves = {width: (this_._width / 2), height: (this_._height / 2)};
+            var anchor = {
+                x: parentCenter.x - halves.width,
+                y: parentCenter.y - halves.height
+            };
+            var direction = this._getDirection(this._parent);
+            var positionX = anchor.x + (direction.x * halves.width);
+            var positionY = anchor.y + (direction.y * halves.height);
+            this.setPosition({x: positionX, y: positionY});
+        },
+        _getDirection: function (parent) {
+            var x = 0;
+            var y = 0;
+            if (parent._movingUp) y = -1;
+            else if (parent._movingDown) y = 1;
+            if (parent._movingLeft) x = -1;
+            else if (parent._movingRight) x = 1;
+            return {x: x, y: y};
         }
     };
 
@@ -51,16 +44,6 @@ var SmokeShot = function (callback) {
     self._categories.push('smoke');
 
     if (callback) callback(self);
-
-    (function () {
-        self.timers.addTimer(function (timer) {
-            timer.onEnd = function () {
-                self.pluck();
-            };
-            timer.ms = Config.beekeeper.smokeLength;
-        });
-    }());
-
 
     return self;
 };

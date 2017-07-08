@@ -37,15 +37,21 @@ var Player = function (context) {
                 }, ['beekeeper']));
             }
 
+            if (event.keyCode === Keys.Space && isKeyPressed) {
+                commandQueue.push(Command(function (node, deltaTime) {
+                    node.activateSmoke(deltaTime, node.getCenter(), commandQueue);
+                }, ['beekeeper']));
+            }
+
+            if (event.keyCode === Keys.Space && !isKeyPressed) {
+                commandQueue.push(Command(function (node, deltaTime) {
+                    node.deactivateSmoke(deltaTime, node.getCenter(), commandQueue);
+                }, ['beekeeper']));
+            }
         },
         processEvent: function (event) {
             if (event.keyCode === Keys.a) {
                 stateStack.push(Pause(context));
-            }
-            if (event.keyCode === Keys.Space) {
-                commandQueue.push(Command(function (node, deltaTime) {
-                    node.shootSmoke(deltaTime, node.getCenter(), commandQueue);
-                }, ['beekeeper']));
             }
         }
     };

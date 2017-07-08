@@ -66,25 +66,20 @@ var Beekeeper = function (callback) {
                 });
             }
         },
-        shootSmoke: function (deltaTime, position, commandQueue) {
-            if (this._shotReady) {
-                _this = this;
-                _this.timers.addTimer(function (timer) {
-                    timer.onStart = function () {
-                        _this._shotReady = false;
-                    };
-                    timer.onEnd = function () {
-                        _this._shotReady = true;
-                    };
-                    timer.ms = Config.beekeeper.smokeCooldown;
-                });
+        activateSmoke: function (deltaTime, position, commandQueue) {
+            var self_ = this;
+            if (!self_._smokerActive) {
+                self_._smokerActive = true;
+                var smokeShot = SmokeShot();
+                self_.attachChild(smokeShot);
+            }
+        },
+        deactivateSmoke: function (deltaTime, position, commandQueue) {
+            if (this._smokerActive) {
                 commandQueue.push(Command(function (node, deltaTime) {
-                    var smokeShot = SmokeShot(function (that) {
-                        that.setPosition({x: position.x, y: position.y});
-                        that._debug = true;
-                    });
-                    node.attachChild(smokeShot);
-                }, ['foreground']));
+                    node.pluck();
+                }, ['smoke']));
+                this._smokerActive = false;
             }
         },
         pluck: function () {
@@ -114,6 +109,7 @@ var Beekeeper = function (callback) {
         _movingRight: false,
         _invincible: false,
         _shotReady: true,
+        _smokerActive: false,
 
         _context: {},
 
