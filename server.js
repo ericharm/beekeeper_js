@@ -1,14 +1,24 @@
 /*
  *  Modules for express
  */
-
-var express = require("express");
+var cookieParser = require("cookie-parser");
+var csrf = require("csurf");
 var path = require("path");
 var bodyParser = require("body-parser");
 var multer = require("multer");
+var express = require("express");
 
+/*
+ * Middleware
+ */
+var csrfProtection = csrf({cookie: true});
+var parseForm = bodyParser.urlencoded({ extended: false });
+
+/*
+ * Initialize and configure express
+ */
 var app = express();
-app.use(bodyParser.json());
+app.use(cookieParser());
 
 /*
  *  Asset paths
@@ -51,8 +61,8 @@ MongoClient.connect('mongodb://localhost/beekeeper', function (err, dbConnection
  */
 
 // Root
-app.get("/", function (req, res) {
-    res.render("index.ejs");
+app.get("/", csrfProtection, function (req, res) {
+    res.render('index.ejs', { csrfToken: req.csrfToken() });
 });
 
 // Highscores API
@@ -66,10 +76,10 @@ app.get("/highscores", function (req, res) {
     });
 });
 
-app.post("/highscores", function (req, res) {
+app.post("/highscores", parseForm, csrfProtection, function (req, res) {
     var score = {
         initials: req.body.initials.toUpperCase(),
-        score: req.body.score
+        score: Number(req.body.score)
     };
     db.collection('highscores').insert(score);
     res.setHeader('Content-Type', 'application/json');

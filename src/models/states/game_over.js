@@ -18,12 +18,12 @@ var GameOver = function (context, score) {
     };
 
     var postToHighscores = function (score, initials) {
+        var csrfToken = $("#csrf-token").val();
         $.ajax({
             type: "POST",
             url: "/highscores",
-            data: JSON.stringify({ score: score, initials: initials }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            data: { score: score, initials: initials, _csrf: csrfToken },
+            dataType: "text",
             success: function(data) {
                 console.log("Highscore saved.");
             },
