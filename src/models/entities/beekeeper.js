@@ -69,11 +69,12 @@ var Beekeeper = function (callback) {
 
         activateSmoke: function (commandQueue) {
             var self_ = this;
-            if (!self_._smokerActive) {
+            if (!self_._smokerActive && self_._stats.currentSmoke > 10) {
                 self_._smokerActive = true;
                 self_._smokerCanCharge = false;
                 var smokeShot = SmokeShot();
                 self_.attachChild(smokeShot);
+                //self_._stats.currentSmoke -= 10;
             }
         },
 
@@ -91,9 +92,8 @@ var Beekeeper = function (callback) {
         },
 
         _updateSmoker: function () {
-            //console.log("hi");
             if (this._smokerActive && this._stats.currentSmoke > 0) {
-                this._stats.currentSmoke -= 2;
+                this._stats.currentSmoke -= 10;
             }
             if (this._stats.currentSmoke < 1) {
                 this._context.commandQueue.push(Command(function (node, deltaTime) {
@@ -173,8 +173,8 @@ var Beekeeper = function (callback) {
     }
 
     self._stats.honey = 0;
-    self._stats.maxSmoke = 20;
-    self._stats.currentSmoke = 20;
+    self._stats.maxSmoke = 100;
+    self._stats.currentSmoke = 100;
     self._categories.push('beekeeper');
 
     if (callback) callback(self);
