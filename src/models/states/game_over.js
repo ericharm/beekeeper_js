@@ -70,13 +70,16 @@ var GameOver = function (context, score) {
 
             canvas.fillStyle = "#ffffff";
             canvas.fillText(score, 300, 300);
+
+            canvas.fillStyle = "#676767";
+            var letterX = 316 + (28 * currentLetter);
+            canvas.fillRect(letterX,378,28,30);
         },
         processRealtimeInput: function (event, isKeyPressed) {
             if ((event.keyCode == Keys.Down || event.keyCode == Keys.Up) && isKeyPressed) {
                 event.preventDefault();
                 var initialsBefore = $(".initials:first").val();
                 letter = nextLetter(initialsBefore[currentLetter], event.keyCode == Keys.Down);
-                console.log(letter);
                 var limitLetter = event.keyCode === Keys.Up ? "Z" : "A";
                 if (initialsBefore[currentLetter] !== limitLetter) {
                     var initialsNow = initialsBefore.replaceAt(currentLetter, letter);
