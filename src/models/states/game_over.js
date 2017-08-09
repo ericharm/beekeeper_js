@@ -36,7 +36,10 @@ var GameOver = function (context, score) {
         input.setAttribute('maxlength', 3);
         input.value = "AAA";
         document.getElementById("canvas-div").appendChild(input);
-        $(".initials:first").focus();
+
+        $(".initials").focus(function () {
+            $(this).blur();
+        });
     };
 
     var postToHighscores = function (score, initials) {
