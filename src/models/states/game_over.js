@@ -72,59 +72,32 @@ var GameOver = function (context, score) {
             canvas.fillText(score, 300, 300);
         },
         processRealtimeInput: function (event, isKeyPressed) {
-            //player.processRealtimeInput(event, isKeyPressed); 
-            if (event.keyCode == Keys.Enter) {
-                var initials = $(".initials:first").val();
-                postToHighscores(score, initials);
-                $(".initials").remove();
-                var MainMenu = require("./main_menu.js");
-                context.stateStack.pop();
-                context.stateStack.push(MainMenu(context));
-            }
-            else if (event.keyCode == Keys.Up && isKeyPressed) {
+            if ((event.keyCode == Keys.Down || event.keyCode == Keys.Up) && isKeyPressed) {
                 event.preventDefault();
                 var initialsBefore = $(".initials:first").val();
-                letter = nextLetter(initialsBefore[currentLetter]);
-                if (initialsBefore[currentLetter] !== "Z") {
+                letter = nextLetter(initialsBefore[currentLetter], event.keyCode == Keys.Down);
+                console.log(letter);
+                var limitLetter = event.keyCode === Keys.Up ? "Z" : "A";
+                if (initialsBefore[currentLetter] !== limitLetter) {
                     var initialsNow = initialsBefore.replaceAt(currentLetter, letter);
                     $(".initials:first").val(initialsNow);
                 }
             }
-            else if (event.keyCode == Keys.Down && isKeyPressed) {
-                event.preventDefault();
-                var initialsBefore = $(".initials:first").val();
-                letter = nextLetter(initialsBefore[currentLetter], true);
-                if (initialsBefore[currentLetter] !== "A") {
-                    var initialsNow = initialsBefore.replaceAt(currentLetter, letter);
-                    $(".initials:first").val(initialsNow);
-                }
-            }
-            else if (event.keyCode == Keys.Right && isKeyPressed) {
+            else if (event.keyCode == Keys.Space && isKeyPressed) {
                 event.preventDefault();
                 if (currentLetter < 2) currentLetter += 1;
-            }
-            else if (event.keyCode == Keys.Left && isKeyPressed) {
-                event.preventDefault();
-                if (currentLetter > 0) currentLetter -= 1;
+                else {
+                    var initials = $(".initials:first").val();
+                    postToHighscores(score, initials);
+                    $(".initials").remove();
+                    var MainMenu = require("./main_menu.js");
+                    context.stateStack.pop();
+                    context.stateStack.push(MainMenu(context));
+                }
             }
         },
         processEvent: function (event) {
-            //if (event.keyCode == Keys.Enter) {
-                //var initials = $(".initials:first").val();
-                //postToHighscores(score, initials);
-                //$(".initials").remove();
-                //var MainMenu = require("./main_menu.js");
-                //context.stateStack.pop();
-                //context.stateStack.push(MainMenu(context));
-            //}
-            //else if (event.keyCode == Keys.Up) {
-                //event.preventDefault();
-                //console.log("up");
-            //}
-            //else if (event.keyCode == Keys.Down) {
-                //event.preventDefault();
-                //console.log("down");
-            //}
+            //
         }
     };
 
