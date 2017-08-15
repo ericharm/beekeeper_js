@@ -31,6 +31,18 @@ var LevelOne = function (context) {
         self._height = Config.canvasHeight;
     });
 
+    var topWall = Wall(function (self) {
+        self._position = {x: 0, y: -30};
+        self._width = Config.canvasWidth;
+        self._height = 10;
+    });
+
+    var bottomWall = Wall(function (self) {
+        self._position = {x: 0, y: Config.canvasHeight + 20};
+        self._width = Config.canvasWidth;
+        self._height = 10;
+    });
+
     // ui
     var healthBar = StatBar(function (self) {
         self._entity = beekeeper;
@@ -103,6 +115,8 @@ var LevelOne = function (context) {
             topLayer.attachChild(beekeeper);
             foregroundLayer.attachChild(leftWall);
             foregroundLayer.attachChild(rightWall);
+            foregroundLayer.attachChild(topWall);
+            foregroundLayer.attachChild(bottomWall);
             beekeeper.attachChild(healthBar);
             beekeeper.attachChild(smokeBar);
             beekeeper.attachChild(beekeeperLabel);
