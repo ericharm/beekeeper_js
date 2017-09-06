@@ -83,7 +83,7 @@ var Beekeeper = function (callback) {
                 self_._smokerCanCharge = false;
                 var smokeShot = SmokeShot();
                 self_.attachChild(smokeShot);
-                //self_._stats.currentSmoke -= 10;
+                self_._stats.currentSmoke -= 8;
             }
         },
 
