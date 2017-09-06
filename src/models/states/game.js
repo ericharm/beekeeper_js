@@ -24,6 +24,12 @@ var Game = function (context) {
                     node.createHive();
                 }, ["foreground"]));
             }
+            time = Config.frameRate * Config.shots.avgSpawnInterval;
+            if (Chance.roll(time) === 1) {
+                context.commandQueue.push(Command(function (node, deltaTime) {
+                    node.dropShot();
+                }, ["foreground"]));
+            }
         },
         draw: function () {
             world.render();

@@ -31,6 +31,13 @@ var Config = {
         maxHoney: 300
     },
 
+    shots: {
+        width: 52,
+        height: 52,
+        avgSpawnInterval: 13.0,
+        basePower: 10
+    },
+
     labels: {
         textColor: "#efefef"
     },

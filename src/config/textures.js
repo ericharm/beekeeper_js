@@ -53,6 +53,7 @@ module.exports = {
 
     hive: "images/hive.png",
     bee: "images/bee.png",
+    shot: "images/shot.png",
 
     Sprite: function (texture) {
         var image = new Image();

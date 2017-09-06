@@ -67,6 +67,15 @@ var Beekeeper = function (callback) {
             }
         },
 
+        heal: function (amount) {
+            var bk = this;
+            for (var i = 0; i < amount; i++) {
+                if (bk._stats.currentHealth + 1 <= bk._stats.maxHealth) {
+                    bk._stats.currentHealth += 1;
+                }
+            }
+        },
+
         activateSmoke: function (commandQueue) {
             var self_ = this;
             if (!self_._smokerActive && self_._stats.currentSmoke > 10) {
