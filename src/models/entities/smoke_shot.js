@@ -1,4 +1,5 @@
 var Entity = require("../../lib/entity.js");
+var Renderer = require("../../views/smoke_renderer.js");
 
 var SmokeShot = function (callback) {
 
@@ -10,8 +11,12 @@ var SmokeShot = function (callback) {
         _width: 200,
         _height: 200,
         _renderCurrent: function (canvas) {
-            var hitBox = this.hitBox();
-            hitBox.render(canvas);
+            var that = this;
+            //var hitBox = that.hitBox();
+            //hitBox.render(canvas);
+            that._renderer.render(canvas, {
+                position: that._position,
+            });
         },
         _updateCurrent: function (deltaTime) {
             var this_ = this;
@@ -34,7 +39,8 @@ var SmokeShot = function (callback) {
             if (parent._movingLeft) x = -1;
             else if (parent._movingRight) x = 1;
             return {x: x, y: y};
-        }
+        },
+        _renderer: Renderer()
     };
 
     for (var attribute in extended) {

@@ -102,7 +102,7 @@ var Beekeeper = function (callback) {
 
         _updateSmoker: function () {
             if (this._smokerActive && this._stats.currentSmoke > 0) {
-                this._stats.currentSmoke -= 10;
+                this._stats.currentSmoke -= 0;
             }
             if (this._stats.currentSmoke < 1) {
                 this._context.commandQueue.push(Command(function (node, deltaTime) {

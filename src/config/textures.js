@@ -47,9 +47,47 @@ module.exports = {
         "standright": {
             "x": 150, "y": 221.25, "width": 49.5, "height": 72
         }
-
     },
 
+    smoke: "images/smoke.png",
+    smokeDescriptor: {
+        "at0deg": {
+            "x": 0, "y": 0, "width": 222, "height": 222
+        },
+        "at30deg": {
+            "x": 223, "y": 0, "width": 222, "height": 222
+        },
+        "at60deg": {
+            "x": 445, "y": 0, "width": 222, "height": 222
+        },
+        "at90deg": {
+            "": 667, "y": 0, "width": 222, "height": 222
+        },
+        "at120deg": {
+            "x": 667, "y": 223, "width": 222, "height": 222
+        },
+        "at150deg": {
+            "x": 445, "y": 223, "width": 222, "height": 222
+        },
+        "at180deg": {
+            "x": 223, "y": 223, "width": 222, "height": 222
+        },
+        "at210deg": {
+            "x": 0, "y": 223, "width": 222, "height": 222
+        },
+        "at240deg": {
+            "x": 0, "y": 445, "width": 222, "height": 222
+        },
+        "at270deg": {
+            "x": 223, "y": 445, "width": 222, "height": 222
+        },
+        "at300deg": {
+            "x": 445, "y": 445, "width": 222, "height": 222
+        },
+        "at330deg": {
+            "x": 667, "y": 445, "width": 222, "height": 222
+        }
+    },
 
     hive: "images/hive.png",
     bee: "images/bee.png",
