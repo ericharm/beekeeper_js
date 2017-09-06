@@ -18,10 +18,11 @@ var SmokeRenderer = function () {
             animator.animate(canvas, {
                 position: position,
                 sprites: [
-                    "at0deg", "at60deg", "at120deg",
-                    "at180deg", "at240deg", "at300deg"
+                    "at0deg", "at30deg", "at60deg", "at90deg",
+                    "at120deg", "at150deg", "at180deg", "at210deg",
+                    "at240deg", "at270deg", "at300deg", "at330deg",
                 ],
-                ms: 400
+                ms: 800
             });
         }
     };
