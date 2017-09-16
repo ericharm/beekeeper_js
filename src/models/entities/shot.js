@@ -30,9 +30,14 @@ var Shot = function (callback) {
     for (var attribute in extended) {
         self[attribute] = extended[attribute];
     }
-
+    self.timers.addTimer(function (timer) {
+        timer.onEnd = function () {
+            self.pluck();
+        };
+        timer.ms = Config.shots.pickupTimeLimit;
+    });
     self._categories.push('shot');
-    self._debug = true;
+    //self._debug = true;
 
     if (callback) callback(self);
 

@@ -25,6 +25,12 @@ var Suit = function (callback) {
 
     self._categories.push('suit');
     //self._debug = true;
+    self.timers.addTimer(function (timer) {
+        timer.onEnd = function () {
+            self.pluck();
+        };
+        timer.ms = Config.suits.pickupTimeLimit;
+    });
 
     if (callback) callback(self);
 

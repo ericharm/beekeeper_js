@@ -35,14 +35,16 @@ var Config = {
         width: 52,
         height: 52,
         avgSpawnInterval: 13.0,
-        basePower: 10
+        basePower: 10,
+        pickupTimeLimit: 6000
     },
 
     suits: {
         width: 62,
         height: 52,
-        avgSpawnInterval: 3.0,
-        basePower: 10
+        avgSpawnInterval: 13.0,
+        basePower: 10,
+        pickupTimeLimit: 6000
     },
 
     labels: {
