@@ -3,9 +3,10 @@ var Textures = require("../config/textures.js");
 var Sprite   = Textures.Sprite;
 var Animator = require("../lib/animator.js");
 
-var BeekeeperRenderer = function () {
+var BeekeeperRenderer = function (texture) {
 
-    var spriteSheet = Sprite(Textures.beekeeper);
+    //var spriteSheet = Sprite(Textures.suitedBeekeeper);
+    var spriteSheet = Sprite(texture);
     var descriptor  = Textures.beekeeperDescriptor;
     var animator = Animator(spriteSheet, descriptor);
     var moveSpeed = Config.beekeeper.moveSpeed;

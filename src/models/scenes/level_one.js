@@ -5,6 +5,7 @@ var Wall      = require("../../lib/wall.js");
 var Beekeeper = require("../entities/beekeeper.js");
 var Hive      = require("../entities/hive.js");
 var Shot      = require("../entities/shot.js");
+var Suit      = require("../entities/suit.js");
 var CollisionController = require("../../controllers/collision_controller.js")();
 var Label = require("../ui/label.js");
 var StatBar = require("../ui/stat_bar.js");
@@ -81,6 +82,15 @@ var LevelOne = function (context) {
 
     var foregroundLayer = SceneNode(function (self) {
         self._categories.push('foreground');
+        self.dropSuit = function () {
+            var suitX = Chance.roll(Config.canvasWidth);
+            var suitY = Chance.roll(Config.canvasHeight);
+            var suit = Suit(function (suit_) {
+                suit_._position = {x: suitX, y: suitY};
+                suit_._commandQueue = commandQueue;
+            });
+            self.attachChild(suit);
+        };
         self.dropShot = function () {
             var shotX = Chance.roll(Config.canvasWidth);
             var shotY = Chance.roll(Config.canvasHeight);

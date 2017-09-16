@@ -38,6 +38,13 @@ var Config = {
         basePower: 10
     },
 
+    suits: {
+        width: 62,
+        height: 52,
+        avgSpawnInterval: 3.0,
+        basePower: 10
+    },
+
     labels: {
         textColor: "#efefef"
     },

@@ -1,4 +1,5 @@
 var Config   = require("../../config/app.js");
+var Textures = require("../../config/textures.js");
 var Entity   = require("../../lib/entity.js");
 var SmokeShot = require("./smoke_shot.js");
 var Renderer = require("../../views/beekeeper_renderer.js");
@@ -52,7 +53,10 @@ var Beekeeper = function (callback) {
             }
         },
         damage: function (amount) {
-            if (!this._invincible) {
+            if (this._suitActive) {
+                this._suitActive = false;
+                this._renderer = Renderer(Textures.beekeeper);
+            } else if (!this._invincible) {
                 var that = this;
                 that._stats.currentHealth -= amount * (1);
                 this.timers.addTimer(function (timer) {
@@ -74,6 +78,11 @@ var Beekeeper = function (callback) {
                     bk._stats.currentHealth += 1;
                 }
             }
+        },
+
+        suitMode: function () {
+            this._suitActive = true;
+            this._renderer = Renderer(Textures.suitedBeekeeper);
         },
 
         activateSmoke: function (commandQueue) {
@@ -136,7 +145,8 @@ var Beekeeper = function (callback) {
         // protected
         _width: Config.beekeeper.width,
         _height: Config.beekeeper.height,
-        _renderer: Renderer(),
+        //_renderer: Renderer(),
+        _renderer: Renderer(Textures.beekeeper),
         _moveSpeed: Config.beekeeper.moveSpeed,
         _movingUp: false,
         _movingDown: false,
@@ -146,6 +156,7 @@ var Beekeeper = function (callback) {
         _shotReady: true,
         _smokerActive: false,
         _smokerCanCharge: true,
+        _suitActive: false,
 
         _context: {},
 

@@ -30,6 +30,12 @@ var Game = function (context) {
                     node.dropShot();
                 }, ["foreground"]));
             }
+            time = Config.frameRate * Config.suits.avgSpawnInterval;
+            if (Chance.roll(time) === 1) {
+                context.commandQueue.push(Command(function (node, deltaTime) {
+                    node.dropSuit();
+                }, ["foreground"]));
+            }
         },
         draw: function () {
             world.render();

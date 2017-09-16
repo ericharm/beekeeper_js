@@ -45,6 +45,13 @@ var CollisionController = function () {
                     beekeeper.harvest(hive, Config.beekeeper.harvestRate);
                 }
                 // Beekeeper hits shot
+                if (matchesCategories(collidingPairs[pair], "suit", "beekeeper")) {
+                    var suit = collidingPairs.where(pair, "suit");
+                    var beekeeper = collidingPairs.where(pair, "beekeeper");
+                    suit.pluck();
+                    beekeeper.suitMode();
+                } 
+                // Beekeeper hits shot
                 if (matchesCategories(collidingPairs[pair], "shot", "beekeeper")) {
                     var shot = collidingPairs.where(pair, "shot");
                     var beekeeper = collidingPairs.where(pair, "beekeeper");

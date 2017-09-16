@@ -7,6 +7,7 @@
 module.exports = {
 
     beekeeper: "images/alien2.png",
+    suitedBeekeeper: "images/alien-suit.png",
     beekeeperDescriptor: {
         "still": {
             "x": 52.5, "y": 71.25, "width": 48.75, "height": 69
@@ -92,6 +93,7 @@ module.exports = {
     hive: "images/hive.png",
     bee: "images/bee.png",
     shot: "images/shot.png",
+    suit: "images/suit-icon.png",
 
     Sprite: function (texture) {
         var image = new Image();
