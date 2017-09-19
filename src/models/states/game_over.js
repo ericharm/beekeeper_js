@@ -42,6 +42,12 @@ var GameOver = function (context, score) {
         });
     };
 
+    var stopAudio = function () {
+        $("audio").each(function () {
+            this.pause();
+        });
+    };
+
     var postToHighscores = function (score, initials) {
         var csrfToken = $("#csrf-token").val();
         $.ajax({
@@ -108,7 +114,7 @@ var GameOver = function (context, score) {
     };
 
     addInitialsField();
-
+    stopAudio();
     return self;
 };
 

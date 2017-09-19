@@ -1,8 +1,9 @@
-var World = require("../../lib/world.js");
+var World   = require("../../lib/world.js");
 var Command = require("../../lib/command.js");
-var Chance = require("../../lib/chance.js");
-var Config = require("../../config/app.js");
-var Player = require("../../controllers/player.js");
+var Chance  = require("../../lib/chance.js");
+var Sound   = require("../../lib/sound.js");
+var Config  = require("../../config/app.js");
+var Player  = require("../../controllers/player.js");
 var LevelOne = require("../scenes/level_one.js");
 
 var Game = function (context) {
@@ -13,6 +14,8 @@ var Game = function (context) {
     var scene = LevelOne(context);
     var world = World(context, scene);
     var player = Player(context);
+    var sound = Sound("audio/music.mp3");
+    sound.play();
 
     var self = {
         update: function (deltaTime) {

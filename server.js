@@ -26,6 +26,7 @@ app.use(cookieParser());
 app.use("/js", express.static(__dirname + "/public/js"));
 app.use("/css", express.static(__dirname + "/public/css"));
 app.use("/images", express.static(__dirname + "/public/images"));
+app.use("/audio", express.static(__dirname + "/public/audio"));
 app.use("/fonts", express.static(__dirname + "/public/fonts"));
 
 
