@@ -71,5 +71,3 @@ I tried to get the benefits of inheritance by cascading object factories instead
 --------
 - Class for managing a game camera
 
-- Audio support
-
