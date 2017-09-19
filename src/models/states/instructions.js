@@ -34,7 +34,7 @@ var Instructions = function (context) {
                 line_two: "won't hurt you"
             });
             addDescription({
-                sprite: shot, y: 200, description: "Pick up antibiotics to recover health",
+                sprite: shot, y: 200, description: "Pick up epinephrine to recover health",
                 line_two: ""
             });
             addDescription({
