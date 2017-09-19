@@ -60,6 +60,8 @@ navigate to: http://localhost:8081
 
 **Timers** - Entities have a timers object that can be used by calling `entity.timers.addTimer(callback)` and in the callback defining a function the runs now (timer.onStart()), a number of milliseconds for the timer to last (timer.ms), and a function that runs after that many milliseconds (timer.onEnd()).
 
+**Audio** - This feature is barely implemented but you can use the Sound module to add audio elements into the DOM, play them and pause them.
+
 ## Inspiration
 --------------
 The architecture of the framework is inspired by the book _[SFML Game Development](https://www.packtpub.com/game-development/sfml-game-development)_ by Jan Haller, Henrik Vogelius Hansson, Artur Moreira.
