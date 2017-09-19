@@ -74,7 +74,10 @@ var MainMenu = function (context) {
             for (var i = 0; i < options.length; i++ ) {
                 if (i == activeOption) {
                     canvas.fillStyle = "#444444";
-                    canvas.fillRect(options[i].location.x - 10, options[i].location.y - 50, 200, 80);
+                    canvas.fillRect(
+                        options[i].location.x - 10, options[i].location.y - 50,
+                        options[i].text.length * 34, 80
+                    );
                 }
                 drawOption(canvas, options[i]);
             }
