@@ -1,7 +1,9 @@
 var Config = require("../../config/app.js");
 var Keys = require("../../config/keys.js");
-var Game = require("../states/game.js");
-var HighScores = require("../states/highscores.js");
+var Game = require("./game.js");
+var HighScores = require("./highscores.js");
+var Instructions = require("./instructions.js");
+var Credits = require("./credits.js");
 
 var MainMenu = function (context) {
 
@@ -10,15 +12,17 @@ var MainMenu = function (context) {
     canvas.font = font;
 
     var options = [
-        { text: "Play", location: {x: 200, y: 300} },
-        { text: "High Scores", location: {x: 200, y: 400} },
-        { text: "Exit", location: {x: 200, y: 500} }
+        { text: "Play", location: {x: 200, y: 250} },
+        { text: "High Scores", location: {x: 200, y: 350} },
+        { text: "Instructions", location: {x: 200, y: 450} },
+        { text: "Credits", location: {x: 200, y: 550} }
     ];
 
     var optionNames = {
         Play: 0,
         Highscores: 1,
-        Exit: 2
+        Instructions: 2,
+        Credits: 3
     };
 
     var activeOption = 0;
@@ -47,8 +51,13 @@ var MainMenu = function (context) {
                         context.stateStack.pop();
                         context.stateStack.push(HighScores(context));
                         break;
-                    case optionNames.Exit:
-                        context.stateStack.emptyStack(); 
+                    case optionNames.Instructions:
+                        context.stateStack.pop();
+                        context.stateStack.push(Instructions(context));
+                        break;
+                    case optionNames.Credits:
+                        context.stateStack.pop();
+                        context.stateStack.push(Credits(context));
                         break;
                 }
             }
@@ -62,7 +71,7 @@ var MainMenu = function (context) {
             canvas.fillStyle="#00ff00";
             canvas.fillText("Main Menu", 280, 90);
 
-            for (var i = 0; i < options.length; i++ ) { 
+            for (var i = 0; i < options.length; i++ ) {
                 if (i == activeOption) {
                     canvas.fillStyle = "#444444";
                     canvas.fillRect(options[i].location.x - 10, options[i].location.y - 50, 200, 80);
