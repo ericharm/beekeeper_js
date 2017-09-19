@@ -44,10 +44,10 @@ var Game = function (context) {
             world.render();
         },
         processRealtimeInput: function (event, isKeyPressed) {
-            player.processRealtimeInput(event, isKeyPressed); 
+            player.processRealtimeInput(event, isKeyPressed);
         },
         processEvent: function (event) {
-            player.processEvent(event); 
+            player.processEvent(event);
         },
     };
     return self;

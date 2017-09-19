@@ -22,7 +22,7 @@ $(document).ready(function () {
             app.processRealtimeInput(event, false);
         }, false);
         window.addEventListener('keypress', function (event) {
-           app.processEvent(event); 
+            app.processEvent(event);
         }, false);
     }
 
