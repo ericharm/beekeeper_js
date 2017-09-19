@@ -14,25 +14,25 @@ var Credits = function (context) {
         draw: function (canvas) {
             canvas.font = titleFont;
             canvas.fillStyle = "#aaaa33";
-            canvas.fillText("Credits", 300, 100);
+            canvas.fillText("Credits", 250, 100);
 
             canvas.font = messageFont;
             canvas.fillStyle = "#aa33aa";
-            canvas.fillText("Programming by", 146, 200);
-            canvas.fillText("Music by", 240, 250);
-            canvas.fillText("Artwork by", 210, 300);
+            canvas.fillText("Programming by", 96, 200);
+            canvas.fillText("Music by", 190, 250);
+            canvas.fillText("Artwork by", 160, 300);
 
             canvas.fillStyle = "#aaaaaa";
-            canvas.fillText("Eric Harm", 400, 200);
-            canvas.fillText("Luke Chiaruttini", 400, 250);
-            canvas.fillText("Tyler Clark", 400, 300);
+            canvas.fillText("Eric Harm", 350, 200);
+            canvas.fillText("Luke Chiaruttini", 350, 250);
+            canvas.fillText("Tyler Clark", 350, 300);
 
             canvas.fillStyle = "#33aa33";
-            canvas.fillText("Additional artwork used by CC0 license from:", 100, 360);
+            canvas.fillText("Additional artwork used by CC0 license from:", 50, 360);
             canvas.fillStyle = "#aaaaaa";
-            canvas.fillText("https://kenney.nl/", 100, 400);
-            canvas.fillText("nightcharges https://www.vecteezy.com/", 100, 430);
-            canvas.fillText("https://emojiterra.com/de/spritze/", 100, 460);
+            canvas.fillText("https://kenney.nl/", 50, 400);
+            canvas.fillText("nightcharges https://www.vecteezy.com/", 50, 430);
+            canvas.fillText("https://emojiterra.com/de/spritze/", 50, 460);
         },
         processRealtimeInput: function (event, isKeyPressed) {
             //player.processRealtimeInput(event, isKeyPressed);
