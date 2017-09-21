@@ -1,7 +1,7 @@
 ## Up and running
 -----------------
 
-git clone https://e_e_harm@bitbucket.org/e_e_harm/beekeeper_js.git
+git clone https://github.com/ericharm/beekeeper_js.git
 
 cd beekeeper_js
 
