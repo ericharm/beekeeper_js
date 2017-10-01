@@ -69,7 +69,6 @@ app.get("/", csrfProtection, function (req, res) {
         if (file.split(".")[0] !== '') audioFiles.push(file.split(".")[0]);
         return audioFiles;
     }, []);
-    console.log(files);
     res.render('index.ejs', { csrfToken: req.csrfToken(), audioFiles: files });
 });
 
