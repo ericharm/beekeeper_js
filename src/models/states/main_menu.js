@@ -1,5 +1,7 @@
 var Config = require("../../config/app.js");
 var Keys = require("../../config/keys.js");
+var Audio = require("../../config/audio.js");
+var Sound = require("../../lib/sound.js");
 var Game = require("./game.js");
 var HighScores = require("./highscores.js");
 var Instructions = require("./instructions.js");
@@ -10,6 +12,8 @@ var MainMenu = function (context) {
     var canvas = context.canvas;
     var font="30px PressStart";
     canvas.font = font;
+    var selectSound = Sound(Audio.select);
+    var scrollSound = Sound(Audio.scroll);
 
     var options = [
         { text: "Play", location: {x: 200, y: 250} },
@@ -35,13 +39,16 @@ var MainMenu = function (context) {
     var self = {
         processRealtimeInput: function (event, isKeyPressed) {
             if (event.keyCode == Keys.Up && activeOption > 0 && isKeyPressed) {
+                scrollSound.play();
                 activeOption -= 1;
             } else if (event.keyCode == Keys.Down && activeOption < (options.length - 1) && isKeyPressed) {
+                scrollSound.play();
                 activeOption += 1;
             }
         },
         processEvent: function (event) {
             if (event.keyCode == Keys.Enter) {
+                selectSound.play();
                 switch (activeOption) {
                     case optionNames.Play:
                         context.stateStack.pop();
