@@ -5,7 +5,7 @@ var GameOver = function (context, score) {
 
     //private
     var canvas = context.canvas;
-    var font="30px PressStart";
+    var font = "30px PressStart";
     canvas.font = font;
     var currentLetter = 0;
 
@@ -71,7 +71,7 @@ var GameOver = function (context, score) {
         draw: function (canvas) {
             //world.render();
             canvas.globalAlpha = 0.5;
-            canvas.fillStyle = "#222200";
+            canvas.fillStyle = "#000000";
             canvas.fillRect(0, 0, Config.canvasWidth, Config.canvasHeight);
             canvas.globalAlpha = 1.0;
             canvas.fillStyle = "#aaaa33";

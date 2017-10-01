@@ -9,6 +9,7 @@ body {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
+    margin: 0px;
 }
 
 header {
@@ -33,16 +34,37 @@ header {
 
 .initials {
     position: absolute;
-    top: 60%;
+    top: 61%;
     left: 35%;
     width: 20%;
     padding: .5em;
-    font-size: 2em;
+    font-size: 1.8em;
     text-align: center;
     background: none;
     border-radius: 10px;
     color: #00ff00;
     border: 1px solid #770099;
+    font-family: PressStart;
 }
 
+
+@media (max-width: 800px) {
+    #canvas-div {
+        width: calc(640px);
+        height: calc(480px);
+    }
+    .initials {
+        font-size: calc(1.8em * (640 / 800));
+    }
+}
+
+@media (max-width: 640px) {
+    #canvas-div {
+        width: calc(400px);
+        height: calc(300px);
+    }
+    .initials {
+        font-size: calc(1.8em / 2);
+    }
+}
 
