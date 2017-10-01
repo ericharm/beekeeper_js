@@ -65,11 +65,18 @@ MongoClient.connect('mongodb://localhost/beekeeper', function (err, dbConnection
 // Root
 app.get("/", csrfProtection, function (req, res) {
     var audioDirectory = './public/audio/';
-    files = fs.readdirSync(audioDirectory).reduce(function (audioFiles, file) {
-        if (file.split(".")[0] !== '') audioFiles.push(file.split(".")[0]);
-        return audioFiles;
+    audioFiles = fs.readdirSync(audioDirectory).reduce(function (files, file) {
+        if (file.split(".")[0] !== '') files.push(file.split(".")[0]);
+        return files;
     }, []);
-    res.render('index.ejs', { csrfToken: req.csrfToken(), audioFiles: files });
+    var imageDirectory = './public/images/';
+    imageFiles = fs.readdirSync(imageDirectory).reduce(function (files, file) {
+        if (file.split(".")[0] !== '') files.push(file.split(".")[0]);
+        return files;
+    }, []);
+    res.render('index.ejs', {
+        csrfToken: req.csrfToken(), audioFiles: audioFiles, imageFiles: imageFiles
+    });
 });
 
 // Highscores API

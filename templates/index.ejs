@@ -13,6 +13,10 @@
 
     <body>
 
+        <% imageFiles.forEach(function(file) { %>
+            <img src="images/<%= file %>.png" style="display: none;" />
+        <% }); %>
+
         <% audioFiles.forEach(function(file) { %>
             <audio preload="auto" controls="none" src="audio/<%= file %>.mp3"
                    class="<%= file %>" style="display: none;"></audio>
