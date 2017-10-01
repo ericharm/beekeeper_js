@@ -57,23 +57,22 @@ MongoClient.connect('mongodb://localhost/beekeeper', function (err, dbConnection
     });
 });
 
-
 /*
  *  Routes
  */
 
 // Root
 app.get("/", csrfProtection, function (req, res) {
-    var audioDirectory = './public/audio/';
-    audioFiles = fs.readdirSync(audioDirectory).reduce(function (files, file) {
-        if (file.split(".")[0] !== '') files.push(file.split(".")[0]);
-        return files;
-    }, []);
-    var imageDirectory = './public/images/';
-    imageFiles = fs.readdirSync(imageDirectory).reduce(function (files, file) {
-        if (file.split(".")[0] !== '') files.push(file.split(".")[0]);
-        return files;
-    }, []);
+    var getFileNames = function (directory) {
+        fileNames = fs.readdirSync(directory).reduce(function (files, file) {
+            if (file.split(".")[0] !== '') files.push(file.split(".")[0]);
+            return files;
+        }, []);
+        return fileNames;
+    };
+
+    var audioFiles = getFileNames('./public/audio/');
+    var imageFiles = getFileNames('./public/images/');
     res.render('index.ejs', {
         csrfToken: req.csrfToken(), audioFiles: audioFiles, imageFiles: imageFiles
     });
