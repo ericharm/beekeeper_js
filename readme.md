@@ -1,3 +1,5 @@
+http://beekeeper.ericharm.com/
+
 ## Up and running
 -----------------
 
@@ -7,7 +9,7 @@ cd beekeeper_js
 
 npm install
 
-npm install -g nodemon browserify
+npm install -g nodemon browserify jasmine
 
 (in another shell) mongod
 
