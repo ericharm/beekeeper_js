@@ -7,6 +7,7 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var multer = require("multer");
 var express = require("express");
+var fs = require('fs');
 
 /*
  * Middleware
@@ -63,7 +64,13 @@ MongoClient.connect('mongodb://localhost/beekeeper', function (err, dbConnection
 
 // Root
 app.get("/", csrfProtection, function (req, res) {
-    res.render('index.ejs', { csrfToken: req.csrfToken() });
+    var audioDirectory = './public/audio/';
+    files = fs.readdirSync(audioDirectory).reduce(function (audioFiles, file) {
+        if (file.split(".")[0] !== '') audioFiles.push(file.split(".")[0]);
+        return audioFiles;
+    }, []);
+    console.log(files);
+    res.render('index.ejs', { csrfToken: req.csrfToken(), audioFiles: files });
 });
 
 // Highscores API

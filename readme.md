@@ -62,7 +62,7 @@ navigate to: http://localhost:8081
 
 **Timers** - Entities have a timers object that can be used by calling `entity.timers.addTimer(callback)` and in the callback defining a function the runs now (timer.onStart()), a number of milliseconds for the timer to last (timer.ms), and a function that runs after that many milliseconds (timer.onEnd()).
 
-**Audio** - This feature is barely implemented but you can use the Sound module to add audio elements into the DOM, play them and pause them.
+**Audio** - All files in the public/audio folder will be fetched in audio elements at page load automatically. Reference the names of these files in config/audio and use the Sound module to add new audio elements into the DOM and play them. When a sound is played is should look for any audio elements that are done playing and clean them up.
 
 ## Inspiration
 --------------

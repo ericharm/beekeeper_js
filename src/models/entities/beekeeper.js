@@ -1,13 +1,17 @@
-var Config   = require("../../config/app.js");
-var Textures = require("../../config/textures.js");
-var Entity   = require("../../lib/entity.js");
+var Config    = require("../../config/app.js");
+var Textures  = require("../../config/textures.js");
+var Audio     = require("../../config/audio.js");
+var Sound     = require("../../lib/sound.js");
+var Entity    = require("../../lib/entity.js");
 var SmokeShot = require("./smoke_shot.js");
-var Renderer = require("../../views/beekeeper_renderer.js");
-var GameOver = require("../states/game_over.js");
+var Renderer  = require("../../views/beekeeper_renderer.js");
+var GameOver  = require("../states/game_over.js");
 
 var Beekeeper = function (callback) {
 
     var self = Entity();
+    var stingSound = Sound(Audio.sting);
+    var smokeSound = Sound(Audio.smoke);
 
     var extended = {
         // public
@@ -58,6 +62,7 @@ var Beekeeper = function (callback) {
                 this._renderer = Renderer(Textures.beekeeper);
             } else if (!this._invincible) {
                 var that = this;
+                stingSound.play();
                 that._stats.currentHealth -= amount * (1);
                 this.timers.addTimer(function (timer) {
                     timer.onStart = function () {
@@ -88,6 +93,7 @@ var Beekeeper = function (callback) {
         activateSmoke: function (commandQueue) {
             var self_ = this;
             if (!self_._smokerActive && self_._stats.currentSmoke > 10) {
+                smokeSound.play();
                 self_._smokerActive = true;
                 self_._smokerCanCharge = false;
                 var smokeShot = SmokeShot();
