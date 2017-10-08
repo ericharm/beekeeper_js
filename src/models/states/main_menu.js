@@ -12,8 +12,8 @@ var MainMenu = function (context) {
     var canvas = context.canvas;
     var font="30px PressStart";
     canvas.font = font;
-    var selectSound = Sound(Audio.select);
-    var scrollSound = Sound(Audio.scroll);
+    var selectSound = Sound(Audio.mp3s.select);
+    var scrollSound = Sound(Audio.mp3s.scroll);
 
     var options = [
         { text: "Play", location: {x: 200, y: 250} },

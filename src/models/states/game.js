@@ -16,13 +16,6 @@ var Game = function (context) {
     var world = World(context, scene);
     var player = Player(context);
 
-    // fix the repetition between this and game over
-    var stopAudio = function () {
-        $("audio").each(function () {
-            if ($(this).attr("loop")) this.pause();
-        });
-    };
-
     var self = {
         update: function (deltaTime) {
             world.update(deltaTime);
@@ -57,9 +50,8 @@ var Game = function (context) {
         },
     };
 
-    // this also kills the sound effect for selecting "Play"
-    stopAudio();
-    var gameMusic = Sound(Audio.gameMusic);
+    Audio.stopAudio();
+    var gameMusic = Sound(Audio.mp3s.gameMusic, true);
     gameMusic.play();
     return self;
 };

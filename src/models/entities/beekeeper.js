@@ -10,8 +10,8 @@ var GameOver  = require("../states/game_over.js");
 var Beekeeper = function (callback) {
 
     var self = Entity();
-    var stingSound = Sound(Audio.sting);
-    var smokeSound = Sound(Audio.smoke);
+    var stingSound = Sound(Audio.mp3s.sting);
+    var smokeSound = Sound(Audio.mp3s.smoke);
 
     var extended = {
         // public

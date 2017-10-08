@@ -37,13 +37,6 @@ var GameOver = function (context, score) {
         });
     };
 
-    // fix the repetition between this and game
-    var stopAudio = function () {
-        $("audio").each(function () {
-            if ($(this).attr("loop")) this.pause();
-        });
-    };
-
     var postToHighscores = function (score, initials) {
         var csrfToken = $("#csrf-token").val();
         $.ajax({
@@ -110,7 +103,7 @@ var GameOver = function (context, score) {
     };
 
     addInitialsField();
-    stopAudio();
+    Audio.stopAudio();
     return self;
 };
 

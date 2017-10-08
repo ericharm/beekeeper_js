@@ -8,7 +8,7 @@ var TitleScreen = function (context) {
     var canvas = context.canvas;
     var titleFont= "30px PressStart";
     var messageFont = "16px PressStart";
-    var menuMusic = Sound(Audio.menuMusic, true);
+    var menuMusic = Sound(Audio.mp3s.menuMusic, true);
     menuMusic.play();
 
     var self = {
