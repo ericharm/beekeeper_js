@@ -21,11 +21,6 @@ var GameOver = function (context, score) {
             } else {
                 return String.fromCharCode(++c);
             }
-            //switch(c){
-                //case 90: return 'A';
-                //case 122: return 'a';
-                //default: return String.fromCharCode(++c);
-            //}
         });
     };
 
@@ -42,9 +37,10 @@ var GameOver = function (context, score) {
         });
     };
 
+    // fix the repetition between this and game
     var stopAudio = function () {
         $("audio").each(function () {
-            this.pause();
+            if ($(this).attr("loop")) this.pause();
         });
     };
 

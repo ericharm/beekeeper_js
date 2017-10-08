@@ -14,12 +14,12 @@
     <body>
 
         <% imageFiles.forEach(function(file) { %>
-            <img src="images/<%= file %>.png" style="display: none;" />
+            <img src="images/<%= file %>.png" style="display: none;" class="preloaded-asset" />
         <% }); %>
 
         <% audioFiles.forEach(function(file) { %>
             <audio preload="auto" controls="none" src="audio/<%= file %>.mp3"
-                   class="<%= file %>" style="display: none;"></audio>
+                   class="preloaded-asset" style="display: none;"></audio>
         <% }); %>
 
         <input type="hidden" name="_csrf" id="csrf-token" value="<%=csrfToken%>">
@@ -27,6 +27,7 @@
             <header></header>
             <canvas id="canvas"></canvas>
         </div>
+
 
         <!-- Global Site Tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107285152-1"></script>

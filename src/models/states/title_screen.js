@@ -1,4 +1,5 @@
 var Config = require("../../config/app.js");
+var Audio = require("../../config/audio.js");
 var Keys = require("../../config/keys.js");
 var MainMenu = require("./main_menu.js");
 
@@ -7,6 +8,8 @@ var TitleScreen = function (context) {
     var canvas = context.canvas;
     var titleFont= "30px PressStart";
     var messageFont = "16px PressStart";
+    var menuMusic = Sound(Audio.menuMusic, true);
+    menuMusic.play();
 
     var self = {
         processRealtimeInput: function (event, isKeyPressed) {

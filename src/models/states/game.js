@@ -15,8 +15,13 @@ var Game = function (context) {
     var scene = LevelOne(context);
     var world = World(context, scene);
     var player = Player(context);
-    var gameMusic = Sound(Audio.gameMusic);
-    gameMusic.play();
+
+    // fix the repetition between this and game over
+    var stopAudio = function () {
+        $("audio").each(function () {
+            if ($(this).attr("loop")) this.pause();
+        });
+    };
 
     var self = {
         update: function (deltaTime) {
@@ -51,6 +56,11 @@ var Game = function (context) {
             player.processEvent(event);
         },
     };
+
+    // this also kills the sound effect for selecting "Play"
+    stopAudio();
+    var gameMusic = Sound(Audio.gameMusic);
+    gameMusic.play();
     return self;
 };
 

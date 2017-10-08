@@ -1,4 +1,4 @@
-Sound = function (src) {
+Sound = function (src, looping) {
 
     var removeExpiredElements = function (className) {
         $("." + className).each(function () {
@@ -15,6 +15,7 @@ Sound = function (src) {
             document.body.appendChild(this.element);
             this.element.setAttribute("preload", "auto");
             this.element.setAttribute("controls", "none");
+            if (!!looping) this.element.setAttribute("loop", looping);
             this.element.style.display = "none";
             this.element.type = "audio/mpeg";
             this.element.src = this.src;
@@ -33,7 +34,8 @@ Sound = function (src) {
 
         stop: function(){
             this.element.pause();
-        }
+        },
+
     };
 
     //sound.init();
