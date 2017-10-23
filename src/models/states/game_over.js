@@ -1,5 +1,6 @@
 var Config = require("../../config/app.js");
 var Keys = require("../../config/keys.js");
+var Audio = require("../../config/audio.js");
 
 var GameOver = function (context, score) {
 
