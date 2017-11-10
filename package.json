@@ -4,8 +4,8 @@
   "description": "a 2d beekeeping simulation built in javascript",
   "main": "server.js",
   "scripts": {
-    "test": "jasmine",
-    "start": "mongod & watchify public/js/index.js -o public/js/bundle.js & nodemon server.js",
+    "test": "node node_modules/jasmine/bin/jasmine.js",
+    "start": "mongod & node node_modules/watchify/index.js public/js/index.js -o public/js/bundle.js & nodemon server.js",
     "open": "open http://localhost:8081/"
   },
   "keywords": [
