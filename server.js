@@ -78,6 +78,10 @@ app.get("/", csrfProtection, function (req, res) {
     });
 });
 
+app.get("/terms", function (req, res) {
+    res.render('terms.ejs');
+});
+
 // Highscores API
 app.get("/highscores", function (req, res) {
     db.collection('highscores')
