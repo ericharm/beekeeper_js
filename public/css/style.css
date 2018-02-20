@@ -8,7 +8,6 @@ body {
   font-family: PressStart;
   height: 100vh;
   width: 100vw;
-  /* overflow: hidden; */
   margin: 0px;
 }
 
@@ -51,8 +50,19 @@ header {
   margin: 4em auto;
   color: #666;
   text-align: center;
-  width: 100%;
+  width: 330px;
   line-height: 2em;
+  border: 1px solid #666;
+  padding: 1em;
+  border-radius: 10px;
+  position: relative;
+}
+
+.hide-copyright {
+  right: 1.5em;
+  position: absolute;
+  color: #aa0;
+  cursor: pointer;
 }
 
 .copyright a, .copyright a:visited,

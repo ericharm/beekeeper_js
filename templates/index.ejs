@@ -29,7 +29,9 @@
         </div>
 
         <div class="copyright">
-          &copy; 2018 Eric Harm<br/>
+          <span class="copyright-notice">&copy; 2018 Eric Harm</span>
+          <span class="hide-copyright">X</span>
+          <br/>
           <a href="https://github.com/ericharm/beekeeper_js">Source</a> |
           <a href="terms">Terms</a>
         </div>
@@ -42,6 +44,14 @@
             gtag('js', new Date());
 
             gtag('config', 'UA-107285152-1');
+        </script>
+
+        <script>
+            $(".hide-copyright").click(function () {
+                $(".copyright").hide();
+                scrollTo(0, 0);
+                $("body").css("overflow", "hidden");
+            });
         </script>
     </body>
 
