@@ -67,9 +67,3 @@ navigate to: http://localhost:8081
 The architecture of the framework is inspired by the book _[SFML Game Development](https://www.packtpub.com/game-development/sfml-game-development)_ by Jan Haller, Henrik Vogelius Hansson, Artur Moreira.
 
 I tried to get the benefits of inheritance by cascading object factories instead of creating prototypes and instantiating objects with the 'new' keyword.  I got this idea from _[JavaScript: The Good Parts](https://www.safaribooksonline.com/library/view/javascript-the-good/9780596517748/)_ by Douglas Crockford.
-
-
-## To Do
---------
-- Class for managing a game camera
-
