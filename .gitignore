@@ -4,3 +4,4 @@ public/js/bundle.js
 npm-debug.log
 *.DS_Store
 .deploy
+deploy
